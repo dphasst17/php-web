@@ -5,7 +5,7 @@ FROM php:7.4-apache
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN a2enmod rewrite
-
+ENV INCLUDE_PATH .:/path/to/.env
 # Copy mã nguồn của bạn vào thư mục /var/www/html trong container
 COPY . /var/www/html/
 

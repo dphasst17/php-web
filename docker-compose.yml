@@ -2,6 +2,7 @@ version: '3'
 services:
   # Định nghĩa dịch vụ PHP
   php:
+    env_file: .env
     build:
       context: .
       dockerfile: Dockerfile

@@ -1,20 +1,9 @@
 <?php
+
 /**
  * Mở kết nối đến CSDL sử dụng PDO
  */
 
-$env = parse_ini_file('/config/.');
-var_dump($env["DB_USER"]);
-
-/* $lines = explode("\n", $env);
-foreach ($lines as $line) {
-    if (strpos($line, '=') !== false) {
-        list($name, $value) = explode('=', $line, 2);
-        $name = trim($name);
-        $value = trim($value);
-        getenv("$name=$value");
-    }
-} */
 function pdo_get_connection(){
     $dburl = "mysql:host=mysql;dbname=tstore;charset=utf8";
     $username = getenv('DB_USER');

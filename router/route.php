@@ -1,6 +1,5 @@
 <?php
 require_once '../config/configRoute.php';
-
 $router = new Router();
 $router->get('/products', 'ProductController', 'getAll');
 $router->get('/products/type', 'ProductController', 'getType');
