@@ -1,0 +1,205 @@
+body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+header{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    margin: 2% 0 4% 0;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+nav{
+    width: 33%;
+    background-color: #6c757d;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    padding: 3px 2px;
+}
+.search,.user{
+    width:20%;
+    height:80%;
+    background-color: #6c757d;
+    border-radius:10px;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1px 2px;
+}
+.user{
+    height:100%;
+    background-color: transparent;
+}
+.search input{
+    width:80%;
+    height:90%;
+    background-color: #c5c6c7;
+    outline:none;
+    border-radius:5px;
+    border:none;
+    font-size: 20px;
+    color:#000000;
+}
+.search input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+    
+}
+.iconSearch{
+    width:17%;
+    height: 90%;
+    border-radius:5px;
+    background-color: #c5c6c7;
+    cursor: pointer;
+    display:flex;
+    align-items: center;
+}
+.iconSearch svg{
+    width:100%;
+    height:70%;
+}
+/* ------ DROP MENU------ */
+
+li a {
+    text-decoration : none;
+    color : #fff;
+    
+}
+
+.btnLogin{
+    width:150px;
+    height:40px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #302a2a;
+    color:#fff;
+    font-size: 20px;
+    font-weight: 550;
+
+}
+.dropMenu {
+  width : 200px; 
+  height:100%;
+  background: #d9d9d9;
+  margin : 40px auto; 
+}
+
+label span {
+    width: 100%;
+    height: 100%;
+    background : #6c757d; 
+    color : white;
+    font-size : 1.2em;
+    font-variant : small-caps;
+    cursor : pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2%;
+    border-radius:5px;
+}
+label span span{
+    width:10%;
+    background-color: transparent;
+    color:#fff
+}
+label span span svg{
+    transition: all .3s linear;
+    transform: rotate(0deg);
+}
+
+label span span svg path{
+    fill:#fff;
+    
+}
+
+
+.slide {
+    position: absolute;
+    clear: both;
+    width: 13.75%;
+    height: 0px;
+    overflow: hidden;
+    transition: all .4s ease;
+    z-index: 1111111111;
+    border-radius: 10px;
+    padding: 2px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.slide li {
+    width:100%;
+    height:40px;
+    list-style: none;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:5px;
+    cursor: pointer;
+}
+.slide li:hover, .slide li:hover a{
+    background-color: #fff;
+    color:#000;
+}
+
+#touch {position: absolute; opacity: 0; height: 0px;}    
+
+#touch:checked + .slide {
+    height: 300px;
+    background : #2d2f31;
+    color:#fff;
+    margin-top:1%;
+}
+.dropMenu #touch:checked ~ label ~ span{
+    color: red;
+  }
+
+.navBars{
+    width: 33%;
+    height:95%;
+    display:flex;
+    justify-content: center;
+    align-items: center;   
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 550;
+    text-decoration: none;
+    color:#dddedf;
+    margin:2px 0;
+    
+}
+.navBars:hover{
+    color:#1f2833;
+    border-radius:5px;
+    background-color: #c5c6c7;
+    transition: all .3s linear;
+
+}
+.navBars.active{
+    border-radius:5px;
+    background-color: #ffffff;
+    color:#1f2833;
+}
+.container{
+    width:100%;
+    min-height: 80vh;
+    height:auto;
+    position: relative;
+}
+footer{
+    background-color: #d3d1d1;
+    display: flex;
+    height: 10%;
+    width: 100%;
+}

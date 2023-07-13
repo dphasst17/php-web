@@ -1,0 +1,32 @@
+body{
+    padding:0 ;
+    margin:0;
+    background-color: #343a40!important;
+}
+.viewAdmin{
+    width:100%;
+    height:auto;
+    min-height: 87.5vh;
+    padding:4%;
+    display: flex;
+    flex-direction: column;
+}
+footer
+{
+    padding: 10px;
+    font-variant: small-caps;
+    text-align: end;
+    background-color: brown;
+}
+.sanpham
+{
+    width: 100%;
+    height: 150px;
+    background-color: grey;
+    margin: 10px;
+}
+@media (min-width: 1200px){
+    .container {
+        max-width: 100%;
+    }
+}

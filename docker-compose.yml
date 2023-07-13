@@ -1,0 +1,36 @@
+version: '3'
+services:
+  # Định nghĩa dịch vụ PHP
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: "dfast17/dfast-d-a-1"
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 8080:80
+
+  # Định nghĩa dịch vụ MySQL
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+   # Định nghĩa dịch vụ phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASSWORD}
+# Định nghĩa tập lệnh
+volumes:
+  db_data:

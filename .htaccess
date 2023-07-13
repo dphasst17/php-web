@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(?!api/|admin/|detail/)(.*)$ index.php?page=$1 [L,QSA]
+RewriteRule ^api/(.*)$ router/route.php/$1 [L,QSA]
+RewriteRule ^admin/(.*)$ admin/index.php?act=$1 [L,QSA]
+RewriteRule ^detail/(\d+)/(\d+)/(.+)$ index.php?page=detail&idType=$1&idProduct=$2&nameProduct=$3 [L,QSA]
