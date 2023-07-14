@@ -5,7 +5,7 @@
  */
 
 function pdo_get_connection(){
-    $dburl = "mysql:host=mysql;dbname=tstore;charset=utf8";
+    $dburl = "mysql:host=" . getenv("DB_HOST") . ";dbname=" . getenv("DB_NAME") . ";charset=utf8";
     $username = getenv('DB_USER');
     $password = getenv('DB_PASSWORD');
     $conn = new PDO($dburl, $username, $password);
