@@ -6,22 +6,22 @@
     $revenue = monthly_revenue();
 
 ?>
-<div class="d-flex flex-wrap justify-content-between align-items-start mb-5">
-    <div class="d-flex flex-wrap justify-content-center align-items-start" style="position: relative; height:70vh; width:40vw;">
-        <h1 class="text-center text-light mb-4">Top sản phẩm bán chạy</h1>
+<div class="flex flex-col md:flex-row lg:flex-row xl:flex-row flex-wrap justify-center items-center mb-5">
+    <div class="w-[300px] xl:w-[550px] lg::w-[450px] md:w-[400px] smr:w-[350px] h-[50vh] relative flex flex-col items-center my-[2%] md:mx-[2%]">
+        <h1 class="text-center text-white text-[30px] my-[2%] font-bold">Top sản phẩm bán chạy</h1>
       <canvas id="product"></canvas>
     </div>
-    <div class="d-flex flex-column align-items-center" style="position: relative; height:50vh; width:40vw;">
-        <h1 class="text-center text-light mb-4">Top loại sản phẩm bán chạy</h1>
-      <canvas id="type"></canvas>
+    <div class="w-[300px] xl:w-[550px] lg::w-[450px] md:w-[400px] smr:w-[350px] h-[70vh] relative flex flex-col items-center my-[2%] md:mx-[2%]">
+        <h1 class="text-center text-white text-[30px] my-[2%] font-bold">Top loại sản phẩm bán chạy</h1>
+        <canvas id="type"></canvas>
     </div>
-    <div style="position: relative; height:50vh; width:40vw;">
-        <h1 class="text-center text-light mb-4">Top sản phẩm có lượt xem nhiều </h1>
-      <canvas id="view"></canvas>
+    <div class="w-[300px] xl:w-[550px] lg::w-[450px] md:w-[400px] smr:w-[350px] h-[50vh] relative flex flex-col items-center my-[2%] md:mx-[2%]">
+        <h1 class="text-center text-white text-[30px] mt-[5%] mb-[2%] font-bold">Top sản phẩm có lượt xem nhiều </h1>
+        <canvas id="view"></canvas>
     </div>
-    <div class="d-flex flex-column align-items-center" style="position: relative; height:50vh; width:40vw;">
-        <h1 class="text-center text-light mb-4">Doanh thu theo tháng</h1>
-      <canvas id="revenue"></canvas>
+    <div class="w-[300px] xl:w-[550px] lg::w-[450px] md:w-[400px] smr:w-[350px] h-[50vh] relative flex flex-col items-center my-[2%] md:mx-[2%]">
+        <h1 class="text-center text-white text-[30px] my-[2%] font-bold">Doanh thu theo tháng</h1>
+        <canvas id="revenue"></canvas>
     </div>
 </div>
 

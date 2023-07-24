@@ -104,7 +104,7 @@
                 formData.append('cate', getCategory.value);
                 formData.append('id', id);
                 input.files.length > 0 ? formData.append('imgFile', file) : formData.append('imgUrl', url.value);
-                fetch('../api/products/image', {
+                fetch('/api/products/image', {
                     method: 'POST',
                     body: formData
                 })
@@ -118,7 +118,7 @@
                 })
                 .catch(error => console.error('Error:', error));
                 setTimeout(() => {
-                    window.location.href="../admin/index.php?act=product";
+                    window.location.href="/admin/product";
                 }, 300);
             }
 

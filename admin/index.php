@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $currentPage = isset($_GET['act']) ? $_GET['act'] : 'cate';
+    $currentPage = isset($_GET['page']) ? $_GET['page']: 'cate'; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,25 +8,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADMIN</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/admin.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        ssm: '390px',
+                        smr: '550px',
+                    },
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-    
-    <?php
+<?php
     include_once 'model/config.php';
-    include_once 'model/user.php';
-    echo "<div class='container' style='width:100%;max-width:100%;padding: 0; margin:0'>";
-        include 'view/header.php';
-            $action="cate";
-            if(isset($_GET['act']))
-                $action=$_GET['act'];
+    include_once './model/user.php';
+    echo "<div class='container w-full min-w-full flex flex-col p-[1%] m-auto overflow-x-hidden' >";
+            include 'view/header.php';
+            $page="cate";
+            if(isset($_GET['page']))
+                $page=$_GET['page'];
             if(!isset($_SESSION['admin']))
             {
-                $action="login";
+                $page="login";
             }
-            echo "<div class='viewAdmin'>";
-                switch($action)
+            echo "<div class='viewAdmin w-full mx-auto overflow-x-hidden'>";
+                switch($page)
                 {
 
                     case "login":
@@ -37,11 +48,13 @@
                             if(CheckLogin($email,$pass)==true)
                             {
                                 $_SESSION['admin']=$email;
+                                echo "<script>localStorage.setItem('idLog',JSON.stringify('".$_SESSION["admin"]."'))</script>";
                                 echo "<script>location.href = './cate'</script>";
+                                
                             }
                             else
                             {
-                                include './view/login.php';
+                                echo "<script>location.href = './login'</script>";
                             }
                         }
                         else

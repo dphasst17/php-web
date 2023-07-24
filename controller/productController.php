@@ -1,6 +1,6 @@
 <?php
-include '../model/product.php';
-include '../model/type.php';
+include_once '../model/product.php';
+include_once '../model/type.php';
 class ProductController
 {
     public function getById($id)
@@ -10,7 +10,18 @@ class ProductController
     public function getAll()
     {
         $products = product_select_all();
-        echo json_encode($products);
+        $newProducts = [];
+        foreach ($products as $product) {
+            $newProduct = [];
+            foreach ($product as $key => $value) {
+                if (!is_int($key)) {
+                $newProduct[$key] = $value;
+                }
+            }
+            $newProducts[] = $newProduct;
+        }
+        header('Content-type: text/javascript');
+        echo json_encode($newProducts, JSON_PRETTY_PRINT);
     }
     public function deleteProduct(){
         $data = json_decode(file_get_contents('php://input'), true);
@@ -19,27 +30,71 @@ class ProductController
     }
     public function getAccess(){
         $access = product_select_by_loai('!=',1);
-        echo json_encode($access);
+        $accessory = [];
+        foreach ($access as $newAccess) {
+            $newProduct = [];
+            foreach ($newAccess as $key => $value) {
+                if (!is_int($key)) {
+                $newProduct[$key] = $value;
+                }
+            }
+            $accessory[] = $newProduct;
+        }
+        header('Content-type: text/javascript');
+        echo json_encode($accessory, JSON_PRETTY_PRINT);
     }
     public function getLap(){
         $laptop = product_select_by_loai('=',1);
-        echo json_encode($laptop);
+        $laptops = [];
+        foreach ($laptop as $newLaptop) {
+            $newProduct = [];
+            foreach ($newLaptop as $key => $value) {
+                if (!is_int($key)) {
+                $newProduct[$key] = $value;
+                }
+            }
+            $laptops[] = $newProduct;
+        }
+        header('Content-type: text/javascript');
+        echo json_encode($laptops, JSON_PRETTY_PRINT);
     }
     public function getNew(){
-        $new = product_select_by_date(); 
-        echo json_encode($new);
+        $new = product_select_by_date();
+        $newProduct = [];
+        foreach ($new as $newProducts) {
+            $news = [];
+            foreach ($newProducts as $key => $value) {
+                if (!is_int($key)) {
+                $news[$key] = $value;
+                }
+            }
+            $newProduct[] = $news;
+        }
+        header('Content-type: text/javascript');
+        echo json_encode($newProduct, JSON_PRETTY_PRINT);
     }
     public function getView(){
         $view = product_select_view(); 
-        echo json_encode($view);
+        $viewProducts = [];
+        foreach ($view as $viewProduct) {
+            $news = [];
+            foreach ($viewProduct as $key => $value) {
+                if (!is_int($key)) {
+                $news[$key] = $value;
+                }
+            }
+            $viewProducts[] = $news;
+        }
+        header('Content-type: text/javascript');
+        echo json_encode($viewProducts, JSON_PRETTY_PRINT);
     }
     public function getType(){
         $type = loai_select_all();
-        echo json_encode($type);
+        echo json_encode($type, JSON_PRETTY_PRINT);
     }
     public function detail($idProduct){
         $detail = product_select_by_id($idProduct);
-        echo json_encode($detail);
+        echo json_encode($detail, JSON_PRETTY_PRINT);
     }
     public function image(){
         $fname = isset($_POST['fname']) ? $_POST['fname'] : '';
@@ -94,6 +149,16 @@ class ProductController
                 }
             exit;
         }
+    }
+    public function updateViewProduct(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        $idProduct = $data['idProduct'];
+        product_update_view($idProduct);
+    }
+
+    public function typeStatistics(){
+        $data = select_min_max_in_type();
+        echo json_encode($data, JSON_PRETTY_PRINT);
     }
 }
 ?>

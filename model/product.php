@@ -50,8 +50,9 @@ function product_delete($ma_hh){
     pdo_execute($sql, $ma_hh);
 }
 
-function product_select_all(){
-    $sql= "SELECT products.*,
+function product_select_all_1(){
+    $sql= "SELECT products.*,type.nameType,(SELECT SUM(CASE WHEN statusWare = 'import' THEN countProduct ELSE 0 END) - SUM(CASE WHEN statusWare = 'export' THEN countProduct ELSE 0 END) 
+    FROM warehouse WHERE idProduct = products.idProduct) AS totalProduct,
     CASE
         WHEN products.idType = 1 THEN CONCAT('CPU:',laptop.cpu)
         WHEN products.idType = 2 THEN CONCAT('LAYOUT:',keyboard.layout)
@@ -88,10 +89,28 @@ function product_select_all(){
     LEFT JOIN harddrive ON products.idProduct = harddrive.idProduct
     LEFT JOIN vga ON products.idProduct = vga.idProduct
     LEFT JOIN keyboard ON products.idProduct = keyboard.idProduct
+    LEFT JOIN `type` ON products.idType = type.idType
     ORDER BY idProduct;";
     return pdo_query($sql);
 }
-
+function product_select_all(){
+    $sql="SELECT p.*,t.nameType,
+    CONCAT_WS(',', CONCAT(UPPER('cpu'), ':', l.cpu), CONCAT(UPPER('capacity'), ':', r.capacity), CONCAT(UPPER('dpi'), ':', m.dpi), CONCAT(UPPER('resolution'), ':', mo.resolution), CONCAT(UPPER('connectionprotocol'), ':', h.connectionprotocol), CONCAT(UPPER('memory'), ':', v.memory), CONCAT(UPPER('layout'), ':', k.layout)) AS detail1,
+    CONCAT_WS(',', CONCAT(UPPER('capacity'), ':', l.capacity), CONCAT(UPPER('busram'), ':', r.busram), CONCAT(UPPER('connection'), ':', m.connection), CONCAT(UPPER('sizeInch'), ':', mo.sizeInch), CONCAT(UPPER('capacitylevels'), ':', h.capacitylevels), CONCAT(UPPER('memoryspeed'), ':', v.memoryspeed), CONCAT(UPPER('connection'), ':', k.connection)) AS detail2,
+    CONCAT_WS(',', CONCAT(UPPER('storage'), ':', l.storage), CONCAT(UPPER('typeram'), ':', r.typeram), CONCAT(UPPER('switch'), ':', m.switch), CONCAT(UPPER('scanfrequency'), ':', mo.scanfrequency), CONCAT(UPPER('size'), ':', h.size), CONCAT(UPPER('heartbeat'), ':', v.heartbeat), CONCAT(UPPER('switch'), ':', k.switch)) AS detail3,
+    CONCAT_WS(',', CONCAT(UPPER('os'), ':', l.os), CONCAT(UPPER('ledlight'), ':', m.ledlight), CONCAT(UPPER('size'), ':', v.size), CONCAT(UPPER('keyboardmaterial'), ':', k.keyboardmaterial)) AS detail4
+    FROM products p 
+    LEFT JOIN ram r ON p.idProduct = r.idProduct 
+    LEFT JOIN mouse m ON p.idProduct = m.idProduct 
+    LEFT JOIN monitor mo ON p.idProduct = mo.idProduct 
+    LEFT JOIN laptop l ON p.idProduct = l.idProduct 
+    LEFT JOIN keyboard k ON p.idProduct = k.idProduct 
+    LEFT JOIN harddrive h ON p.idProduct = h.idProduct 
+    LEFT JOIN vga v ON p.idProduct = v.idProduct 
+    LEFT JOIN type t ON p.idType = t.idType 
+    ORDER BY p.idProduct;";
+    return pdo_query($sql);
+}
 function product_select_by_id($ma_hh){
     $sql = "SELECT * FROM products WHERE idProduct=?";
     return pdo_query_one($sql, $ma_hh);
@@ -106,7 +125,7 @@ function product_exist($ma_hh){
     return pdo_query_value($sql, $ma_hh) > 0;
 }
 
-function product_tang_so_luot_xem($ma_hh){
+function product_update_view($ma_hh){
     $sql = "UPDATE products SET view = view + 1 WHERE idProduct=?";
     pdo_execute($sql, $ma_hh);
 }
@@ -128,6 +147,22 @@ function product_select_by_loai_different_id($operator, $ma_loai, $ma_hh){
 }
 
 function product_select_keyword($keyword){
-    $sql = "SELECT * FROM products hh JOIN type lo ON lo.idType=hh.idType WHERE nameProduct LIKE '%$keyword%' OR nameType LIKE '%$keyword%';";
+    $sql = "SELECT products.*,lo.nameType,
+            CONCAT_WS(',', CONCAT(UPPER('cpu'), ':', l.cpu), CONCAT(UPPER('capacity'), ':', r.capacity), CONCAT(UPPER('dpi'), ':', m.dpi), CONCAT(UPPER('resolution'), ':', mo.resolution), CONCAT(UPPER('connectionprotocol'), ':', h.connectionprotocol), CONCAT(UPPER('memory'), ':', v.memory), CONCAT(UPPER('layout'), ':', k.layout)) AS detail1,
+            CONCAT_WS(',', CONCAT(UPPER('capacity'), ':', l.capacity), CONCAT(UPPER('busram'), ':', r.busram), CONCAT(UPPER('connection'), ':', m.connection), CONCAT(UPPER('sizeInch'), ':', mo.sizeInch), CONCAT(UPPER('capacitylevels'), ':', h.capacitylevels), CONCAT(UPPER('memoryspeed'), ':', v.memoryspeed), CONCAT(UPPER('connection'), ':', k.connection)) AS detail2,
+            CONCAT_WS(',', CONCAT(UPPER('storage'), ':', l.storage), CONCAT(UPPER('typeram'), ':', r.typeram), CONCAT(UPPER('switch'), ':', m.switch), CONCAT(UPPER('scanfrequency'), ':', mo.scanfrequency), CONCAT(UPPER('size'), ':', h.size), CONCAT(UPPER('heartbeat'), ':', v.heartbeat), CONCAT(UPPER('switch'), ':', k.switch)) AS detail3,
+            CONCAT_WS(',', CONCAT(UPPER('os'), ':', l.os), CONCAT(UPPER('ledlight'), ':', m.ledlight), CONCAT(UPPER('size'), ':', v.size), CONCAT(UPPER('keyboardmaterial'), ':', k.keyboardmaterial)) AS detail4
+            FROM products
+            LEFT JOIN laptop l ON products.idProduct = l.idProduct
+            LEFT JOIN mouse m ON products.idProduct = m.idProduct
+            LEFT JOIN monitor mo ON products.idProduct = mo.idProduct
+            LEFT JOIN ram r ON products.idProduct = r.idProduct
+            LEFT JOIN harddrive h ON products.idProduct = h.idProduct
+            LEFT JOIN vga v ON products.idProduct = v.idProduct
+            LEFT JOIN keyboard k ON products.idProduct = k.idProduct
+            LEFT JOIN `type` ON products.idType = type.idType
+            LEFT JOIN type lo ON products.idType=lo.idType 
+            WHERE nameProduct LIKE '%$keyword%' OR lo.nameType LIKE '%$keyword%' OR brand LIKE '%$keyword%'
+            ORDER BY products.idProduct;";
     return pdo_query($sql);
 }

@@ -15,4 +15,12 @@
                 AS totalProduct FROM warehouse GROUP BY idProduct;";
         return pdo_query($sql);
     }
+    function get_all_warehouse(){
+        $sql="SELECT * FROM `warehouse` ORDER BY dateIOX DESC;";
+        return pdo_query($sql);
+    }
+    function delete_warehouse_by_id($idWarehouse){
+        $sql="DELETE FROM warehouse WHERE id=?;";
+        pdo_execute($sql,$idWarehouse);
+    }
 ?>

@@ -6,12 +6,12 @@ require_once 'pdo.php';
  * @param String $ten_loai là tên loại
  * @throws PDOException lỗi thêm mới
  */
-function loai_insert($ten_loai){
-    $sql = "INSERT INTO loai(ten_loai) VALUES(?)";
-    pdo_execute($sql, $ten_loai);
+function type_insert($ten_loai){
+    $sql = "INSERT INTO type(nameType) VALUES(?)";
+    pdo_execute($sql, $ten_type);
 }
 
-function select_min_max_in_loai(){
+function select_min_max_in_type(){
     $sql = "SELECT l.idType,l.nameType, MIN(h.price)AS min, ((MIN(h.price)+ MAX(h.price))/2) AS medium,MAX(h.price) AS max 
             from `type` l JOIN `products` h ON l.idType = h.idType GROUP BY l.idType;";
     return pdo_query($sql);

@@ -46,8 +46,8 @@ function user_select_all(){
 }
 
 function user_select_by_id($ma_kh){
-    $sql = "SELECT * FROM users WHERE idUser=?";
-    return pdo_query_one($sql, $ma_kh);
+    $sql = "SELECT * FROM users WHERE idUser=? OR nameUser=?";
+    return pdo_query_one($sql, $ma_kh,$ma_kh);
 }
 
 function user_exist($ma_kh){
@@ -68,3 +68,7 @@ function user_login($ma_kh,$mat_khau){
     $sql = "SELECT * FROM users WHERE (idUser = ? OR email = ?) AND password=?";
     return pdo_query($sql,$ma_kh,$ma_kh,$mat_khau);
 }
+/* function user_get_by_name($name){
+    $sql = "SELECT * FROM users WHERE nameUser = ?";
+    return pdo_query($sql,$name);
+} */

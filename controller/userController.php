@@ -1,6 +1,6 @@
 <?php 
-    include '../model/user.php';
-    include '../model/bill.php';
+    include_once '../model/user.php';
+    include_once '../model/bill.php';
     class UserController{
         public function getUser($idUser){
             $data = user_select_by_id($idUser);
@@ -43,6 +43,10 @@
                 echo $response;
                 exit;
             }
+        }
+        public function staffStatistics(){
+            $data = user_select_by_role('1');
+            echo json_encode($data);
         }
     }
 ?>

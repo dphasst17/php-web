@@ -10,6 +10,7 @@ $router->get('/products/view', 'ProductController', 'getView');
 $router->get('/products/detail/:id', 'ProductController', 'detail');
 $router->post('/products/image','ProductController','image');
 $router->post('/products/delete', 'ProductController', 'deleteProduct');
+$router->post('/products/updateview', 'ProductController', 'updateViewProduct');
 
 $router->get('/transport', 'TransController', 'getAll');
 $router->post('/transport/update', 'TransController', 'updateStatusTransport');
@@ -18,6 +19,7 @@ $router->post('/transport/switch', 'TransController', 'switchDataToBill');
 $router->post('/transport/insert', 'TransController', 'switchToTransport');
 
 $router->get('/comment', 'CommentController', 'getAll');
+$router->get('/comment/:id', 'CommentController', 'commentByIdProduct');
 $router->post('/comment/insert', 'CommentController', 'commentInsert');
 $router->post('/comment/delete', 'CommentController', 'commentDelete');
 
@@ -29,7 +31,11 @@ $router->post('/user/image','UserController','updateImage');
 $router->get('/user/transport/:idUser', 'TransController', 'viewTransportByUser');
 $router->get('/user/bought/:idUser', 'UserController', 'viewBought');
 
-$router->get('/ware/total', 'WareHouseController', 'getAll');
+$router->get('/ware/total', 'WareHouseController', 'getTotalProduct');
+$router->get('/ware', 'WareHouseController', 'getAll');
+
+$router->get('/statistics/type', 'ProductController', 'typeStatistics');
+$router->get('/statistics/staff', 'UserController', 'staffStatistics');
 
 $router->run();
 

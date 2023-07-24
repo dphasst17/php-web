@@ -2,36 +2,50 @@
     include '../model/user.php';
     $data = user_select_by_role('1');
 ?>
-<table id="myTable" class="table table-dark border border-light flex-sm-column">
-  <thead>
+<table id="myTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead class="text-xs text-gray-700 uppercase bg-gray-700 dark:text-gray-400">
       <tr>
-        <th scope="col" class="col-1">Mã nhân viên</th>
-        <th scope="col" class="col-2">Ảnh đại diện</th>
-        <th scope="col" class="col-3">Họ và tên</th>
-        <th scope="col" class="col-3">Email</th>
-        <th scope="col" class="col-1">Vai trò</th>
-        <th scope="col" class="col-1">Chỉnh sửa</th>
-        <th scope="col" class="col-1">Xóa</th>
+        <th class="px-6 py-3">Mã nhân viên</th>
+        <th class="hidden lg:table-cell px-6 py-3">Ảnh đại diện</th>
+        <th class="px-6 py-3">Họ và tên</th>
+        <th class="hidden lg:table-cell px-6 py-3">Email</th>
+        <th class="hidden lg:table-cell px-6 py-3">Vai trò</th>
+        <th class="hidden lg:table-cell w-[10%] text-center px-6 py-3">Chỉnh sửa</th>
+        <th class="hidden lg:table-cell w-[10%] text-center px-6 py-3">Xóa</th>
+        <th class="block md:hidden w-auto px-6 py-3">More</th>
       </tr>
   </thead>
 </table>
 
 <script>
-    let data = <?php echo json_encode($data)?>;
-    let viewProduct = data.map(e => `<tbody>
-        <tr>
-            <th scope="col" class="col-1">${e.idUser}</th>
-           
-            <th scope="col" class="col-2">
-                <img src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`../public/images/uploads/${e.img}`}  
-                    alt="User-image"  style="width:100px;height:100px;object-fit:contain;"/>
-            </th>
-            <th scope="col" class="col-3">${e.nameUser}</th>
-            <th scope="col" class="col-3">${e.email}</th>
-            <th scope="col" class="col-1">Nhân viên</th>
-            <th scope="col"><button class="btn btn-primary">Edit</button></th>
-            <th scope="col"><button class="btn btn-danger">Delete</button></th>
-        </tr>
-    </tbody>`).join('');
-    document.getElementById("myTable").insertAdjacentHTML('beforeend', viewProduct);
+    let data = [];
+    fetch('/api/statistics/staff')
+    .then(res => {return res.json()})
+    .then(restData => {
+        data = restData;
+        viewDataStaff(restData)
+    })
+    const viewDataStaff = (data) =>{
+        let viewProduct = data.map(e => `<tbody class="border-b-solid border-b-white border-b-[1px]">
+            <tr class="bg-slate-800 ">
+                <th class="w-[10%] px-6 py-4">${e.idUser}</th>
+               
+                <th class="hidden lg:table-cell w-[15%] min-w-[150px] px-6 py-4">
+                    <img class="rounded-[10px] border-solid border-white border-[1px]" src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`../public/images/uploads/${e.img}`}  
+                        alt="User-image"  style="width:100px;height:100px;object-fit:contain;"/>
+                </th>
+                <th class="px-6 py-4">${e.nameUser}</th>
+                <th class="hidden lg:table-cell px-6 py-4">${e.email}</th>
+                <th class="hidden lg:table-cell px-6 py-4">Nhân viên</th>
+                <th class="hidden lg:table-cell w-[10%] justify-center items-center px-6 py-4"><button class="w-full min-w-[100px] h-[30px] rounded-[5px] bg-[#007bff] hover:bg-blue-800 text-white">Edit</button></th>
+                <th class="hidden lg:table-cell w-[10%] justify-center items-center px-6 py-4"><button class="w-full min-w-[100px] h-[30px] rounded-[5px] mt-[5%] mt-[5%] bg-[#d9534f] hover:bg-red-600 text-white">Delete</button></th>
+                <th class="block md:hidden m-auto flex justify-center items-center px-6 py-4">
+                    <svg class="w-5 h-5 text-white hover:text-blue-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                        <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                    </svg>
+                </th>
+            </tr>
+        </tbody>`).join('');
+        document.getElementById("myTable").insertAdjacentHTML('beforeend', viewProduct);
+    }
 </script>

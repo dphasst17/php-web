@@ -22,7 +22,7 @@ nav{
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
-    padding: 3px 2px;
+    padding: 2px 3px;
 }
 .search,.user{
     width:20%;
@@ -163,7 +163,7 @@ label span span svg path{
 }
 .dropMenu #touch:checked ~ label ~ span{
     color: red;
-  }
+}
 
 .navBars{
     width: 33%;
@@ -180,9 +180,9 @@ label span span svg path{
     
 }
 .navBars:hover{
-    color:#1f2833;
     border-radius:5px;
-    background-color: #c5c6c7;
+    background-color: #ffffff;
+    color:#1f2833;
     transition: all .3s linear;
 
 }
@@ -202,4 +202,9 @@ footer{
     display: flex;
     height: 10%;
     width: 100%;
+}
+
+.activeBtn{
+    background-color: #586582;
+    color: #fff;
 }

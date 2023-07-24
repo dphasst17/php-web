@@ -13,7 +13,7 @@
       <script>
       function search() {
         var searchValue = document.getElementById("search").value;
-        window.location.href = "./search&value=" + searchValue;
+        window.location.href = "/search/" + searchValue;
       }
     </script>
       <nav>

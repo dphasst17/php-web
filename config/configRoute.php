@@ -1,10 +1,10 @@
 <?php
-  require '../controller/productController.php';
-  require '../controller/cartController.php';
-  require '../controller/transportController.php';
-  require '../controller/userController.php';
-  require '../controller/commentController.php';
-  require '../controller/warehouseController.php';
+  require_once '../controller/productController.php';
+  require_once '../controller/cartController.php';
+  require_once '../controller/transportController.php';
+  require_once '../controller/userController.php';
+  require_once '../controller/commentController.php';
+  require_once '../controller/warehouseController.php';
   class Router
   {
     const GET = 'GET';

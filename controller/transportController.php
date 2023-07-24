@@ -1,5 +1,5 @@
 <?php 
-    include '../model/transport.php';
+    include_once '../model/transport.php';
     class TransController{
         public function switchToTransport(){
             $data = json_decode(file_get_contents('php://input'), true);

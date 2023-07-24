@@ -1,6 +1,5 @@
 
     <script>
-        
         const addCart = (id,u) => {
             const isLogin = JSON.parse(localStorage.getItem("isLogin") || "[]");
             if(isLogin === true ){
@@ -13,11 +12,8 @@
                     },
                     body: JSON.stringify(postData)
                     })
-                    .then(response => response.json())
+                    .then(response => response.text())
 
-            }else{window.location.href="login.php"}
-        
-        
-        
+            }else{window.location.href="login.php"} 
     }
     </script>

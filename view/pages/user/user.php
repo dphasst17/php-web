@@ -2,32 +2,32 @@
     $css = file_get_contents('view/pages/user/styleUser.css');
     echo "<style>" . $css . "</style>";
 ?>
-<div class="userPage">
-    <div id="getUser">
-        <div id="information"></div>
-        <div class="viewPurchase" style="width:100%;min-height:200px;height:auto;margin-top:5%;">
-            <table id="confirm" style="width:90%;height:auto;display:flex;flex-direction:column;margin:0 auto;">
-                <thead style="width:100%;min-height:30px;">
-                    <tr style="width:100%;display:flex;justify-content:space-between;">
-                        <th style="width:20%;text-align:center">Tên sản phẩm</th>
-                        <th style="width:20%;text-align:center">Đơn giá</th>
-                        <th style="width:20%;text-align:center">Trạng thái</th>
-                        <th style="width:20%;text-align:center">Số lượng</th>
-                        <th style="width:20%;text-align:center">Hủy</th>
+<div class="userPage w-[90%] min-h-[400px] h-auto flex justify-center my-[2%] mx-auto">
+    <div id="getUser" class="w-2/4 h-full flex flex-col justify-center">
+        <div id="information" class="w-full h-2/4 flex justify-center mb-[5%]"></div>
+        <div class="viewPurchase" class="w-full min-h-[200px] h-auto mt-[5%]">
+            <table id="confirm" class="w-[90%] h-auto flex flex-col my-[0] mx-auto" >
+                <thead class="w-full min-h-[30px]" >
+                    <tr class="w-full flex justify-between" >
+                        <th class="w-1/5 text-center">Tên sản phẩm</th>
+                        <th class="w-1/5 text-center">Đơn giá</th>
+                        <th class="w-1/5 text-center">Trạng thái</th>
+                        <th class="w-1/5 text-center">Số lượng</th>
+                        <th class="w-1/5 text-center">Hủy</th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
-    <div id="items">
-        <h1 style="cursor:pointer" class="text-[40px] font-bold">Đơn hàng đã mua</h1>
-        <div id="bought"></div>
-        <div class="pagination">
-            <div class="prevPage" onclick="prevPage()">PREV</div>
-            <div class="buttonPage" id="buttonPage">
+    <div id="items" class="w-2/4 h-full flex flex-col justify-center">
+        <h1 style="cursor:pointer" class="text-[40px] font-bold text-[#03207e] text-center cursor-pointer">Đơn hàng đã mua</h1>
+        <div id="bought" class="w-full min-h-[575px] h-auto"></div>
+        <div class="pagination w-4/5 h-[50px] flex justify-evenly items-center m-auto">
+            <div class="prevPage w-[10%] h-2/4 bg-slate-300 flex items-center justify-center text-[18px] text-black font-medium rounded-[8px] cursor-pointer transition-all hover:bg-[#586582] hover:text-white" onclick="prevPage()">PREV</div>
+            <div class="buttonPage w-4/5 min-w-[60px] h-full flex justify-evenly items-center mx-[2%]" id="buttonPage">
             
             </div>
-            <div class="nextPage" onclick="nextPage()">NEXT</div>
+            <div class="nextPage w-[10%] h-2/4 bg-slate-300 flex items-center justify-center text-[18px] text-black font-medium rounded-[8px] cursor-pointer transition-all hover:bg-[#586582] hover:text-white" onclick="nextPage()">NEXT</div>
         </div>
     </div>
 </div>
@@ -112,7 +112,7 @@
         for(let i = 1; i <= totalPage; i++){
             pagination.push(i);
         }
-        let viewPagination = pagination.map(e => `<button class='${e === activePage ? 'active' : ""}' onclick='setPagination(${e})' id="showButton-${e}">${e}</button>`);
+        let viewPagination = pagination.map(e => `<button class='${e === activePage ? 'activeBtn' : ""} w-[45px] min-w-[30px] h-[25px] text-[18px] font-medium rounded-[8px] border-none cursor-pointer hover:bg-[#586582] hover:text-white transition-all' onclick='setPagination(${e})' id="showButton-${e}">${e}</button>`);
         document.getElementById('buttonPage').innerHTML = viewPagination.join('')
         
     }
@@ -126,13 +126,13 @@
         
     }
     const viewBought = (p,start,end) => {
-        let viewBought = p.slice(start,end).map(e => `<div class="items">
-            <div class="itemsImg"><img src=${e.imgProduct} alt="image"/></div>
-            <div class="itemsContent">
-                <div class="itemsTitle">${e.nameProduct}</div>
-                <div id='viewCount' class="itemsPrice">Count: ${e.countProduct}</div>
-                <div class="itemsPrice">Price: ${e.price} USD</div>
-                <div class="itemsPrice">Total: <span id='itemsPrice'>${e.price*e.countProduct}</span> USD</div>
+        let viewBought = p.slice(start,end).map(e => `<div class="items w-full min-h-[100px] h-auto flex justify-center items-center p-[5px] border-solid border-b-[2px] border-black">
+            <div class="itemsImg w-[30%] h-full"><img class="w-2/4 h-full object-contain" src=${e.imgProduct} alt="image"/></div>
+            <div class="itemsContent w-[70%] h-full flex flex-wrap">
+                <div class="itemsTitle w-2/4 min-h-[30px] text-[20px] font-medium text-[#2f2a87] overflow-hidden text-ellipsis whitespace-nowrap">${e.nameProduct}</div>
+                <div id='viewCount' class="itemsPrice w-2/4 min-h-[30px] text-[20px] font-medium text-[#2f2a87] overflow-hidden text-ellipsis whitespace-nowrap">Count: ${e.countProduct}</div>
+                <div class="itemsPrice w-2/4 min-h-[30px] text-[20px] font-medium text-[#2f2a87] overflow-hidden text-ellipsis whitespace-nowrap">Price: ${e.price} USD</div>
+                <div class="itemsPrice w-2/4 min-h-[30px] text-[20px] font-medium text-[#2f2a87] overflow-hidden text-ellipsis whitespace-nowrap">Total: <span id='itemsPrice'>${e.price*e.countProduct}</span> USD</div>
             </div>
         
         </div>`);
@@ -140,8 +140,8 @@
         paginationPage()
     }
     const viewUser = (e) => {
-        let viewInfor = e.map(e => `<div class="userDetail">
-            <div class="userImg">
+        let viewInfor = e.map(e => `<div class="userDetail w-[90%] h-[90%] flex flex-col items-center">
+            <div class="userImg w-full h-[70px] flex justify-center mb-[5%]">
                 <img class='w-[70px] h-full rounded-[50%] border-solid border-2 border-black cursor-pointer object-cover' src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`./public/images/uploads/${e.img}`}  alt="User-image" />
                 <div class="changeAvt absolute w-[12%] h-[50px] my-[2%] mx-[0] ml-[2%] flex flex-wrap justify-end items-end pr-[3%]" >
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" onclick="changeAvt()" class="w-[25px] h-[30px] rounded-[50%] border-2 border-solid border-black hover:border-blue-900 p-[2%] cursor-pointer transition-all fill-black hover:fill-blue-900">
@@ -149,27 +149,27 @@
                     </svg>
                 </div>
             </div>
-            <div class="userName">Tên: <span>${e.nameUser}</span></div>
-            <div class="email">Email: <span>${e.email}</span></div>
+            <div class="userName w-[70%] h-[50px] my-[2%] flex items-center text-[20px] text-[18px] font-medium pl-[2%] border-solid border-2 border-black rounded-[5px]">Tên: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${e.nameUser}</span></div>
+            <div class="email w-[70%] h-[50px] my-[2%] flex items-center text-[20px] text-[18px] font-medium pl-[2%] border-solid border-2 border-black rounded-[5px]">Email: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${e.email}</span></div>
             <div class="change">
-                <button onclick="changeUser()">Change user information</button>
+                <button class="w-[250px] h-[40px] outline-none border-none rounded-[10px] text-[16px] text-white font-semibold bg-[#586582] hover:bg-blue-700 cursor-pointer transition-all" onclick="changeUser()">Change user information</button>
             </div>
         </div>`)
         document.getElementById('information').innerHTML = viewInfor.join('');
     }
 
     const viewTransport = (e) => {
-        let viewPurchase = e.map(e => `<tbody style='width:100%;'>
-                <tr style='width:100%;min-height:40px;display:flex;justify-content:space-between;align-items:center'>
-                    <th style='width:20%;text-align:center'>${e.nameProduct}</th>
-                    <th style='width:20%;text-align:center'>${e.price}</th>
-                    <th style='width:20%;text-align:center'>${e.status}</th>
-                    <th style='width:20%;text-align:center'>${e.countProduct}</th>
-                    ${e.status === "Chờ xác nhận" ? `<th style='width:20%;text-align:center'>
+        let viewPurchase = e.map(e => `<tbody class="w-full">
+                <tr class="w-full min-h-[40px] flex justify-between items-center">
+                    <th class="w-1/5 text-center">${e.nameProduct}</th>
+                    <th class="w-1/5 text-center">${e.price}</th>
+                    <th class="w-1/5 text-center">${e.status}</th>
+                    <th class="w-1/5 text-center">${e.countProduct}</th>
+                    ${e.status === "Chờ xác nhận" ? `<th class="w-1/5 text-center">
                         <button style='width:120px;height:30px;background-color:#dc3545;border-radius:5px;outline:none;border:none;cursor:pointer;color:#fff;font-weight:550;'>
                             Hủy đơn hàng
                         </button>
-                    </th>`:`<th style='width:20%;text-align:center'></th>`}
+                    </th>`:`<th class="w-1/5 text-center"></th>`}
                 </tr>
             </tbody>`).join('')
         document.getElementById("confirm").insertAdjacentHTML('beforeend', viewPurchase);
@@ -206,7 +206,7 @@
         var formData = new FormData();
         formData.append('file', file);
         formData.append('id', id);
-        fetch('./api/user/image', {
+        fetch('/api/user/image', {
             method: 'POST',
             body: formData
         })
@@ -225,9 +225,9 @@
 
 
     const changeUser = () => {
-        let changeUserName= data.map(e => `<input type="text" value=${e.nameUser} id="newName"/>`);
-        let changeEmail= data.map(e => `<input type="text" value=${e.email} id="newEmail"/>`);
-        let save = `<button onclick="saveData()">
+        let changeUserName= data.map(e => `<input class="w-[95%] h-full bg-transparent border-none outline-none font-medium text-[18px]" type="text" value=${e.nameUser} id="newName"/>`);
+        let changeEmail= data.map(e => `<input class="w-[95%] h-full bg-transparent border-none outline-none font-medium text-[18px]" type="text" value=${e.email} id="newEmail"/>`);
+        let save = `<button class="w-[250px] h-[40px] outline-none border-none rounded-[10px] text-[16px] text-white font-semibold bg-[#586582] hover:bg-blue-700 cursor-pointer transition-all" onclick="saveData()">
                         Save
                     </button>`
         document.querySelector(".userName").innerHTML = changeUserName.join('')
@@ -238,14 +238,14 @@
         let id = idUser;
         let name = document.getElementById("newName");
         let email = document.getElementById("newEmail");
-        let newName = `Full Name: <span>${name.value}</span>`;
-        let newEmail = `Email: <span>${email.value}</span>`;
+        let newName = `Tên: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${name.value}</span>`;
+        let newEmail = `Email: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${email.value}</span>`;
         let save = `<button onclick="changeUser()">Change user information</button>`
         document.querySelector(".userName").innerHTML = newName;
         document.querySelector(".email").innerHTML = newEmail;
         document.querySelector(".change").innerHTML = save;
         let postData={id:id,name:name.value,email:email.value}
-        fetch('./api/user/update', {
+        fetch('/api/user/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -256,15 +256,6 @@
         .then(response => console.log(response))
         .catch(error => console.error('Error:', error));
 
-        var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
-                }
-            };
-            xhttp.open("POST", "handle/user.php", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("id=" + id +"&name="+name.value + "&email="+email.value); 
     }
 
 

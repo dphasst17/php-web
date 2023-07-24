@@ -1,6 +1,7 @@
 <?php
 function CheckLogin($email,$pass)
 { 
+
     $DBH=connect(); 
     $query="SELECT * FROM users WHERE email='$email' OR idUser='$email' AND password = '$pass' AND roleUser != 2";
     $STH = $DBH->query($query);
@@ -9,6 +10,7 @@ function CheckLogin($email,$pass)
     {
         return false;
     }
+    
     return true;
 }
 
