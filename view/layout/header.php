@@ -12,8 +12,8 @@
       </div>
       <script>
       function search() {
-        var searchValue = document.getElementById("search").value;
-        window.location.href = "/search/" + searchValue;
+        var searchValuePC = document.getElementById("search").value;
+        window.location.href = "/search/" + searchValuePC;
       }
     </script>
       <nav class="bg-neutral-800">
