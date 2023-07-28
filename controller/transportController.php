@@ -10,9 +10,9 @@
             $methods = $data['methods'];
             $costs = $data['costs'];
 
-            $insert = insert_product_onTransport_table($idUser);
-            $update = add_infor_user_onTransport_table($name,$phone,$city,$methods,$costs,$idUser);
-            $deleteCart = delete_cart_all($idUser);
+            insert_product_onTransport_table($idUser);
+            add_infor_user_onTransport_table($name,$phone,$city,$methods,$costs,$idUser);
+            delete_cart_all($idUser);
             echo "Success";
         }
         public function getAll(){

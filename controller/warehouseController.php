@@ -3,11 +3,33 @@
     class WareHouseController{
         public function getAll(){
             $data = get_all_warehouse();
-            echo json_encode($data);
+            $getAll = [];
+            foreach ($data as $product) {
+                $newProduct = [];
+                foreach ($product as $key => $value) {
+                    if (!is_int($key)) {
+                    $newProduct[$key] = $value;
+                    }
+                }
+                $getAll[] = $newProduct;
+            }
+            header('Content-type: text/javascript');
+            echo json_encode($getAll, JSON_PRETTY_PRINT);
         }
         public function getTotalProduct(){
-            $data = get_total_product_in_ware();
-            echo json_encode($data);
+            $products = get_total_product_in_ware();
+            $total = [];
+            foreach ($products as $product) {
+                $newProduct = [];
+                foreach ($product as $key => $value) {
+                    if (!is_int($key)) {
+                    $newProduct[$key] = $value;
+                    }
+                }
+                $total[] = $newProduct;
+            }
+            header('Content-type: text/javascript');
+            echo json_encode($total, JSON_PRETTY_PRINT);
         }
     }
 ?>

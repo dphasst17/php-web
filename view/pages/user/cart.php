@@ -1,12 +1,9 @@
-<?php
-    $css = file_get_contents('view/pages/user/user.css');
-    echo "<style>" . $css . "</style>";
-?>
 
-<div id="viewCart"></div>
-<div class="btn">
-    <div id="clearAll"></div>
-    <div id="purchase"></div> 
+
+<div id="viewCart" class="w-4/5 min-h-[60vh] h-auto mx-auto"></div>
+<div class="btn w-full h-[50px] flex">
+    <div id="clearAll" class="w-2/4 min-h-[50px] h-auto mx-auto flex items-center justify-evenly"></div>
+    <div id="purchase" class="w-2/4 min-h-[50px] h-auto mx-auto flex items-center justify-evenly"></div> 
 </div>
 <script>
     let idUser = JSON.parse(localStorage.getItem("uS") || [])
@@ -28,22 +25,22 @@
     )
     .then(data => viewCarts(data));
     let viewCartEmpty = `<h1 class="text-[40px] font-bold">YOUR CART IS EMPTY</h1>`;
-    let button = `<button onclick="window.location.href= './purchase&id=${idUser}'">PURCHASE</button>`;
-    let btnClearAll = `<button onclick="deleteAllItems()">Clear All Items</button>`;
+    let button = `<button class="w-[150px] h-[30px] rounded-[5px] text-white text-[20px] font-semibold bg-[#567090] border-none outline-none" onclick="window.location.href= './purchase&id=${idUser}'">PURCHASE</button>`;
+    let btnClearAll = `<button class="w-[150px] h-[30px] rounded-[5px] text-white text-[20px] font-semibold bg-[#567090] border-none outline-none" onclick="deleteAllItems()">Clear All Items</button>`;
     const viewCarts = (e) => {
-        let viewCart = e.map(e => `<div class="items">
-            <div class="itemsImg"><img src=${e.imgProduct} alt="image"/></div>
-            <div class="itemsContent">
-                <div class="itemsTitle">${e.nameProduct}</div>
-                <div class="itemsPrice">Price: ${e.price} USD</div>
-                <div class="itemsPrice">Total: <span id='itemsPrice${e.idCart}'>${e.price*e.countProduct}</span> USD</div>
+        let viewCart = e.map(e => `<div class="items w-full min-h-[100px] h-auto flex flex-col sm:flex-row justify-center items-center p-[5px] border-b-solid border-b-[1px] border-b-black">
+            <div class="itemsImg w-full sm:w-2/5 md:w-1/4 h-2/5 sm:h-full flex items-center justify-center"><img class="w-2/4 h-full object-contain" src=${e.imgProduct} alt="image"/></div>
+            <div class="itemsContent w-full sm:w-3/5 md:w-3/4 h-2/5 sm:h-full flex flex-col">
+                <div class="itemsTitle w-full min-h-[30px] text-[20px] text-[#2f2a87] font-semibold flex items-center overflow-hidden whitespace-nowrap text-ellipsis ">${e.nameProduct}</div>
+                <div class="itemsPrice w-full min-h-[30px] text-[20px] text-[#2f2a87] font-semibold flex items-center overflow-hidden whitespace-nowrap text-ellipsis ">Price: ${e.price} USD</div>
+                <div class="itemsPrice w-full min-h-[30px] text-[20px] text-[#2f2a87] font-semibold flex items-center overflow-hidden whitespace-nowrap text-ellipsis ">Total: <span id='itemsPrice${e.idCart}'>${e.price*e.countProduct}</span> USD</div>
             </div>
-            <div class="button">
-                <button class="decre flex items-center justify-center text-[20px] font-bold" onclick="decrement(${e.idCart},${e.price})">-</button>
-                <div id='viewCount${e.idCart}' class="viewCount">${e.countProduct}</div>
-                <button class="incre flex items-center justify-center text-[20px] font-bold" onclick="increment(${e.idCart},${e.price})">+</button>
+            <div class="button w-3/5 sm:w-2/5 md:w-1/5 h-full flex justify-around items-center">
+                <button class="decre w-[50px] h-[30px]flex items-center justify-center text-[20px] font-bold cursor-pointer" onclick="decrement(${e.idCart},${e.price})">-</button>
+                <div id='viewCount${e.idCart}' class="viewCount w-auto min-w-[30px] h-[30px] flex justify-center items-center text-[20px] font-semibold">${e.countProduct}</div>
+                <button class="incre w-[50px] h-[30px]flex items-center justify-center text-[20px] font-bold cursor-pointer" onclick="increment(${e.idCart},${e.price})">+</button>
             </div>
-            <div class="delete" onclick="deleteItems(${e.idCart})">DELETE</div>
+            <div class="delete w-[100px] h-[30px] rounded-[5px] flex items-center justify-center bg-[#ebe8e8] text-[20px] font-semibold cursor-pointer" onclick="deleteItems(${e.idCart})">DELETE</div>
             
         </div>`);
         

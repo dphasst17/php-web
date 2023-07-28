@@ -51,7 +51,7 @@ function user_select_by_id($ma_kh){
 }
 
 function user_exist($ma_kh){
-    $sql = "SELECT count(*) FROM users WHERE $idUser=?";
+    $sql = "SELECT count(*) FROM users WHERE idUser=?";
     return pdo_query_value($sql, $ma_kh) > 0;
 }
 

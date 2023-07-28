@@ -8,18 +8,7 @@
     <title>TStore</title>
     <link rel="stylesheet" href="/public/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    screens: {
-                        ssm: '390px',
-                        smr: '550px',
-                    },
-                }
-            }
-        }
-    </script>
+    <script src="/public/js/config.Tailwind.js"></script>
 </head>
 <body>
     <?php
@@ -30,8 +19,11 @@
         }
         if($page !== 'contact'){
             include_once 'view/layout/header.php';
-        }   
-        echo "<div class='container w-screen max-w-full flex flex-col items-center my-[0] mx-auto'>";
+        }
+        if($page !== 'contact'){
+            include_once 'view/layout/headerMobile.php';
+        }  
+        echo "<div class='container w-screen max-w-full flex flex-col items-center mt-[10%] lg:mt-0 mx-auto'>";
         switch ($page) {
             case 'home':
                 include_once 'view/pages/home/home.php';

@@ -8,6 +8,8 @@ $router->get('/products/access', 'ProductController', 'getAccess');
 $router->get('/products/new', 'ProductController', 'getNew');
 $router->get('/products/view', 'ProductController', 'getView');
 $router->get('/products/detail/:id', 'ProductController', 'detail');
+$router->get('/products/search/:keyword', 'ProductController', 'searchProduct');
+
 $router->post('/products/image','ProductController','image');
 $router->post('/products/delete', 'ProductController', 'deleteProduct');
 $router->post('/products/updateview', 'ProductController', 'updateViewProduct');

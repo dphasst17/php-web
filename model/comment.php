@@ -34,11 +34,6 @@ function comment_exist($ma_bl){
     $sql = "SELECT count(*) FROM comments WHERE idComment=?";
     return pdo_query_value($sql, $ma_bl) > 0;
 }
-//-------------------------------//
-/* function comment_select_by_hang_hoa($ma_hh){
-    $sql = "SELECT b.*, h.nameProduct FROM comments b JOIN products h ON h.idProduct=b.idProduct WHERE b.idProduct=? ORDER BY dateComment DESC";
-    return pdo_query($sql, $ma_hh);
-} */
 function comment_select_by_hang_hoa_user($ma_hh){
     $sql = "SELECT b.*, h.nameUser,h.img FROM comments b JOIN users h ON h.idUser=b.idUser WHERE b.idProduct=? ORDER BY dateComment DESC;";
     return pdo_query($sql, $ma_hh);

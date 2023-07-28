@@ -3,12 +3,7 @@ include_once '../model/product.php';
 include_once '../model/type.php';
 class ProductController
 {
-    public function getById($id)
-    {
-        echo $id;
-    }
-    public function getAll()
-    {
+    public function getAll(){
         $products = product_select_all();
         $newProducts = [];
         foreach ($products as $product) {
@@ -94,6 +89,7 @@ class ProductController
     }
     public function detail($idProduct){
         $detail = product_select_by_id($idProduct);
+        header('Content-type: text/javascript');
         echo json_encode($detail, JSON_PRETTY_PRINT);
     }
     public function image(){
@@ -159,6 +155,21 @@ class ProductController
     public function typeStatistics(){
         $data = select_min_max_in_type();
         echo json_encode($data, JSON_PRETTY_PRINT);
+    }
+    public function searchProduct($keyword){
+        $products = product_select_keyword($keyword);
+        $newProducts = [];
+        foreach ($products as $product) {
+            $newProduct = [];
+            foreach ($product as $key => $value) {
+                if (!is_int($key)) {
+                $newProduct[$key] = $value;
+                }
+            }
+            $newProducts[] = $newProduct;
+        }
+        header('Content-type: text/javascript');
+        echo json_encode($newProducts, JSON_PRETTY_PRINT);
     }
 }
 ?>

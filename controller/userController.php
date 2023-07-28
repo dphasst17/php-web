@@ -15,7 +15,7 @@
             $id = isset($data['id'])? $data['id']: '';
             $name = isset($data['name'])? $data['name']: '';
             $email = isset($data['email'])? $data['email']: '';
-            $update = update_user($name,$email,$id);
+            update_user($name,$email,$id);
         }
         public function updateImage(){
             if(isset($_FILES['file']['name'])){
@@ -39,7 +39,7 @@
                           $response = 1;
                      } 
                 }
-                $upload = upload_image($filename,$id);
+                upload_image($filename,$id);
                 echo $response;
                 exit;
             }

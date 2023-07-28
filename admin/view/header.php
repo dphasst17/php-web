@@ -4,14 +4,14 @@
   <?php
             if(isset($_SESSION["admin"]))
             {
-              echo ' 
+              echo '
               <div class="w-[276px] h-[50px] fixed rounded-[5px] bg-neutral-800 cursor-pointer" id="tabAdmin">
                 
               </div>
             ';
             }
   ?>
-  <nav id="navBar" class="w-[276px] h-[60vh] fixed justify-center top-[90px] pt-[2%] bg-neutral-800 rounded-[5px] transition-all" style="display:none;">
+  <nav id="navBar" style="width:0px;height:0vh;transition:all .1s linear; overflow:hidden;" class="fixed flex justify-center top-[90px] pt-[2%] bg-neutral-800 rounded-[5px] transition-all" style="display:none;">
         <ul class="w-[90%] h-full flex flex-col">
         <li onclick="window.location.href = './cate'" class="nav-item w-full h-[30px] flex items-center pl-[2%] <?php if ($currentPage == 'cate' ) echo 'active h-[50px] flex justify-center items-center text-white text-[25px] font-bold rounded-[5px] bg-sky-500 transition-all'; ?>mb-[2%] text-white text-[15px] font-semibold mb-[5%] cursor-pointer hover:rounded-[5px] hover:bg-sky-500 hover:text-white transition-all">
             <a class="nav-link text-white" href="./cate">Danh mục</a>
@@ -65,10 +65,12 @@
           }
           const nav = document.querySelector("nav");
           const dropMenu = () => {
-            if(nav.style.display === "flex"){
-              nav.style.display = "none";
+            if(nav.style.width === "0px"){
+              nav.style.width = "276px";
+              nav.style.height = "60vh";
             }else{
-              nav.style.display = "flex"
+              nav.style.width = "0px";
+              nav.style.height = "0vh";
             }
           }
          </script>

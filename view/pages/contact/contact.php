@@ -1,6 +1,6 @@
 
 <?php 
-    include 'model/contact.php'; 
+    include_once 'model/contact.php'; 
     $css = file_get_contents('./view/pages/contact/contact.css');
     echo "<style>" . $css . "</style>";
     

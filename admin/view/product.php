@@ -40,11 +40,9 @@
   </tbody>
 </table>
 <div class="pagination w-full flex items-center justify-center my-[2%] mx-auto">
-        <div class="prevPage w-[50px] lg:w-[70px] h-[50px] flex items-center justify-center text-white hover:text-blue-500 border-[1px] border-white hover:border-blue-500 border-solid rounded-[5px] transition-all" onclick="prevPage()" style="cursor:pointer">PREV</div>
         <div class="buttonPage w-2/5 min-w-[250px] h-full flex justify-evenly overflow-hidden" id="buttonPage">
         </div>
-        <div class="nextPage w-[50px] lg:w-[70px] h-[50px] flex items-center justify-center text-white hover:text-blue-500 border-[1px] border-white hover:border-blue-500 border-solid rounded-[5px] transition-all" onclick="nextPage()"style="cursor:pointer">NEXT</div>
-    </div> 
+</div> 
 <script>
     let data = [];
     let start = 0;
@@ -69,38 +67,9 @@
         data = restData;
         viewProducts(restData,start,end)
         totalPage = restData.length % itemsInPage === 0 ? restData.length / itemsInPage : (restData.length / itemsInPage) + 1;
-        paginationPage();
+        paginationPage("btnProductAll","viewProducts");
     })
 
-    const nextPage = () => {
-        if(activePage < totalPage){
-            activePage = activePage + 1;
-            setPagination(activePage)
-        }
-    }
-    const prevPage = () => {
-        if(activePage > 1){
-            activePage = activePage - 1;
-            setPagination(activePage)
-        }
-    }
-    const paginationPage = () => {
-        let pagination = [];
-        
-        for(let i = 1; i <= totalPage; i++){
-            pagination.push(i);
-        }
-        let viewPagination = pagination.map(e => `<button class='w-[50px] h-[50px] text-white text-[15px] mx-[1%] ${e === activePage ? 'text-[20px] bg-blue-600 font-bold' : ''}hover:bg-blue-600 hover:font-bold rounded-[5px] transition-all' onclick='setPagination(${e})' id="showButton-${e}">${e}</button>`);
-        document.getElementById('buttonPage').innerHTML = viewPagination.join('')
-    }
-    const setPagination = (e) => {
-        start = (12 * e) - 12;
-        end = 12*e;
-        document.getElementById(`showButton-${activePage}`).classList.remove('active');
-        activePage = e;
-        document.getElementById(`showButton-${e}`).classList.add('active');
-        viewProducts(data,start,end);
-    }
     const viewProducts = (e,start,end) => {
         let viewProduct = e.slice(start,end).map(e => `
             <tr class="bg-slate-800 ">
@@ -113,18 +82,27 @@
                 <th  class="hidden lg:table-cell border-solid border-white border-[1px] px-6 py-3">${(e.des !== null && e.des?.length !== 0) ? e.des?.slice(0,180)+"..." : ""}</th>
                 <th  class="hidden lg:table-cell w-[5%] border-solid border-white border-[1px] px-6 py-4">${e.view}</th>
                 <th  class="hidden md:table-cell w-[10%] px-6 py-4">
-                    <button class="w-full min-w-[100px] h-[30px] rounded-[5px] bg-[#007bff] hover:bg-blue-800 text-white" onclick="window.location.href = './edit&id=${e.idProduct}'">Edit</button>
-                    <button class="w-full min-w-[100px] h-[30px] rounded-[5px] mt-[5%] bg-[#d9534f] hover:bg-red-600 text-white" onclick="deleteItems(${e.idProduct})">Delete</button>
+                    <button class="w-full min-w-[100px] h-[30px] rounded-[5px] bg-[#007bff] hover:bg-blue-800 text-white" 
+                        onclick="window.location.href = './edit&id=${e.idProduct}'">Edit
+                    </button>
+                    <button class="w-full min-w-[100px] h-[30px] rounded-[5px] mt-[5%] bg-[#d9534f] hover:bg-red-600 text-white" 
+                        onclick="deleteItems(${e.idProduct})">Delete
+                    </button>
                 </th>
-                <th class="block md:hidden m-auto flex justify-center items-center px-6 py-4">
+                <th class="block md:hidden m-auto flex justify-start items-center px-6 py-4" onclick="handleHideShowAdmin('btnAll-${e.idProduct}')">
                     <svg class="w-5 h-5 text-white hover:text-blue-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
                         <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
                     </svg>
                 </th>
+                <div id='btnAll-${e.idProduct}' style="width:0px;height:0px;overflow:hidden; transition:all .1s linear" 
+                    class="btnMobile absolute flex md:hidden flex-col justify-around items-center bg-slate-500 rounded-[5px] mt-[-17%] sm:mt-[-10%] right-[10px]">
+                    <button class="btnViewProduct w-2/4 h-2/5 rounded-[5px] text-white bg-blue-500" onclick="window.location.href = './edit&id=${e.idProduct}'">Edit</button>
+                    <button class="btnViewProduct w-2/4 h-2/5 rounded-[5px] text-white bg-[#d9534f]" onclick="deleteItems(${e.idProduct})">Delete</button>
+                </div>
             </tr>
         `).join('');
         document.getElementById("myTable").innerHTML =  viewProduct;
-        paginationPage();
+        paginationPage("btnProductAll","viewProducts");
     }
     const getNewProduct = (e) => {
         let viewNew = e.map(e => `<tbody>
@@ -141,11 +119,16 @@
                     <button class="w-full min-w-[100px] h-[30px] rounded-[5px] bg-[#007bff] hover:bg-blue-800 text-white" onclick="window.location.href = './edit&id=${e.idProduct}'">Edit</button>
                     <button class="w-full min-w-[100px] h-[30px] rounded-[5px] mt-[5%] bg-[#d9534f] hover:bg-red-600 text-white" onclick="deleteItems(${e.idProduct})">Delete</button>
                 </th>
-                <th class="block md:hidden m-auto flex justify-center items-center  px-6 py-4">
+                <th class="block md:hidden m-auto flex justify-start items-center px-6 py-4" onclick="handleHideShowAdmin('btnNew-${e.idProduct}')">
                     <svg class="w-5 h-5 text-white hover:text-blue-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
                         <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
                     </svg>
                 </th>
+                <div id='btnNew-${e.idProduct}' style="width:0px;height:0px;overflow:hidden; transition:all .1s linear" 
+                    class="btnMobile absolute flex md:hidden flex-col justify-around items-center bg-slate-500 rounded-[5px] mt-[-35%] sm:mt-[-15%] right-[10px]">
+                    <button class="btnViewProduct w-2/4 h-2/5 rounded-[5px] text-white bg-blue-500" onclick="window.location.href = './edit&id=${e.idProduct}'">Edit</button>
+                    <button class="btnViewProduct w-2/4 h-2/5 rounded-[5px] text-white bg-[#d9534f]" onclick="deleteItems(${e.idProduct})">Delete</button>
+                </div>
             </tr>
     </tbody>`).join('');
     document.getElementById("newProduct").insertAdjacentHTML('beforeend', viewNew);
@@ -191,3 +174,4 @@
         }, 0);
     }
 </script>
+<script src="/public/js/adminHandle.js"></script>

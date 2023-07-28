@@ -1,13 +1,11 @@
-<?php 
-    $css = file_get_contents('view/pages/user/styleUser.css');
-    echo "<style>" . $css . "</style>";
-?>
-<div class="userPage w-[90%] min-h-[400px] h-auto flex justify-center my-[2%] mx-auto">
-    <div id="getUser" class="w-2/4 h-full flex flex-col justify-center">
+
+<div class="userPage w-[98%] md:w-[90%] min-h-[400px] h-auto flex flex-col md:flex-row justify-center my-[2%] mx-auto mt-[12%] smr:mt-[5%] md:mt-0">
+    <div id="getUser" class="w-full md:w-2/4 h-full flex flex-col justify-center">
         <div id="information" class="w-full h-2/4 flex justify-center mb-[5%]"></div>
-        <div class="viewPurchase" class="w-full min-h-[200px] h-auto mt-[5%]">
-            <table id="confirm" class="w-[90%] h-auto flex flex-col my-[0] mx-auto" >
-                <thead class="w-full min-h-[30px]" >
+        <div class="viewPurchase w-full min-h-[200px] h-auto mt-[5%]">
+            <table id="confirm" class="w-full md:w-[90%] h-auto flex flex-col my-[0] mx-auto" >
+                <caption class="text-center text-[20px] text-[#03207e] font-bold mb-[5%]">Đơn hàng đang mua</caption>
+                <thead class="w-full min-h-[30px] border-b-[2px] border-b-black border-b-solid" >
                     <tr class="w-full flex justify-between" >
                         <th class="w-1/5 text-center">Tên sản phẩm</th>
                         <th class="w-1/5 text-center">Đơn giá</th>
@@ -19,8 +17,8 @@
             </table>
         </div>
     </div>
-    <div id="items" class="w-2/4 h-full flex flex-col justify-center">
-        <h1 style="cursor:pointer" class="text-[40px] font-bold text-[#03207e] text-center cursor-pointer">Đơn hàng đã mua</h1>
+    <div id="items" class="w-full md:w-2/4 h-full flex flex-col justify-center mt-[2%] md:mt-0">
+        <h1 style="cursor:pointer" class="text-[20px] md:text-[40px] font-bold text-[#03207e] text-center cursor-pointer">Đơn hàng đã mua</h1>
         <div id="bought" class="w-full min-h-[575px] h-auto"></div>
         <div class="pagination w-4/5 h-[50px] flex justify-evenly items-center m-auto">
             <div class="prevPage w-[10%] h-2/4 bg-slate-300 flex items-center justify-center text-[18px] text-black font-medium rounded-[8px] cursor-pointer transition-all hover:bg-[#586582] hover:text-white" onclick="prevPage()">PREV</div>
@@ -140,17 +138,17 @@
         paginationPage()
     }
     const viewUser = (e) => {
-        let viewInfor = e.map(e => `<div class="userDetail w-[90%] h-[90%] flex flex-col items-center">
+        let viewInfor = e.map(e => `<div class="userDetail w-full md:w-[90%] h-[90%] flex flex-col items-center">
             <div class="userImg w-full h-[70px] flex justify-center mb-[5%]">
                 <img class='w-[70px] h-full rounded-[50%] border-solid border-2 border-black cursor-pointer object-cover' src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`./public/images/uploads/${e.img}`}  alt="User-image" />
-                <div class="changeAvt absolute w-[12%] h-[50px] my-[2%] mx-[0] ml-[2%] flex flex-wrap justify-end items-end pr-[3%]" >
+                <div class="changeAvt w-[12%] lg:w-[7%] h-full flex flex-wrap justify-end items-end pr-[3%]" >
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" onclick="changeAvt()" class="w-[25px] h-[30px] rounded-[50%] border-2 border-solid border-black hover:border-blue-900 p-[2%] cursor-pointer transition-all fill-black hover:fill-blue-900">
                         <path  d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z"/>
                     </svg>
                 </div>
             </div>
-            <div class="userName w-[70%] h-[50px] my-[2%] flex items-center text-[20px] text-[18px] font-medium pl-[2%] border-solid border-2 border-black rounded-[5px]">Tên: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${e.nameUser}</span></div>
-            <div class="email w-[70%] h-[50px] my-[2%] flex items-center text-[20px] text-[18px] font-medium pl-[2%] border-solid border-2 border-black rounded-[5px]">Email: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${e.email}</span></div>
+            <div class="userName w-full md:w-[70%] h-[50px] my-[2%] flex items-center text-[20px] text-[18px] font-medium pl-[2%] border-solid border-2 border-black rounded-[5px]">Tên: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${e.nameUser}</span></div>
+            <div class="email w-full md:w-[70%] h-[50px] my-[2%] flex items-center text-[20px] text-[18px] font-medium pl-[2%] border-solid border-2 border-black rounded-[5px]">Email: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${e.email}</span></div>
             <div class="change">
                 <button class="w-[250px] h-[40px] outline-none border-none rounded-[10px] text-[16px] text-white font-semibold bg-[#586582] hover:bg-blue-700 cursor-pointer transition-all" onclick="changeUser()">Change user information</button>
             </div>
@@ -159,7 +157,7 @@
     }
 
     const viewTransport = (e) => {
-        let viewPurchase = e.map(e => `<tbody class="w-full">
+        let viewPurchase = e.map(e => `<tbody class="w-full border-b-[2px] border-b-black border-b-solid">
                 <tr class="w-full min-h-[40px] flex justify-between items-center">
                     <th class="w-1/5 text-center">${e.nameProduct}</th>
                     <th class="w-1/5 text-center">${e.price}</th>
@@ -219,8 +217,6 @@
             }
         })
         .catch(error => console.error('Error:', error));
-
-       
     }
 
 
@@ -240,7 +236,7 @@
         let email = document.getElementById("newEmail");
         let newName = `Tên: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${name.value}</span>`;
         let newEmail = `Email: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${email.value}</span>`;
-        let save = `<button onclick="changeUser()">Change user information</button>`
+        let save = `<button class="w-[250px] h-[40px] outline-none border-none rounded-[10px] text-[16px] text-white font-semibold bg-[#586582] hover:bg-blue-700 cursor-pointer transition-all" onclick="changeUser()">Change user information</button>`
         document.querySelector(".userName").innerHTML = newName;
         document.querySelector(".email").innerHTML = newEmail;
         document.querySelector(".change").innerHTML = save;

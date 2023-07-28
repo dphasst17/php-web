@@ -1,5 +1,5 @@
-<?php 
-    include '../model/product.php';
+<?php
+    include_once '../model/product.php';
     $id = $_GET['id'];
     $getProduct = product_select_by_id($id);
 ?>

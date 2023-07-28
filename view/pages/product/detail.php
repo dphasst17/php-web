@@ -22,12 +22,11 @@
 </div>
 <div class="viewType w-screen xl:w-full min-h-[150px] flex flex-col justify-center items-center mb-[2%]">
     <h1 class="text-center text-[30px] font-bold">SIMILAR PRODUCTS</h1>
-    <div id="productType" class="w-4/5 min-h-[150px] flex flex-wrap justify-around"></div>
+    <div id="productType" class="w-[90%] min-h-[150px] flex flex-wrap justify-around"></div>
 </div>
 
 <script>
     let idProduct = <?php echo $id;?>;
-    
     let isLogin = JSON.parse(localStorage.getItem("isLogin") || [])
     let idUser = JSON.parse(localStorage.getItem("uS") || [])
     let productType = <?php echo json_encode($type); ?>; 
@@ -77,9 +76,9 @@
         </div>`;
         document.getElementById("viewProduct").innerHTML = viewProducts;
     }
-    let viewProductType = productType.slice(0,5).map(e => `<div class="items w-1/5 min-w-[150px] h-[200px]">
+    let viewProductType = productType.slice(0,5).map(e => `<div class="items w-[250px] min-w-[150px] h-[200px]">
         <div class="itemsImg w-full h-2/5 flex justify-center"><img class="w-2/4 h-full object-contain" src=${e.imgProduct} class="object-contain" alt="imgProduct"/></div>
-        <div class="itemsTitle w-full min-h-[50px] flex justify-center items-center text-[18px] text-[#9d2b2b] font-semibold">${e.nameProduct}</div>
+        <div class="itemsTitle w-full  min-h-[50px] flex items-center text-center text-[18px] text-[#9d2b2b] font-semibold overflow-hidden whitespace-nowrap text-ellipsis"><span class="w-full mx-auto overflow-hidden whitespace-nowrap text-ellipsis">${e.nameProduct}</span></div>
         <div class="itemsPrice w-full h-[30px] text-[#9d2b2b] font-bold">Price: <span>${e.price} USD</span> </div>
         <div class="button w-full h-1/5 flex flex-row justify-start">
             <button class="w-[62%] lg:h-full text-[15px] text-white font-semibold rounded-[5px] bg-[#586582] hover:bg-[#4F71B1] transition-all border-none outline-none cursor-pointer">Add to cart</button>

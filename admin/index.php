@@ -1,6 +1,6 @@
-<?php 
+<?php
     session_start();
-    $currentPage = isset($_GET['page']) ? $_GET['page']: 'cate'; 
+    $currentPage = isset($_GET['page']) ? $_GET['page']: 'cate';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,25 +10,14 @@
     <title>ADMIN</title>
     <link rel="stylesheet" href="/public/css/admin.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    screens: {
-                        ssm: '390px',
-                        smr: '550px',
-                    },
-                }
-            }
-        }
-    </script>
+    <script src="/public/js/config.Tailwind.js"></script>
 </head>
 <body>
 <?php
     include_once 'model/config.php';
     include_once './model/user.php';
     echo "<div class='container w-full min-w-full flex flex-col p-[1%] m-auto overflow-x-hidden' >";
-            include 'view/header.php';
+            include_once 'view/header.php';
             $page="cate";
             if(isset($_GET['page']))
                 $page=$_GET['page'];
@@ -39,18 +28,16 @@
             echo "<div class='viewAdmin w-full mx-auto overflow-x-hidden'>";
                 switch($page)
                 {
-
                     case "login":
                         if(isset($_POST['btn_submit']))
                         {
                             $email=$_POST['username'];
                             $pass=$_POST['password'];
-                            if(CheckLogin($email,$pass)==true)
+                            if(CheckLogin($email,$pass))
                             {
                                 $_SESSION['admin']=$email;
                                 echo "<script>localStorage.setItem('idLog',JSON.stringify('".$_SESSION["admin"]."'))</script>";
                                 echo "<script>location.href = './cate'</script>";
-                                
                             }
                             else
                             {
@@ -59,7 +46,7 @@
                         }
                         else
                         {
-                            include './view/login.php';
+                            include_once './view/login.php';
                         }
                         break;
                     case "logout":
@@ -67,31 +54,34 @@
                         echo "<script>location.href = './login'</script>";
                         break;
                     case "cate":
-                        include './view/catalog.php';
+                        include_once './view/catalog.php';
                         break;
                     case "product":
-                        include './view/product.php';
+                        include_once './view/product.php';
                         break;
                     case "new":
-                        include './view/addnew.php';
+                        include_once './view/addnew.php';
                         break;
                     case "edit":
-                        include './view/edit.php';
+                        include_once './view/edit.php';
                         break;
                     case "staff":
-                        include './view/staff.php';
+                        include_once './view/staff.php';
                         break;
                     case "comment":
-                        include './view/comment.php';
+                        include_once './view/comment.php';
                         break;
                     case "statistical":
-                        include './view/statistical.php';
+                        include_once './view/statistical.php';
                         break;
                     case "order":
-                        include './view/order.php';
+                        include_once './view/order.php';
                         break;
                     case "ware":
-                        include './view/ware.php';
+                        include_once './view/ware.php';
+                        break;
+                    default:
+                        include_once '/view/pages/error/error.php';
                         break;
                 }
             echo "</div>";

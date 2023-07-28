@@ -10,13 +10,13 @@
         return pdo_query($sql,$statusWare);
     }
     function get_total_product_in_ware(){
-        $sql = "SELECT idProduct, 
-                SUM(CASE WHEN statusWare = 'import' THEN countProduct ELSE 0 END) - SUM(CASE WHEN statusWare = 'export' THEN countProduct ELSE 0 END) 
-                AS totalProduct FROM warehouse GROUP BY idProduct;";
+        $sql = "SELECT w.idProduct,p.nameProduct,p.imgProduct,p.price,
+            SUM(CASE WHEN statusWare = 'import' THEN countProduct ELSE 0 END) - SUM(CASE WHEN statusWare = 'export' THEN countProduct ELSE 0 END) 
+            AS totalProduct FROM warehouse w JOIN products p ON w.idProduct = p.idProduct GROUP BY w.idProduct;";
         return pdo_query($sql);
     }
     function get_all_warehouse(){
-        $sql="SELECT * FROM `warehouse` ORDER BY dateIOX DESC;";
+        $sql="SELECT w.*,p.nameProduct FROM `warehouse` w JOIN products p ON w.idProduct = p.idProduct ORDER BY dateIOX DESC;";
         return pdo_query($sql);
     }
     function delete_warehouse_by_id($idWarehouse){

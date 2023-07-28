@@ -1,158 +1,111 @@
-<?php 
-    include 'model/product.php';
-    $value = $_GET['value'];
-    $detail = product_select_keyword($value);
-?>
-<div class="product w-screen xl:w-full h-auto min-h-[600px] flex my-[2%] px-[2%]" style="justify-content:center">
-    <div class="filter w-1/5 h-[15%] hidden xl:flex flex-wrap justify-start items-start rounded-[10px] bg-[#f0efef]" id="getFilter"></div>
-    <div class="viewProduct w-full xl:w-4/5 h-auto min-h-[200px] flex flex-col items-center my-[2%]" >
-        <div id="getAll" class="w-full lg:w-[95%] h-auto min-h-[700px] flex flex-wrap justify-center  justify-around lg:justify-start items-start mb-[2%]"></div>
-        <div class="pagination w-4/5 h-[50px] flex justify-center items-center" >
-            <div class="prevPage w-[10%] h-2/4 bg-slate-300 flex items-center justify-center text-[18px] text-black font-medium rounded-[8px] cursor-pointer transition-all hover:bg-[#586582] hover:text-white" onclick="prevPage()">PREV</div>
-            <div class="buttonPage w-auto min-w-[60px] h-full flex justify-around items-center mx-[2%]" id="buttonPage">
+<div class="product w-full h-auto min-h-[600px] flex flex-col lg:justify-evenly mb-[2%]">
+    <div class="filter w-[350px] lg:w-2/4 h-auto min-h-[100px] relative flex flex-wrap flex-row justify-start items-center rounded-[10px]" >
+        <div 
+            class="w-[100px] h-[30px] mx-[3%]  flex flex-row items-center justify-evenly text-[20px] rounded-[5px] border-solid border-black border-[1px] font-semibold border-b-solid border-b-black border-b-[1px] cursor-pointer"
+            onclick="handleShowHide(getFilter,svgType)">
+            Type 
+            <svg id="svgType" class="h-[85%] flex items-center justify-center transition-all" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+            </svg>
             
-            </div>
-            <div class="nextPage w-[10%] h-2/4 bg-slate-300 flex items-center justify-center text-[18px] text-black font-medium rounded-[8px] cursor-pointer transition-all hover:bg-[#586582] hover:text-white" onclick="nextPage()">NEXT</div>
         </div>
-    </div>   
-</div>
-</div>
+        <div class="filterDetail w-[250px] absolute top-[100px] md:top-[80px] left-[10px] md:left-[10px] bg-slate-300 flex flex-wrap justify-center items-center rounded-[10px]" style="height:0px;overflow:hidden; transition:all .2s linear" id="getFilter">
+        </div>
 
+        <div class="w-[100px] h-[30px] mx-[3%] flex flex-row items-center justify-evenly text-[20px] rounded-[5px] border-solid border-black border-[1px] font-semibold border-b-solid border-b-black border-b-[1px] cursor-pointer" 
+             onclick="handleShowHide(getFilter2,svgBrand)">
+             Brand
+             <svg id="svgBrand" class="h-[85%] flex items-center justify-center transition-all" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+            </svg>
+        </div>
+        <div class="filter w-[250px] absolute top-[100px] md:top-[80px] left-[10px] md:left-[100px] bg-slate-300 flex flex-wrap justify-center items-center rounded-[10px]" style="height:0px;overflow-y:scroll;overflow-x:hidden; transition:all .2s linear" id="getFilter2">
+        </div>
+
+        <div class="w-[100px] h-[30px] mx-[3%] flex flex-row items-center justify-evenly text-[20px] rounded-[5px] border-solid border-black border-[1px] font-semibold border-b-solid border-b-black border-b-[1px] cursor-pointer" 
+            onclick="handleShowHide(selectOption,svgOption)">
+            Option
+            <svg id="svgOption" class="h-[85%] flex items-center justify-center transition-all" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+            </svg>
+        </div>
+        <div class="filter w-[250px] absolute top-[100px] md:top-[80px] left-[10px] md:left-[190px] bg-slate-300 h-auto flex flex-wrap justify-evenly items-center rounded-[10px]" id="selectOption" style="height:0px;overflow-y:scroll;overflow-x:hidden; transition:all .2s linear">
+        </div>
+        
+    </div>
+    <div class="viewProduct w-full h-auto min-h-[200px] flex flex-col items-center mb-[2%]">
+        <div id="getAll" class="w-full lg:w-[95%] h-auto min-h-[700px] flex flex-wrap justify-center xl:justify-evenly items-start"></div>
+        <div class="pagination w-full smr:w-4/5 h-[150px] smr:h-[50px] flex flex-col smr:flex-row justify-center items-center my-[4%] smr:my-0">
+            <div class="prevPage w-[70px] h-[30px] my-[2%] smr:my-0 bg-slate-300 flex items-center justify-center text-[18px] text-black font-medium rounded-[8px] cursor-pointer transition-all hover:bg-[#586582] hover:text-white" onclick="prevPage()">PREV</div>
+            <div class="buttonPage w-full smr:w-3/5 min-w-[60px] h-full flex justify-evenly items-center mx-[2%]" id="buttonPage">
+            
+            </div>
+            <div class="nextPage w-[70px] h-[30px] my-[2%] smr:my-0 bg-slate-300 flex items-center justify-center text-[18px] text-black font-medium rounded-[8px] cursor-pointer transition-all hover:bg-[#586582] hover:text-white" onclick="nextPage()">NEXT</div>
+        </div>
+    </div> 
+</div>
 <script>
-    let us = JSON.parse(localStorage.getItem("uS") || "[]");
-    let product = <?php echo json_encode($detail); ?>;
-    let data = product;
-    let arrayFilter = Array.from(new Set(product.map((e) => e.nameType)));
-    let arrayFilterBrand = Array.from(new Set(product.map((e) => e.brand)));
-    let valueFilter = [];
-    let start = 0;
-    let end = 12;
-    let itemsInPage = 12;
-    let activePage = 1
-    let totalPage = product.length % itemsInPage === 0 ? product.length / itemsInPage : (product.length / itemsInPage) + 1;
-    const nextPage = () => {
-        if(activePage < totalPage){
-            activePage = activePage + 1;
-            setPagination(activePage)
+    let value = window.location.pathname.split( '/search/' );
+    /* Get Result from Api */
+    fetch(`/api/products/search/${value[1]}`)
+    .then(res => {return res.json()})
+    .then(resultData => {
+        data = resultData;
+        let brand = Array.from(new Set(resultData.map(e => e.brand.toUpperCase())));
+        let type = Array.from(new Set(resultData.flatMap(e =>e.nameType)))
+        let resultDetail = Array.from(new Set(resultData.flatMap(e => [e.detail1, e.detail2, e.detail3, e.detail4].map(d => d.slice(0, d.indexOf(":")))))).filter(e => e !== "");
+        let resultValueDetail = Array.from(new Set(resultData.flatMap(e => [e.detail1, e.detail2, e.detail3, e.detail4]))).filter(e => e !== "");
+
+        for (let i = 0; i < resultDetail.length; i++) {
+            const fieldset = document.createElement("div");
+            fieldset.id = resultDetail[i];
+            fieldset.className = "option w-full h-auto flex flex-col justify-center pl-[2%] overflow-hidden";
+            document.getElementById("selectOption").appendChild(fieldset);
+
+            const legend = document.createElement("div");
+            legend.textContent = resultDetail[i];
+            legend.setAttribute("class", "w-[125px] text-[20px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer");
+            legend.setAttribute("onclick", "handleShowHideOption('" + resultDetail[i] + "-container')");
+            fieldset.appendChild(legend);
+
+            const div = document.createElement("div");
+            div.id = resultDetail[i] + "-container";
+            div.className = "labelFilter bg-slate-400 rounded-[5px] text-white";
+            div.setAttribute("style", "width:0px;height:0px;overflow:hidden;transition:height .5s linear");
+            fieldset.appendChild(div);
         }
-    }
-    const prevPage = () => {
-        if(activePage > 1){
-            activePage = activePage - 1;
-            setPagination(activePage)
-        }
-    }
 
-    /* function page number */
-    const paginationPage = () => {
-        let pagination = [];
-        
-        for(let i = 1; i <= totalPage; i++){
-            pagination.push(i);
-        }
-        let viewPagination = pagination.map(e => `<button class='${e === activePage ? 'activeBtn' : ""} w-[45px] min-w-[30px] h-[25px] text-[18px] font-medium rounded-[8px] border-none cursor-pointer' onclick='setPagination(${e})' id="showButton-${e}">${e}</button>`);
-        document.getElementById('buttonPage').innerHTML = viewPagination.join(''); 
-    }
-    /* function onclick pagination in button*/
-    const setPagination = (e) => {
-        start = (12 * e) - 12;
-        end = 12*e;
-        document.getElementById(`showButton-${activePage}`).classList.remove('active');
-        activePage = e;
-        document.getElementById(`showButton-${e}`).classList.add('active');
-        viewProducts(data,start,end);
-        
-    }
+        for (let i = 0; i < resultValueDetail.length; i++) {
+            let optionValue = resultValueDetail[i].split(":")[1];
+            let optionText = resultValueDetail[i].split(":")[1];
+            let selectId = resultValueDetail[i].split(":")[0];
 
-    let viewFilter = arrayFilter.map((e,i) => `<div class="inputFilter w-[45%] h-[50px] flex flex-wrap items-center pl-[2%] cursor-pointer">
-        <input class="accent-[#0a65c0] rounded-[50%] cursor-pointer checked:border-indigo-50 transition-all" type="checkbox" value=${i+1} id='filter${i+1}' name='filter' onclick="filterType(${i+1})"/>
-        <label class="text-[#2f4466] text-[18px] font-semibold cursor-pointer" for='filter${i+1}'>${e.toUpperCase()}</label>
-    </div>`);
-    
-    if(arrayFilter.length > 3){
-        document.getElementById('getFilter').innerHTML = viewFilter.join('');
-    }else{
-        document.getElementById('getFilter').style.display="none";
-    }
-
-    /* function view product */
-    const viewProducts = (p,start,end) => {
-        let viewProduct = p.slice(start,end).map(e => `<div class="items w-[160px] lg:w-1/4 md:w-[230px] min-w-[160px] h-[400px] lg:h-[500px] mb-[2%] cursor-pointer" key=${e.idProduct}>
-            <div class="itemsImg w-full h-2/5 flex justify-center"><img class="w-2/4 h-full object-contain" src=${e.imgProduct} alt="imgProduct"/></div>
-            <div class="itemsTitle w-full h-[65px] flex justify-center items-center text-[20px] text-[#9d2b2b] font-semibold overflow-hidden whitespace-nowrap text-ellipsis">
-                <span class='overflow-hidden whitespace-nowrap text-ellipsis'>${e.nameProduct}</span>
-            </div>
-            <div class='w-full min-h-[10%] h-auto overflow-hidden whitespace-nowrap text-ellipsis'>
-                <p class='w-4/5 text-blue-950 font-bold text-[17px] overflow-hidden whitespace-nowrap text-ellipsis'>${e.detail1}</p>
-                <p class='w-4/5 text-blue-950 font-bold text-[17px] overflow-hidden whitespace-nowrap text-ellipsis'>${e.detail2}</p>
-                <p class='w-4/5 text-blue-950 font-bold text-[17px] overflow-hidden whitespace-nowrap text-ellipsis'>${e.detail3}</p>
-            </div>
-            <div class="itemsPrice w-full h-[50px] flex justify-start items-center text-[20px] text-black font-semibold py-[5px]">Price: <span class="text-[20px] text-[#9d2b2b] font-semibold my-[2px]">${e.price} USD</span> </div>
-            <div class="button w-full h-[70px] xl:h-[70px] lg:h-[100px] flex flex-col xl:flex-row justify-evenly lg:items-center xl:justify-start ">
-                <button class="w-full lg:w-3/5 xl:w-2/4 lg:h-2/5 xl:h-[70%] flex items-center justify-center rounded-[5px] outline-none cursor-pointer border-none text-[20px] text-white font-semibold bg-[#586582] hover:bg-blue-700 transition-all" onclick="addProduct(${e.idProduct},'${us}')" >Add to cart</button>
-                <button class="w-full lg:w-3/5 xl:w-1/4 lg:h-1/5 xl:h-[70%] flex items-center justify-center rounded-[5px] outline-none cursor-pointer border-none font-medium lg:ml-[2%] hover:bg-blue-700 hover:text-white transition-all" onclick="location.href='detail/${e.idType}/${e.idProduct}/${e.nameProduct}'">Detail</button>
-            </div>
-        </div>`);
-    document.getElementById('getAll').innerHTML = viewProduct.join('');
-    paginationPage();
-    }
-    viewProducts(data,start,end);
-
-    const filterType = (e) => {
-        let oldData = product;
-        
-        if(valueFilter.length === 0){
-            start = 0;
-            end = 12;
-            activePage = 1;
-            valueFilter.push(e)
-            data = product.filter(e => valueFilter.toString().includes(e.idType))
+            const label = document.createElement("label");
+            label.setAttribute("class", "w-4/5 flex flex-row-reverse justify-end overflow-hidden whitespace-nowrap text-ellipsis");
+            document.getElementById(selectId + "-container").appendChild(label);
             
-        }else{
-            if (!valueFilter.includes(e)) {
-                valueFilter.push(e);
-                 data = product.filter(e => valueFilter.toString().includes(e.idType))
-                 
-                
-            } else {
-                start = 0;
-                end = 12;
-                activePage = 1;
-                valueFilter = valueFilter.filter(i => i !== e);
-                 data = product.filter(e => valueFilter.toString().includes(e.idType))    
-                 
-            }
-            
-        }
-        
-        if(valueFilter.length !== 0){
-            totalPage = data.length % itemsInPage === 0 ? data.length / itemsInPage : (data.length / itemsInPage) + 1;
-            viewProducts(data,start,end)
-        }else{
-            start = 0;
-            end = 12;
-            activePage = 1;
-            data = oldData;
-            totalPage = data.length % itemsInPage === 0 ? data.length / itemsInPage : (data.length / itemsInPage) + 1;
-            viewProducts(data,start,end)
-        }
-        
-    }
+            const pTag = document.createElement("p");
+            pTag.textContent = optionText;
+            pTag.setAttribute("class", "w-full overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer");
+            label.appendChild(pTag);
 
-    const addProduct = (p,u) => {
-        const isLogin = JSON.parse(localStorage.getItem("isLogin") || "[]");
-        if(isLogin === true ){
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                // Handle response here
-                }
-            };
-            xhttp.open("POST", "handle/cart.php", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("function=addCart&idP=" + p + "&idU=" + u);
-        }else{window.location.href="login.php"}
-        
+            const input = document.createElement("input");
+            input.type = "checkbox";
+            input.value = optionValue;
+            input.setAttribute("style", "order:1");
+            input.setAttribute("onclick", "filterOption('"+optionText+"')");
+            label.appendChild(input);
+        }
+        if(type.length !== 0 ){
+            viewFilter(type)
+        }
+        if(brand.length !== 0 ){
+            viewFilterBrand(brand)
+        }
+        if(valueFilter.length === 0){viewProducts(resultData,start,end);}
+        totalPage = data.length % itemsInPage === 0 ? data.length / itemsInPage : (data.length / itemsInPage) + 1;
+        paginationPage();
+    })
 
-    }
 </script>
+<script src="/public/js/getProduct.js"></script>

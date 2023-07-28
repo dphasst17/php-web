@@ -1,35 +1,33 @@
-<?php 
-    $css = file_get_contents('view/pages/user/user.css');
-    echo "<style>" . $css . "</style>";
-?>
-<div class="purchase">
-    <div id="viewPurchase"></div>
-    <div class="viewUser">
-        <div id="user"></div>
-        <select id="city" required>
+<div class="purchase w-full min-h-[60vh] h-auto flex flex-col lg:flex-row justify-around items-center">
+    <div id="viewPurchase" class="w-screen lg:w-[66%] min-h-[60vh] h-auto flex flex-wrap justify-evenly lg:justify-start"></div>
+    <div class="viewUser w-full sm:w-3/4 lg:w-[30%] flex flex-col">
+        <div id="user" class="w-full h-[200px]"></div>
+        <select class="w-full h-[50px] outline-none rounded-[5px] bg-[#dad8d8] text-[#03207e] text-[20px] font-semibold my-[3%] cursor-pointer" id="city" required>
             <option value="">City</option>
         </select>
-        <select id="district" required>
+        <select class="w-full h-[50px] outline-none rounded-[5px] bg-[#dad8d8] text-[#03207e] text-[20px] font-semibold my-[3%] cursor-pointer" id="district" required>
             <option value="">District</option>
         </select>
-        <div class="addressDetail"><input type="text" placeholder="Enter your address detail" required id="address"></div>
-        <div class="payment">
+        <div class="addressDetail w-full h-[50px]">
+            <input class="w-full h-full outline-none rounded-[5px] border-black border-solid border-[1px] pl-[1%]" type="text" placeholder="Enter your address detail" required id="address">
+        </div>
+        <div class="payment w-full min-h-[50px] flex flex-col justify-center">
             <h2 class="text-[20px] font-bold">Payment methods</h2>
-            <div class="methods">
+            <div class="methods w-full h-[35px] flex justify-evenly items-center text-[20px] text-black font-bold">
                 <input type="radio" name="methods" id="pay1" value="Payment on delivery">
-                <label for="pay1">Payment on delivery</label>
+                <label class="cursor-pointer" for="pay1">Payment on delivery</label>
                 <input type="radio" name="methods" id="pay2" value="Pay by credit card/visa" />
-                <label for="pay2">Pay by credit card/visa</label>
+                <label class="cursor-pointer" for="pay2">Pay by credit card/visa</label>
             </div>
         </div>
-        <div class="ship">
-            <span>Transportation costs:&nbsp;</span>
-            <div id="costs">0</div><span> &nbsp;USD</span>
+        <div class="ship w-full min-h-[50px] flex items-center text-[22px]">
+            <span class="text-[22px] font-semibold">Transportation costs:&nbsp;</span>
+            <div id="costs" class="text-[25px] font-bold text-[#2f2a87]">0</div><span> &nbsp;USD</span>
         </div>
-        <div class="total">
-            <span>Total:&nbsp;</span><div id="getTotal">0</div><span>&nbsp;USD</span>
+        <div class="total w-full min-h-[50px] flex items-center text-[22px]">
+            <span>Total:&nbsp;</span><div id="getTotal" class="text-[25px] font-bold text-[#2f2a87]">0</div><span>&nbsp;USD</span>
         </div>
-        <input type="submit" class="buy" value="BUY NOW" onclick="submit()"/>
+        <input class="w-[285px] h-[40px] rounded-[5px] border-none outline-none mx-auto bg-[#5580d4] text-white text-[20px] font-semibold cursor-pointer" type="submit" class="buy" value="BUY NOW" onclick="submit()"/>
     </div>
     
 </div>
@@ -38,13 +36,7 @@
     let product = [];
     let user = [];
     let dataUser = {idUser:idUser}
-    fetch('./api/user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataUser)
-            })
+    fetch(`/api/user/${idUser}`)
     .then(res => 
         {
             if (!res.ok) {
@@ -59,7 +51,7 @@
 
     });
     let postData = {fname:'view' , idUser:idUser.toString()}
-    fetch('./api/cart', {
+    fetch('/api/cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -78,17 +70,17 @@
         product = data;
         viewProduct(data)});
     /* -------------GET CART ---------------*/
-    const viewProduct = (e) => {
-        let viewCart = e.map(e => `<div class="items">
-            <div class="itemsImg"><img src=${e.imgProduct} alt="image"/></div>
-            <div class="itemsContent">
-                <div class="itemsTitle">${e.nameProduct}</div>
-                <div class="itemsPrice">Price: ${e.price} USD</div>
-                <div id='viewCount${e.idCart}' class="itemsPrice">Count: ${e.countProduct}</div>
-                <div class="itemsPrice">Total:&nbsp;<span id="totalItems">${e.price*e.countProduct}</span>&nbsp;USD</div>
+    const viewProduct = (data) => {
+        let viewCart = data.map(e => `<div class="items w-[200px] lg:w-[300px] h-[300px] flex flex-col justify-end border-none cursor-pointer bg-[#ededed] rounded-[5px] m-[1%]">
+            <div class="itemsImg w-full h-2/4 flex justify-center items-center"><img class="w-2/4 h-full object-contain" src=${e.imgProduct} alt="image"/></div>
+            <div class="itemsContent w-full h-2/4 flex flex-col px-[2%]">
+                <div class="itemsTitle w-full min-h-[30px] h-auto text-[20px] text-center text-[#2f2a87] font-semibold overflow-hidden whitespace-nowrap text-ellipsis">${e.nameProduct}</div>
+                <div class="itemsPrice w-full min-h-[30px] h-auto text-[20px] text-[#2f2a87] font-semibold">Price: ${e.price} USD</div>
+                <div id='viewCount${e.idCart}' class="itemsPrice w-full min-h-[30px] h-auto text-[20px] text-[#2f2a87] font-semibold">Count: ${e.countProduct}</div>
+                <div class="itemsPrice w-full min-h-[30px] h-auto text-[20px] text-[#2f2a87] font-semibold">Total:&nbsp;<span id="totalItems">${e.price*e.countProduct}</span>&nbsp;USD</div>
             </div>
-        </div>`);
-        document.getElementById('viewPurchase').innerHTML = viewCart.join('');
+        </div>`).join('');
+        document.getElementById('viewPurchase').innerHTML = viewCart;
         let total = document.querySelectorAll('#totalItems');
         let costsValue = document.querySelectorAll('#costs');
             costsValue = Array.from(costsValue).map(e => e.textContent)
@@ -101,10 +93,10 @@
 
     /* ---------------- GET data user =----------------- */
     const viewDataUser = (e) => {
-        let viewUser = e.map(e => `<div class="getUser">
-            <input type="text" value='${e.nameUser}' id="name" />
-            <input type="text" value='${e.email}' />
-            <input type="text" value="" placeholder="Enter your phone" required id="phone"/>
+        let viewUser = e.map(e => `<div class="getUser w-full h-full flex flex-col justify-evenly items-stretch">
+            <input class="w-full h-[50px] pl-[1%] rounded-[5px] border-solid border-[1px] border-black outline-none" type="text" value='${e.nameUser}' id="name" />
+            <input class="w-full h-[50px] pl-[1%] rounded-[5px] border-solid border-[1px] border-black outline-none" type="text" value='${e.email}' />
+            <input class="w-full h-[50px] pl-[1%] rounded-[5px] border-solid border-[1px] border-black outline-none" type="text" value="" placeholder="Enter your phone" required id="phone"/>
         </div>`)
         document.getElementById('user').innerHTML = viewUser.join('');
     }
