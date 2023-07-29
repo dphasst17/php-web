@@ -52,11 +52,11 @@
     </button>
 </header>
 <script>
-  const isLogin = localStorage.getItem("isLogin") || false
+  const checkLogin = localStorage.getItem("isLogin") || false
   const nav = document.querySelector("#navMob");
   const navBars = document.querySelectorAll("#navBarsMobile");
   const btnLogin = document.querySelector("#login");
-  if(isLogin === "true"){
+  if(checkLogin === "true"){
     nav.style.display = "flex";
     btnLogin.style.display = "none";
     navBars.forEach((div) => {

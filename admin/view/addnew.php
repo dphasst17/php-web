@@ -1,25 +1,25 @@
 
  <div class="w-50 m-auto p-5 d-flex flex-column " >
-      <label class="text-light" for="file">Tải hình ảnh lên từ tệp</label>
-      <input class="w-100 p-2 rounded text-light"style="border:none;outline:none;cursor:pointer;" type="file" id="imageFile" name="imageFile"><br>
+      <label class="text-white" for="file">Tải hình ảnh lên từ tệp</label>
+      <input class="w-full p-[2%] rounded-[5px] text-white"style="border:none;outline:none;cursor:pointer;" type="file" id="imageFile" name="imageFile"><br>
     
-      <label class="text-light" for="url">Tải hình ảnh từ internet</label>
-      <input class="w-100 p-2 rounded"style="border:none;outline:none;cursor:pointer;" type="text" id="imageUrl" name="imageUrl"><br>
+      <label class="text-white" for="url">Tải hình ảnh từ internet</label>
+      <input class="w-full p-[2%] rounded-[5px]"style="border:none;outline:none;cursor:pointer;" type="text" id="imageUrl" name="imageUrl"><br>
     
-      <label class="text-light" for="name">Tên:</label>
-      <input class="w-100 p-2 rounded"style="border:none;outline:none;cursor:pointer;" type="text" id="name" name="name"><br>
+      <label class="text-white" for="name">Tên:</label>
+      <input class="w-full p-[2%] rounded-[5px]"style="border:none;outline:none;cursor:pointer;" type="text" id="name" name="name"><br>
       
-      <label class="text-light" for="price">Đơn giá (USD):</label>
-      <input class="w-100 p-2 rounded"style="border:none;outline:none;cursor:pointer;" type="number" id="price" name="price"><br>
+      <label class="text-white" for="price">Đơn giá (USD):</label>
+      <input class="w-full p-[2%] rounded-[5px]"style="border:none;outline:none;cursor:pointer;" type="number" id="price" name="price"><br>
 
-      <label class="text-light" for="des">Mô tả:</label>
-      <textarea class="w-100 p-4 "style="border:none;outline:none;cursor:pointer;resize: none;" id="des" name="des" rows="5" cols="30" required></textarea><br><br>
+      <label class="text-white" for="des">Mô tả:</label>
+      <textarea class="w-full p-[4%] "style="border:none;outline:none;cursor:pointer;resize: none;" id="des" name="des" rows="5" cols="30" required></textarea><br><br>
       
-      <label class="text-light" for="date">Ngày nhập:</label>
-      <input class="w-100 p-2 rounded"style="border:none;outline:none;cursor:pointer;" type="date" id="date" name="date"><br>
+      <label class="text-white" for="date">Ngày nhập:</label>
+      <input class="w-full p-[2%] rounded-[5px]"style="border:none;outline:none;cursor:pointer;" type="date" id="date" name="date"><br>
     
-      <label class="text-light" for="category">Mã loại:</label>
-      <select class="w-100 p-2 rounded"style="border:none;outline:none;cursor:pointer;" id="category" name="category">
+      <label class="text-white" for="category">Mã loại:</label>
+      <select class="w-full p-[2%] rounded-[5px]"style="border:none;outline:none;cursor:pointer;" id="category" name="category">
     
         <option value="">--Chọn loại--</option>
         <option value="1">LAPTOP</option>
@@ -30,7 +30,7 @@
         <option value="6">VGA</option>
         <option value="7">CHUỘT</option>
       </select><br><br>
-      <button type="button" class="w-25 m-auto btn btn-primary" onclick="add()">Submit</button>
+      <button type="button" class="w-2/5 lg:w-1/4 h-[30px] mx-auto bg-blue-500 rounded-[5px] text-white" onclick="add()">Submit</button>
     
  </div>
 <script>

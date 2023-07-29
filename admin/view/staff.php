@@ -10,9 +10,7 @@
         <th class="px-6 py-3">Họ và tên</th>
         <th class="hidden md:table-cell px-6 py-3">Email</th>
         <th class="hidden sm:table-cell px-6 py-3">Vai trò</th>
-        <th class="hidden sm:table-cell w-[10%] text-center px-6 py-3">Chỉnh sửa</th>
-        <th class="hidden sm:table-cell w-[10%] text-center px-6 py-3">Xóa</th>
-        <th class="block sm:hidden w-auto px-6 py-3">More</th>
+        <th class="w-[10%] text-center px-6 py-3">Chỉnh sửa</th>
       </tr>
   </thead>
 </table>
@@ -37,13 +35,11 @@
                 <th class="px-6 py-4">${e.nameUser}</th>
                 <th class="hidden md:table-cell px-6 py-4">${e.email}</th>
                 <th class="hidden sm:table-cell px-6 py-4">Nhân viên</th>
-                <th class="hidden sm:table-cell w-[10%] justify-center items-center px-6 py-4"><button class="w-full min-w-[100px] h-[30px] rounded-[5px] bg-[#007bff] hover:bg-blue-800 text-white">Edit</button></th>
-                <th class="hidden sm:table-cell w-[10%] justify-center items-center px-6 py-4"><button class="w-full min-w-[100px] h-[30px] rounded-[5px] mt-[5%] mt-[5%] bg-[#d9534f] hover:bg-red-600 text-white">Delete</button></th>
-                <th class="block sm:hidden m-auto flex justify-center items-center px-6 py-4">
-                    <svg class="w-5 h-5 text-white hover:text-blue-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                        <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                    </svg>
+                <th class="w-[10%] justify-center items-center px-6 py-4">
+                    <button class="w-full min-w-[100px] h-[30px] rounded-[5px] bg-[#007bff] hover:bg-blue-800 text-white">Edit</button>
+                    <button class="w-full min-w-[100px] h-[30px] rounded-[5px] mt-[5%] mt-[5%] bg-[#d9534f] hover:bg-red-600 text-white">Delete</button>
                 </th>
+
             </tr>
         </tbody>`).join('');
         document.getElementById("myTable").insertAdjacentHTML('beforeend', viewProduct);

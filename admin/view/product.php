@@ -1,4 +1,5 @@
-<div class="w-[200px] h-[40px] flex items-center justify-center  rounded-[5px] bg-blue-950 hover:bg-blue-700 mt-[2%] ml-[2%] rounded-[5px] text-white text-[20px] font-semibold bg-primary cursor-pointer transition-all"  onclick="window.location.href='index.php?act=new'">Thêm sản phẩm</div>
+<div class="w-[200px] h-[40px] flex items-center justify-center  rounded-[5px] bg-blue-950 hover:bg-blue-700 mt-[2%] ml-[2%] rounded-[5px] text-white text-[20px] font-semibold bg-primary cursor-pointer transition-all"  
+    onclick="window.location.href='./new'">Thêm sản phẩm</div>
 
 <div class="new">
     <h1 class="text-white text-center text-[30px] font-bold mb-[3%]">Sản phẩm mới</h1>
@@ -6,15 +7,14 @@
 <thead class="text-xs text-gray-700 uppercase bg-gray-700 dark:text-gray-400">
       <tr>
         <th  class="hidden smr:table-cell w-[10%] px-6 py-3">Mã hàng hóa</th>
-        <th  class="hidden ssm:table-cell px-6 py-3">Mã loại</th>
-        <th  class="hidden sm:table-cell min-w-[156px] px-6 py-3">Hình ảnh</th>
+        <th  class="hidden smr:table-cell px-6 py-3">Mã loại</th>
+        <th  class="hidden md:table-cell min-w-[156px] px-6 py-3">Hình ảnh</th>
         <th  class="w-[15%] px-6 py-3">Tên hàng hóa</th>
         <th  class="w-[15%] px-6 py-3">Đơn giá</th>
         <th  class="hidden lg:table-cell px-6 py-3">Ngày nhập</th>
         <th  class="hidden lg:table-cell w-[20%] px-6 py-3">Mô tả</th>
         <th  class="hidden lg:table-cell px-6 py-3">Số lượt xem</th>
-        <th  class="hidden md:table-cell px-6 py-3">Action</th>
-        <th  class="block md:hidden w-auto px-6 py-3">More</th>
+        <th  class="block px-6 py-3">Action</th>
       </tr>
   </thead>
 </table>
@@ -24,15 +24,14 @@
   <thead class="text-xs text-gray-700 uppercase bg-gray-700 dark:text-gray-400">
       <tr>
         <th  class="hidden smr:table-cell w-[10%] px-6 py-3">Mã hàng hóa</th>
-        <th  class="hidden ssm:table-cell px-6 py-3">Tên loại</th>
-        <th  class="hidden sm:table-cell min-w-[156px] px-6 py-3">Hình ảnh</th>
+        <th  class="hidden smr:table-cell px-6 py-3">Tên loại</th>
+        <th  class="hidden md:table-cell min-w-[156px] px-6 py-3">Hình ảnh</th>
         <th  class="w-[15%] px-6 py-3">Tên hàng hóa</th>
         <th  class="w-[15%] px-6 py-3">Đơn giá</th>
         <th  class="hidden lg:table-cell px-6 py-3">Ngày nhập</th>
         <th  class="hidden lg:table-cell md:w-[10%] min-w-[300px] px-6 py-3">Mô tả</th>
         <th  class="hidden lg:table-cell px-6 py-3">Số lượt xem</th>
-        <th  class="hidden md:table-cell px-6 py-3">Action</th>
-        <th  class="block md:hidden w-auto px-6 py-3">More</th>
+        <th  class="block px-6 py-3">Action</th>
       </tr>
   </thead>
   <tbody id="myTable">
@@ -67,21 +66,21 @@
         data = restData;
         viewProducts(restData,start,end)
         totalPage = restData.length % itemsInPage === 0 ? restData.length / itemsInPage : (restData.length / itemsInPage) + 1;
-        paginationPage("btnProductAll","viewProducts");
+        paginationPage("buttonPage","btnPage","viewProducts",'data',totalPage,start,end);
     })
 
     const viewProducts = (e,start,end) => {
         let viewProduct = e.slice(start,end).map(e => `
             <tr class="bg-slate-800 ">
-                <th  class="hidden smr:table-cell w-[5%] border-solid border-white border-[1px] px-6 py-4">${e.idProduct}</th>
-                <th  class="hidden ssm:table-cell w-[10%] border-solid border-white border-[1px] px-6 py-4">${e.nameType.toUpperCase()}</th>
-                <th  class="hidden sm:table-cell w-[10%] border-solid border-white border-[1px] px-6 py-4"><img src=${e.imgProduct.includes('https://') ? `${e.imgProduct}` : `../images/product/${e.imgProduct}`} alt="imageProduct" style="width:100px;height:100px;object-fit:contain;"/></th>
-                <th  class="w-[15%] border-solid border-white border-[1px] px-6 py-4">${e.nameProduct}</th>
-                <th  class="w-[15%] border-solid border-white border-[1px] px-6 py-4">${e.price}</th>
-                <th  class="hidden lg:table-cell w-[10%] border-solid border-white border-[1px] px-6 py-4">${e.dateAdded}</th>
-                <th  class="hidden lg:table-cell border-solid border-white border-[1px] px-6 py-3">${(e.des !== null && e.des?.length !== 0) ? e.des?.slice(0,180)+"..." : ""}</th>
-                <th  class="hidden lg:table-cell w-[5%] border-solid border-white border-[1px] px-6 py-4">${e.view}</th>
-                <th  class="hidden md:table-cell w-[10%] px-6 py-4">
+                <th class="hidden smr:table-cell w-[5%] border-solid border-white border-[1px] px-6 py-4">${e.idProduct}</th>
+                <th class="hidden smr:table-cell w-[10%] border-solid border-white border-[1px] px-6 py-4">${e.nameType.toUpperCase()}</th>
+                <th class="hidden md:table-cell w-[10%] border-solid border-white border-[1px] px-6 py-4"><img src=${e.imgProduct.includes('https://') ? `${e.imgProduct}` : `../images/product/${e.imgProduct}`} alt="imageProduct" style="width:100px;height:100px;object-fit:contain;"/></th>
+                <th class="w-2/5 md:w-1/5 lg:w-[15%] border-solid border-white border-[1px] px-6 py-4">${e.nameProduct}</th>
+                <th class="w-[15%] border-solid border-white border-[1px] px-6 py-4">${e.price}</th>
+                <th class="hidden lg:table-cell w-[10%] border-solid border-white border-[1px] px-6 py-4">${e.dateAdded}</th>
+                <th class="hidden lg:table-cell border-solid border-white border-[1px] px-6 py-3">${(e.des !== null && e.des?.length !== 0) ? e.des?.slice(0,180)+"..." : ""}</th>
+                <th class="hidden lg:table-cell w-[5%] border-solid border-white border-[1px] px-6 py-4">${e.view}</th>
+                <th class="block w-[10%] px-6 py-4">
                     <button class="w-full min-w-[100px] h-[30px] rounded-[5px] bg-[#007bff] hover:bg-blue-800 text-white" 
                         onclick="window.location.href = './edit&id=${e.idProduct}'">Edit
                     </button>
@@ -89,46 +88,26 @@
                         onclick="deleteItems(${e.idProduct})">Delete
                     </button>
                 </th>
-                <th class="block md:hidden m-auto flex justify-start items-center px-6 py-4" onclick="handleHideShowAdmin('btnAll-${e.idProduct}')">
-                    <svg class="w-5 h-5 text-white hover:text-blue-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                        <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                    </svg>
-                </th>
-                <div id='btnAll-${e.idProduct}' style="width:0px;height:0px;overflow:hidden; transition:all .1s linear" 
-                    class="btnMobile absolute flex md:hidden flex-col justify-around items-center bg-slate-500 rounded-[5px] mt-[-17%] sm:mt-[-10%] right-[10px]">
-                    <button class="btnViewProduct w-2/4 h-2/5 rounded-[5px] text-white bg-blue-500" onclick="window.location.href = './edit&id=${e.idProduct}'">Edit</button>
-                    <button class="btnViewProduct w-2/4 h-2/5 rounded-[5px] text-white bg-[#d9534f]" onclick="deleteItems(${e.idProduct})">Delete</button>
-                </div>
             </tr>
         `).join('');
         document.getElementById("myTable").innerHTML =  viewProduct;
-        paginationPage("btnProductAll","viewProducts");
+        paginationPage("buttonPage","btnPage","viewProducts",'data',totalPage,start,end);
     }
     const getNewProduct = (e) => {
         let viewNew = e.map(e => `<tbody>
         <tr class="bg-slate-800">
                 <th class="hidden smr:table-cell border-solid border-white border-[1px] px-6 py-4">${e.idProduct}</th>
-                <th class="hidden ssm:table-cell border-solid border-white border-[1px] px-6 py-4">${e.idType}</th>
-                <th class="hidden sm:table-cell border-solid border-white border-[1px] px-6 py-4"><img src=${e.imgProduct.includes('https://') ? `${e.imgProduct}` : `../images/product/${e.imgProduct}`} alt="imageProduct" style="width:100px;height:100px;object-fit:contain;"/></th>
-                <th class="w-[15%] border-solid border-white border-[1px] px-6 py-4">${e.nameProduct}</th>
+                <th class="hidden smr:table-cell border-solid border-white border-[1px] px-6 py-4">${e.idType}</th>
+                <th class="hidden md:table-cell border-solid border-white border-[1px] px-6 py-4"><img src=${e.imgProduct.includes('https://') ? `${e.imgProduct}` : `../images/product/${e.imgProduct}`} alt="imageProduct" style="width:100px;height:100px;object-fit:contain;"/></th>
+                <th class="w-2/5 md:w-1/5 lg:w-[15%] border-solid border-white border-[1px] px-6 py-4">${e.nameProduct}</th>
                 <th class="w-[15%] border-solid border-white border-[1px] px-6 py-4">${e.price}</th>
                 <th class="hidden lg:table-cell border-solid border-white border-[1px] px-6 py-4">${e.dateAdded}</th>
                 <th class="hidden lg:table-cell w-[20%] border-solid border-white border-[1px] px-6 py-4">${e.des !== null ? e.des : ""}</th>
                 <th class="hidden lg:table-cell border-solid border-white border-[1px] px-6 py-4">${e.view}</th>
-                <th class="hidden md:table-cell w-[10%] px-6 py-4">
+                <th class="block w-[10%] px-6 py-4">
                     <button class="w-full min-w-[100px] h-[30px] rounded-[5px] bg-[#007bff] hover:bg-blue-800 text-white" onclick="window.location.href = './edit&id=${e.idProduct}'">Edit</button>
                     <button class="w-full min-w-[100px] h-[30px] rounded-[5px] mt-[5%] bg-[#d9534f] hover:bg-red-600 text-white" onclick="deleteItems(${e.idProduct})">Delete</button>
                 </th>
-                <th class="block md:hidden m-auto flex justify-start items-center px-6 py-4" onclick="handleHideShowAdmin('btnNew-${e.idProduct}')">
-                    <svg class="w-5 h-5 text-white hover:text-blue-500 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                        <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                    </svg>
-                </th>
-                <div id='btnNew-${e.idProduct}' style="width:0px;height:0px;overflow:hidden; transition:all .1s linear" 
-                    class="btnMobile absolute flex md:hidden flex-col justify-around items-center bg-slate-500 rounded-[5px] mt-[-35%] sm:mt-[-15%] right-[10px]">
-                    <button class="btnViewProduct w-2/4 h-2/5 rounded-[5px] text-white bg-blue-500" onclick="window.location.href = './edit&id=${e.idProduct}'">Edit</button>
-                    <button class="btnViewProduct w-2/4 h-2/5 rounded-[5px] text-white bg-[#d9534f]" onclick="deleteItems(${e.idProduct})">Delete</button>
-                </div>
             </tr>
     </tbody>`).join('');
     document.getElementById("newProduct").insertAdjacentHTML('beforeend', viewNew);

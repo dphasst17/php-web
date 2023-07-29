@@ -92,6 +92,21 @@ class ProductController
         header('Content-type: text/javascript');
         echo json_encode($detail, JSON_PRETTY_PRINT);
     }
+    public function getProductDifferentId($idType,$idProduct){
+        $products = product_select_by_loai_different_id('=',$idType,$idProduct);
+        $resultData = [];
+        foreach ($products as $product) {
+            $newProduct = [];
+            foreach ($product as $key => $value) {
+                if (!is_int($key)) {
+                $newProduct[$key] = $value;
+                }
+            }
+            $resultData[] = $newProduct;
+        }
+        header('Content-type: text/javascript');
+        echo json_encode($resultData, JSON_PRETTY_PRINT);
+    }
     public function image(){
         $fname = isset($_POST['fname']) ? $_POST['fname'] : '';
         $name = isset($_POST['name']) ?$_POST['name']:'';
