@@ -1,8 +1,3 @@
-<?php 
-  include '../model/transport.php';
-  $getData = select_transport();
-
-?>
 <h1 class="text-center text-white text-[20px] font-bold">Đơn hàng chờ xác nhận</h1>
 <div class="w-[150px] h-[40px] flex items-center justify-center text-[20px] text-white font-semibold rounded-[5px] bg-blue-700 hover:bg-blue-500"  style="width:200px;cursor:pointer;margin: 0 0 2% 0;" onclick="changeStatusAll('Chuẩn bị đơn hàng','Chờ xác nhận')">
   Xác nhận tất cả

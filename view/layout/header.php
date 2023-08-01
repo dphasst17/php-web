@@ -29,13 +29,13 @@
       </nav>
       <div class="user">
         <script>
-          let name=JSON.parse(localStorage.getItem("name")|| "[]");
+          let nameUser=JSON.parse(localStorage.getItem("name")|| "[]");
           let id=JSON.parse(localStorage.getItem("uS")|| "[]");
-          name.length !== 0 ? document.write(`
+          nameUser.length !== 0 ? document.write(`
           <div class="dropMenu ">
           <label for="touch" onclick="clickDropMenu()">
             <span class="bg-neutral-800">
-              Hello ${name.map(e => e)}
+              Hello ${nameUser}
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                   <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
@@ -52,13 +52,13 @@
             <li onclick="log()">LogOut</li>
           </ul>
         </div>
-          `) : document.write(`<button class="btnLogin" onclick="location.href='/login.php'">Login</button>`);
+          `) : document.write(`<button class="btnLogin" onclick="location.href='/login'">Login</button>`);
 
           const log = () => {
             localStorage.setItem("isLogin" , false)
             localStorage.setItem("name",JSON.stringify([]))
             localStorage.removeItem("uS")
-            location.href="/login.php"
+            location.href="/login"
           }
           </script>
         

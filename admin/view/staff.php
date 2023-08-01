@@ -1,7 +1,3 @@
-<?php 
-    include '../model/user.php';
-    $data = user_select_by_role('1');
-?>
 <table id="myTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
   <thead class="text-xs text-gray-700 uppercase bg-gray-700 dark:text-gray-400">
       <tr>

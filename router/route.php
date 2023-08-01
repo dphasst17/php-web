@@ -34,6 +34,8 @@ $router->post('/user/image','UserController','updateImage');
 $router->get('/user/transport/:idUser', 'TransController', 'viewTransportByUser');
 $router->get('/user/bought/:idUser', 'UserController', 'viewBought');
 
+$router->post('/login', 'UserController', 'userLogin');
+
 $router->get('/ware/total', 'WareHouseController', 'getTotalProduct');
 $router->get('/ware', 'WareHouseController', 'getAll');
 

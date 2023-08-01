@@ -48,5 +48,52 @@
             $data = user_select_by_role('1');
             echo json_encode($data);
         }
+        public function userLogin () {
+            $data = json_decode(file_get_contents('php://input'), true);
+            if(isset($data['username'])){
+                $username = $data['username'];
+                $password = $data['password'];
+                $result = user_login($username,$password);
+                if(!empty($result)){
+                    http_response_code(200);
+                    $newResult = array(
+                        "idUser" => $result[0]["idUser"],
+                        "nameUser" => $result[0]["nameUser"]
+                    );
+                    header('Content-type: text/javascript');
+                    echo json_encode($newResult,JSON_PRETTY_PRINT);
+                    exit;
+                }else{
+                    http_response_code(401);
+                    echo "Login false!";
+                    exit;
+                }
+            }else{
+                $email = $data['email'];
+                $name = $data['name'];
+                $result = user_login_email($email);
+                if(!empty($result)){
+                    http_response_code(200);
+                    $newResult = array(
+                        "idUser" => $result[0]["idUser"],
+                        "nameUser" => $result[0]["nameUser"]
+                    );
+                    header('Content-type: text/javascript');
+                    echo json_encode($newResult,JSON_PRETTY_PRINT);
+                    exit;
+                }else{
+                    $parts = explode("@", $email);
+                    $idUser = $parts[0];
+                    insert_user_with_email($idUser,$name,$email);
+                    $resultData= array(
+                        "idUser"=>$idUser,
+                        "nameUser"=>$name
+                    );
+                    http_response_code(201);
+                    echo json_encode($resultData);
+                    exit;
+                }
+            }
+        }
     }
 ?>

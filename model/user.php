@@ -65,10 +65,14 @@ function user_change_password($ma_kh, $mat_khau_moi){
     pdo_execute($sql, $mat_khau_moi, $ma_kh);
 }
 function user_login($ma_kh,$mat_khau){
-    $sql = "SELECT * FROM users WHERE (idUser = ? OR email = ?) AND password=?";
-    return pdo_query($sql,$ma_kh,$ma_kh,$mat_khau);
+    $sql = "SELECT * FROM users WHERE idUser = ? AND password=?";
+    return pdo_query($sql,$ma_kh,$mat_khau);
 }
-/* function user_get_by_name($name){
-    $sql = "SELECT * FROM users WHERE nameUser = ?";
-    return pdo_query($sql,$name);
-} */
+function user_login_email($email){
+    $sql = "SELECT * FROM users WHERE email = ?;";
+    return pdo_query($sql,$email);
+}
+function insert_user_with_email($idUser,$name,$email){
+    $sql = "INSERT INTO users (idUser,password,nameUser,img,email,roleUser)VALUES(?,'',?,'',?,2);";
+    pdo_execute($sql, $idUser, $name, $email);
+}

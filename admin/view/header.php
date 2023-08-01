@@ -1,5 +1,3 @@
-
-
 <header class="w-1/5 h-[70px] z-50 <?php if (isset($_SESSION["admin"])){echo 'flex flex-col';}else{echo 'hidden';}?>">
   <?php
             if(isset($_SESSION["admin"]))

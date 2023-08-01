@@ -1,4 +1,3 @@
-
 <div class="w-[200px] h-[40px] flex items-center justify-center mb-[1%] text-white text-[20px] font-bold rounded-[5px] bg-blue-950 hover:bg-blue-700 cursor-pointer"  onclick="window.location.href='index.php?act=new'">Thêm danh mục</div>
 <table id="myTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
   <thead class="text-xs text-gray-700 uppercase bg-gray-700 dark:text-gray-400">
