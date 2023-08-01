@@ -265,6 +265,16 @@
             },
             body:JSON.stringify(postData)
         })
+        .then(res => {
+              if(res.status === 200 || res.status === 201){
+                return res.json();
+              }else{
+                alert("Login false!")
+              }
+            })
+        .then(data => {
+          handelSaveData(data.idUser,data.nameUser)
+        });
       }
     };
     const handleShowHidePass = () => {

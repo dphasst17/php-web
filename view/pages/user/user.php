@@ -1,5 +1,5 @@
 
-<div class="userPage w-[98%] md:w-[90%] min-h-[400px] h-auto flex flex-col md:flex-row justify-center my-[2%] mx-auto mt-[12%] smr:mt-[5%] md:mt-0">
+<div class="userPage w-[98%] md:w-[90%] min-h-[400px] h-auto flex flex-col md:flex-row justify-center my-[2%] mx-auto mt-[12%] smr:mt-[5%] md:mt-0 pt-[2%]">
     <div id="getUser" class="w-full md:w-2/4 h-full flex flex-col justify-center">
         <div id="information" class="w-full h-2/4 flex justify-center mb-[5%]"></div>
         <div class="viewPurchase w-full min-h-[200px] h-auto mt-[5%]">
@@ -18,9 +18,9 @@
         </div>
     </div>
     <div id="items" class="w-full md:w-2/4 h-full flex flex-col justify-center mt-[2%] md:mt-0">
-        <h1 style="cursor:pointer" class="text-[20px] md:text-[40px] font-bold text-[#03207e] text-center cursor-pointer">Đơn hàng đã mua</h1>
+        <h1 id="boughtTitle" style="display:block;cursor:pointer" class="text-[20px] md:text-[40px] font-bold text-[#03207e] text-center cursor-pointer">Đơn hàng đã mua</h1>
         <div id="bought" class="w-full min-h-[575px] h-auto"></div>
-        <div class="pagination w-4/5 h-[50px] flex justify-evenly items-center m-auto">
+        <div id="pagination" style="display:flex" class="pagination w-4/5 h-[50px] justify-evenly items-center m-auto">
             <div class="prevPage w-[10%] h-2/4 bg-slate-300 flex items-center justify-center text-[18px] text-black font-medium rounded-[8px] cursor-pointer transition-all hover:bg-[#586582] hover:text-white" onclick="prevPage()">PREV</div>
             <div class="buttonPage w-4/5 min-w-[60px] h-full flex justify-evenly items-center mx-[2%]" id="buttonPage">
             
@@ -78,9 +78,13 @@
     .then(boughtData => 
         {
             if(boughtData.length === 0){
-                let isEmpty = `<h1>No orders yet</h1>`
+                let isEmpty = `<h1 class="text-center text-[20px] font-semibold">No orders yet</h1>`
                 document.getElementById('bought').innerHTML = isEmpty;
+                document.getElementById('pagination').style.display = "none"
+                document.getElementById('boughtTitle').style.display = "none"
             }else{
+                document.getElementById('pagination').style.display = "flex"
+                document.getElementById('boughtTitle').style.display = "none"
                 bought = boughtData
                 totalPage = bought.length % itemsInPage === 0 ? bought.length / itemsInPage : (bought.length / itemsInPage) + 1;
                 viewBought(boughtData,start,end)
@@ -140,7 +144,7 @@
     const viewUser = (e) => {
         let viewInfor = e.map(e => `<div class="userDetail w-full md:w-[90%] h-[90%] flex flex-col items-center">
             <div class="userImg w-full h-[70px] flex justify-center mb-[5%]">
-                <img class='w-[70px] h-full rounded-[50%] border-solid border-2 border-black cursor-pointer object-cover' src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`./public/images/uploads/${e.img}`}  alt="User-image" />
+                <img class='w-[70px] h-full rounded-[50%] border-solid border-2 border-black cursor-pointer object-cover' src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`/public/images/uploads/${e.img}`}  alt="User-image" />
                 <div class="changeAvt w-[12%] lg:w-[7%] h-full flex flex-wrap justify-end items-end pr-[3%]" >
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" onclick="changeAvt()" class="w-[25px] h-[30px] rounded-[50%] border-2 border-solid border-black hover:border-blue-900 p-[2%] cursor-pointer transition-all fill-black hover:fill-blue-900">
                         <path  d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z"/>

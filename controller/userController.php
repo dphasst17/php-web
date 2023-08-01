@@ -30,7 +30,7 @@
                 $file_extension = strtolower($file_extension);
              
                 // Valid extensions
-                $valid_ext = array("pdf","doc","docx","jpg","png","jpeg");
+                $valid_ext = array("pdf","doc","docx","jpg","png","jpeg","webp");
              
                 $response = 0;
                 if(in_array($file_extension,$valid_ext)){
