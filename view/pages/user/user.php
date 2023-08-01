@@ -225,7 +225,7 @@
 
 
     const changeUser = () => {
-        let changeUserName= data.map(e => `<input class="w-[95%] h-full bg-transparent border-none outline-none font-medium text-[18px]" type="text" value=${e.nameUser} id="newName"/>`);
+        let changeUserName= data.map(e => `<input class="w-[95%] h-full bg-transparent border-none outline-none font-medium text-[18px]" type="text" value="${e.nameUser}" id="newName"/>`);
         let changeEmail= data.map(e => `<input class="w-[95%] h-full bg-transparent border-none outline-none font-medium text-[18px]" type="text" value=${e.email} id="newEmail"/>`);
         let save = `<button class="w-[250px] h-[40px] outline-none border-none rounded-[10px] text-[16px] text-white font-semibold bg-[#586582] hover:bg-blue-700 cursor-pointer transition-all" onclick="saveData()">
                         Save
