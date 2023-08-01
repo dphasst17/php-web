@@ -8,7 +8,7 @@
       </svg>
     </div>
     <div class="search w-2/5 min-w-[200px] bg-neutral-800">
-        <input class="bg-slate-50 pl-[2%]" type="search" id="searchMob" onkeydown="if (event.keyCode == 13) search()"/>
+        <input class="bg-slate-50 pl-[2%]" type="search" id="searchMob" onkeydown="if (event.keyCode == 13) searchMob()"/>
         <div class="iconSearch bg-slate-50" onclick="searchMob()">
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
             <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
@@ -47,7 +47,7 @@
       <button id="login" 
       class="fixed w-[100px] justify-center items-center p-0 top-[60px] sm:top-[70px] left-[20px] sm:left-[62px] bg-neutral-800 text-white text-[20px] rounded-[5px] z-50" 
       style="display:none;height:0px; overflow:hidden; transition:height .1s linear"
-      onclick="window.location.href= '/login.php'"
+      onclick="window.location.href= '/login'"
       >Login<button>
     </button>
 </header>
@@ -97,6 +97,6 @@
     localStorage.removeItem("isLogin")
     localStorage.removeItem("name")
     localStorage.removeItem("uS")
-    location.href="/login.php"
+    location.href="/login"
   }
 </script>
