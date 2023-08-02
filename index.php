@@ -24,6 +24,7 @@
             include_once 'view/layout/headerMobile.php';
         }  
         echo "<div class='container w-screen max-w-full flex flex-col items-center mt-[10%] lg:mt-0 mx-auto'>";
+        include_once 'view/layout/loading.php';
         switch ($page) {
             case 'home':
                 include_once 'view/pages/home/home.php';

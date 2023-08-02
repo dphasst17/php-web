@@ -36,6 +36,8 @@
     let bought = [];
     let totalPage=0;
     let getDataUser={idUser:idUser}
+    let loading = document.getElementById('animationLoading');
+    loading.style.display = "flex";
     fetch(`./api/user/${idUser}`)
     .then(res => 
         {
@@ -47,6 +49,7 @@
     )
     .then(dataUser => 
         {
+            loading.style.display = "none";
             data = [dataUser]
             viewUser([dataUser])
         }

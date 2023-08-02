@@ -2,6 +2,9 @@
 <h1 class="text-[35px] font-bold">NEW PRODUCT</h1>
 <div id="productNew" class="w-full xl:w-4/5 min-h-[300px] h-auto flex flex-wrap justify-around my-[2%] mx-auto"></div>
 <script>
+    let us = JSON.parse(localStorage.getItem("uS") || "[]");
+    let loading = document.getElementById('animationLoading');
+    loading.style.display = "flex";
     fetch('./api/products/new')
     .then(res => {
         if (!res.ok) {
@@ -10,12 +13,12 @@
         return res.json();
     })
     .then(product => {
+        loading.style.display = "none";
         newProducts(product)
     })
     .catch(error => {
         console.log(error);
     });
-    let us = JSON.parse(localStorage.getItem("uS") || "[]");
     const newProducts = (e) => {
         let viewProductNew = e.map(e => `<div class="items w-[22%] min-w-[150px] smr:min-w-[180px] md:min-w-[200px] h-2/4 flex flex-col flex-wrap items-center p-[1%] cursor-pointer hover:rounded-[5px] hover:bg-slate-300 transition-all" key=${e.idProduct}>
         <div class="itemsImg w-full h-[150px] flex justify-center"><img class="w-2/4 h-full object-contain" src=${e.imgProduct} alt="imgProduct"/></div>
