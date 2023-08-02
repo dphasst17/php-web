@@ -1,6 +1,8 @@
-<?php 
+<?php
     include_once '../model/user.php';
     include_once '../model/bill.php';
+    use Firebase\JWT\JWT;
+    use Firebase\JWT\Key;
     class UserController{
         public function getUser($idUser){
             $data = user_select_by_id($idUser);
@@ -23,7 +25,7 @@
                 $filename = $_FILES['file']['name'];
                 $id = $_POST['id'];
                 // Location
-                $location = '../public/images/uploads/'.$filename;
+                $location = '/public/images/uploads/'.$filename;
              
                 // file extension
                 $file_extension = pathinfo($location, PATHINFO_EXTENSION);
@@ -94,6 +96,11 @@
                     exit;
                 }
             }
+        }
+        private function decodeToken ($jwt) {
+            $key = new Key(getenv(S_KEY), 'HS256');
+            $decoded = JWT::decode($jwt, $$key);
+            return $decoded;
         }
     }
 ?>
