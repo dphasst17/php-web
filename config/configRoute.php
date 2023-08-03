@@ -1,4 +1,5 @@
 <?php
+  require_once '../controller/tokenController.php';
   require_once '../controller/productController.php';
   require_once '../controller/cartController.php';
   require_once '../controller/transportController.php';
