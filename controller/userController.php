@@ -1,9 +1,7 @@
 <?php
     include_once '../model/user.php';
     include_once '../model/bill.php';
-    use Firebase\JWT\JWT;
-    use Firebase\JWT\Key;
-    class UserController{
+    class UserController extends tokenController{
         public function getUser($idUser){
             $data = user_select_by_id($idUser);
             echo json_encode($data);
@@ -25,7 +23,7 @@
                 $filename = $_FILES['file']['name'];
                 $id = $_POST['id'];
                 // Location
-                $location = '/public/images/uploads/'.$filename;
+                $location = '../public/images/uploads/'.$filename;
              
                 // file extension
                 $file_extension = pathinfo($location, PATHINFO_EXTENSION);
@@ -50,7 +48,7 @@
             $data = user_select_by_role('1');
             echo json_encode($data);
         }
-        public function userLogin () {
+        public function userLogin() {
             $data = json_decode(file_get_contents('php://input'), true);
             if(isset($data['username'])){
                 $username = $data['username'];
@@ -58,12 +56,25 @@
                 $result = user_login($username,$password);
                 if(!empty($result)){
                     http_response_code(200);
-                    $newResult = array(
+                    $expAccess = time() + 600;
+                    $expRefresh = time() + 5 * 24 * 60 * 60;
+                    $accessToken = $this->createToken($expAccess, $result[0]['idUser'], 'access');
+                    $refreshToken = $this->createToken($expRefresh, $result[0]['idUser'], 'refresh');
+                    $resultData = array(
+                        "accessToken" => $accessToken,
+                        "expAccess" => $expAccess,
+                        "refreshToken" => $refreshToken,
+                        "expRf" => $expRefresh
+                    );
+                    header('Content-type: text/javascript');
+                    echo json_encode($resultData,JSON_PRETTY_PRINT);
+
+                    /* $newResult = array(
                         "idUser" => $result[0]["idUser"],
                         "nameUser" => $result[0]["nameUser"]
                     );
                     header('Content-type: text/javascript');
-                    echo json_encode($newResult,JSON_PRETTY_PRINT);
+                    echo json_encode($newResult,JSON_PRETTY_PRINT); */
                     exit;
                 }else{
                     http_response_code(401);
@@ -96,11 +107,6 @@
                     exit;
                 }
             }
-        }
-        private function decodeToken ($jwt) {
-            $key = new Key(getenv(S_KEY), 'HS256');
-            $decoded = JWT::decode($jwt, $$key);
-            return $decoded;
         }
     }
 ?>
