@@ -29,7 +29,7 @@
       </nav>
       <div class="user">
         <script>
-          let nameUser=JSON.parse(localStorage.getItem("name")|| "[]");
+          let nameUser=JSON.parse(localStorage.getItem("name")|| "[]").toString();
           let id=JSON.parse(localStorage.getItem("uS")|| "[]");
           nameUser.length !== 0 ? document.write(`
           <div class="dropMenu ">
