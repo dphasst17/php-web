@@ -61,7 +61,6 @@
                 $result = user_login($username,$password);
                 if(!empty($result)){
                     http_response_code(200);
-<<<<<<< HEAD
                     $expAccess = time() + 600;
                     $expRefresh = time() + 5 * 24 * 60 * 60;
                     $accessToken = $this->createToken($expAccess, $result[0]['idUser'], 'access');
@@ -74,7 +73,6 @@
                         "expRf" => $expRefresh
                     );
                     echo json_encode($resultData,JSON_PRETTY_PRINT);
-=======
                     header('Content-type: text/javascript');
                     $newResult = array(
                         "idUser" => $result[0]["idUser"],
@@ -82,7 +80,6 @@
                     );
                     header('Content-type: text/javascript');
                     echo json_encode($newResult,JSON_PRETTY_PRINT);
->>>>>>> d035ec2d0a0902bad7041bc12848e39a5781d992
                     exit;
                 }else{
                     http_response_code(401);
