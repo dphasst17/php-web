@@ -73,7 +73,6 @@
                         "expRf" => $expRefresh
                     );
                     echo json_encode($resultData,JSON_PRETTY_PRINT);
-                    header('Content-type: text/javascript');
                     exit;
                 }else{
                     http_response_code(401);
