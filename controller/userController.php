@@ -74,12 +74,6 @@
                     );
                     echo json_encode($resultData,JSON_PRETTY_PRINT);
                     header('Content-type: text/javascript');
-                    $newResult = array(
-                        "idUser" => $result[0]["idUser"],
-                        "nameUser" => $result[0]["nameUser"]
-                    );
-                    header('Content-type: text/javascript');
-                    echo json_encode($newResult,JSON_PRETTY_PRINT);
                     exit;
                 }else{
                     http_response_code(401);
