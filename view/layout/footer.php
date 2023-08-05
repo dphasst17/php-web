@@ -1,13 +1,16 @@
     <script>
         const isLogin = localStorage.getItem("isLogin") || false;
-        const addCart = (id,u) => {
+        checkExpCookie(checkRf,url)
+        
+        const addCart = async (id) => {
+            let token = await checkExpCookie(checkRf)
             if(isLogin === "true"){
-                
-                let postData = {fname:'add' , idProduct:id, idUser: u}
-                fetch('./api/cart', {
+                let postData = {fname:'add' , idProduct:id}
+                fetch('/api/cart', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': "Bearer " + token,
                     },
                     body: JSON.stringify(postData)
                     })

@@ -23,6 +23,9 @@ class ProductController
         $idProduct = $data['idProduct'];
         $delete = hang_hoa_delete($idProduct);
     }
+    public function addNewProduct(){}
+    public function updateProduct(){}
+
     public function getAccess(){
         $access = product_select_by_loai('!=',1);
         $accessory = [];

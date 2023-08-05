@@ -2,17 +2,22 @@
     include_once '../model/user.php';
     include_once '../model/bill.php';
     class UserController extends tokenController{
-        public function getUser($idUser){
+        public function getUser(){
+            $token = $this->getToken();
+            $idUser = $this->verifyToken($token);
             $data = user_select_by_id($idUser);
             echo json_encode($data);
         }
-        public function viewBought($idUser){
+        public function viewBought(){
+            $token = $this->getToken();
+            $idUser = $this->verifyToken($token);
             $data = select_bill_by_id($idUser);
             echo json_encode($data);
         }
         public function updateUser(){
             $data = json_decode(file_get_contents('php://input'), true);
-            $id = isset($data['id'])? $data['id']: '';
+            $token = $this->getToken();
+            $id = $this->verifyToken($token);
             $name = isset($data['name'])? $data['name']: '';
             $email = isset($data['email'])? $data['email']: '';
             update_user($name,$email,$id);
@@ -61,20 +66,13 @@
                     $accessToken = $this->createToken($expAccess, $result[0]['idUser'], 'access');
                     $refreshToken = $this->createToken($expRefresh, $result[0]['idUser'], 'refresh');
                     $resultData = array(
+                        "nameUser" => $result[0]["nameUser"],
                         "accessToken" => $accessToken,
                         "expAccess" => $expAccess,
                         "refreshToken" => $refreshToken,
                         "expRf" => $expRefresh
                     );
-                    header('Content-type: text/javascript');
                     echo json_encode($resultData,JSON_PRETTY_PRINT);
-
-                    /* $newResult = array(
-                        "idUser" => $result[0]["idUser"],
-                        "nameUser" => $result[0]["nameUser"]
-                    );
-                    header('Content-type: text/javascript');
-                    echo json_encode($newResult,JSON_PRETTY_PRINT); */
                     exit;
                 }else{
                     http_response_code(401);
@@ -87,23 +85,37 @@
                 $result = user_login_email($email);
                 if(!empty($result)){
                     http_response_code(200);
-                    $newResult = array(
-                        "idUser" => $result[0]["idUser"],
-                        "nameUser" => $result[0]["nameUser"]
+                    $expAccess = time() + 600;
+                    $expRefresh = time() + 5 * 24 * 60 * 60;
+                    $accessToken = $this->createToken($expAccess, $result[0]['idUser'], 'access');
+                    $refreshToken = $this->createToken($expRefresh, $result[0]['idUser'], 'refresh');
+                    $resultData = array(
+                        "nameUser" => $result[0]["nameUser"],
+                        "accessToken" => $accessToken,
+                        "expAccess" => $expAccess,
+                        "refreshToken" => $refreshToken,
+                        "expRf" => $expRefresh
                     );
-                    header('Content-type: text/javascript');
-                    echo json_encode($newResult,JSON_PRETTY_PRINT);
+                    echo json_encode($resultData,JSON_PRETTY_PRINT);
                     exit;
                 }else{
                     $parts = explode("@", $email);
                     $idUser = $parts[0];
                     insert_user_with_email($idUser,$name,$email);
-                    $resultData= array(
-                        "idUser"=>$idUser,
-                        "nameUser"=>$name
-                    );
+
                     http_response_code(201);
-                    echo json_encode($resultData);
+                    $expAccess = time() + 600;
+                    $expRefresh = time() + 5 * 24 * 60 * 60;
+                    $accessToken = $this->createToken($expAccess, $idUser, 'access');
+                    $refreshToken = $this->createToken($expRefresh, $idUser, 'refresh');
+                    $resultData = array(
+                        "nameUser" => $name,
+                        "accessToken" => $accessToken,
+                        "expAccess" => $expAccess,
+                        "refreshToken" => $refreshToken,
+                        "expRf" => $expRefresh
+                    );
+                    echo json_encode($resultData,JSON_PRETTY_PRINT);
                     exit;
                 }
             }

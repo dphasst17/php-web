@@ -209,7 +209,9 @@
               }
             })
         .then(data => {
-            handelSaveData(data.idUser,data.nameUser)
+          handleSetCookie('access',data.accessToken,data.expAccess)
+          handleSetCookie('refresh',data.refreshToken,data.expRf)
+          handelSaveData(data.nameUser,data.expAccess,data.expRf)
         });
       }
     }
@@ -261,7 +263,9 @@
               }
             })
             .then(data => {
-              handelSaveData(data.idUser,data.nameUser)
+              handleSetCookie('access',data.accessToken,data.expAccess)
+              handleSetCookie('refresh',data.refreshToken,data.expRf)
+              handelSaveData(data.nameUser,data.expAccess,data.expRf)
             });
           });
         } else {
@@ -270,14 +274,6 @@
       });
       FB.logout()
     };
-
-    const handelSaveData = (id,name) => {
-        localStorage.setItem("isLogin", true)
-        localStorage.setItem("uS",JSON.stringify([id]))
-        localStorage.setItem("name",JSON.stringify(name))
-        document.getElementById('animationLoading').style.display = "none"
-        window.location.href = "/"
-    }
 
     const validateForm = () => {
       let username = document.getElementById("username")?.value;
@@ -314,10 +310,24 @@
               }
             })
         .then(data => {
-          handelSaveData(data.idUser,data.nameUser)
+          handleSetCookie('access',data.accessToken,data.expAccess)
+          handleSetCookie('refresh',data.refreshToken,data.expRf)
+          handelSaveData(data.nameUser,data.expAccess,data.expRf)
         });
       }
     };
+    const handleSetCookie = (name,value,exp) => {
+      let expires = "; expires=" + new Date(exp * 1000).toString();
+      document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    const handelSaveData = (name,exp,expRf) => {
+        localStorage.setItem("isLogin", true)
+        localStorage.setItem("name",JSON.stringify(name))
+        localStorage.setItem("exp",exp)
+        localStorage.setItem("expRf",expRf)
+        document.getElementById('animationLoading').style.display = "none"
+        window.location.href = "/"
+    }
     const handleShowHidePass = () => {
         let idPass = document.getElementById("password");
         if(idPass.type === "password"){

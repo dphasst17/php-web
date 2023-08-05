@@ -29,7 +29,7 @@
       </nav>
       <div class="user">
         <script>
-          let nameUser=JSON.parse(localStorage.getItem("name")|| "[]").toString();
+          let nameUser=JSON.parse(localStorage.getItem("name")|| "[]");
           let id=JSON.parse(localStorage.getItem("uS")|| "[]");
           nameUser.length !== 0 ? document.write(`
           <div class="dropMenu ">
@@ -55,10 +55,11 @@
           `) : document.write(`<button class="btnLogin" onclick="location.href='/login'">Login</button>`);
 
           const log = () => {
-            localStorage.setItem("isLogin" , false)
-            localStorage.setItem("name",JSON.stringify([]))
-            localStorage.removeItem("uS")
-            location.href="/login"
+            localStorage.removeItem("isLogin")
+            localStorage.removeItem("name")
+            location.href="/login";
+            logOutCookie('access')
+            logOutCookie('refresh')
           }
           </script>
         

@@ -19,7 +19,6 @@
     let value = window.location.pathname.split( '/' );
     let idType = value[2]
     let idProduct = value[3]
-    let idUser = JSON.parse(localStorage.getItem("uS") || "[]")
     let postData = {idProduct:idProduct};
             fetch(`/api/products/detail/${idProduct}`)
             .then(res => res.json())
@@ -27,11 +26,20 @@
                 let newData = [data];
                 viewData(newData)
             })
-            fetch(`/api/user/${idUser}`)
-            .then(response => {return response.json()})
-            .then(data => {
-                commentUser([data]);
-            })
+            const handleGetUser = async() => {
+                let token = await checkExpCookie(checkRf,url);
+                fetch('/api/user',{
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': "Bearer " + token
+                    },
+                })
+                .then(response => {return response.json()})
+                .then(data => {
+                    commentUser([data]);
+                })
+            }
+            handleGetUser()
             fetch(`/api/comment/${idProduct}`)
             .then(response => {return response.json()})
             .then(data => {

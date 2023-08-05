@@ -32,43 +32,51 @@
     
 </div>
 <script>
-    let idUser = JSON.parse(localStorage.getItem("uS") || []).toString()
     let product = [];
     let user = [];
-    let dataUser = {idUser:idUser}
-    fetch(`/api/user/${idUser}`)
-    .then(res => 
-        {
-            if (!res.ok) {
-                throw new Error(`An error occurred: ${res.status}`);
-            }
-            return res.json();
-        }
-    )
-    .then(data => {
-        user = [data]
-        viewDataUser([data])
-
-    });
-    let postData = {fname:'view' , idUser:idUser.toString()}
-    fetch('/api/cart', {
-            method: 'POST',
+    let postData = {fname:'view'};
+    const getDataProduct = async() => {
+        let token = await checkExpCookie(checkRf,url);
+        fetch('/api/user',{
             headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postData)
-            })
-    .then(res => 
-        {
-            if (!res.ok) {
-                throw new Error(`An error occurred: ${res.status}`);
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + token
             }
-            return res.json();
-        }
-    )
-    .then(data => {
-        product = data;
-        viewProduct(data)});
+        })
+        .then(res => 
+            {
+                if (!res.ok) {
+                    throw new Error(`An error occurred: ${res.status}`);
+                }
+                return res.json();
+            }
+        )
+        .then(data => {
+            user = [data]
+            viewDataUser([data])
+    
+        });
+        fetch('./api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + token
+                },
+                body: JSON.stringify(postData)
+                })
+        .then(res => 
+            {
+                if (!res.ok) {
+                    throw new Error(`An error occurred: ${res.status}`);
+                }
+                return res.json();
+            }
+        )
+        .then(data => {
+            product = data;
+            viewProduct(data)});
+    }
+    getDataProduct()
     /* -------------GET CART ---------------*/
     const viewProduct = (data) => {
         let viewCart = data.map(e => `<div class="items w-[200px] lg:w-[300px] h-[300px] flex flex-col justify-end border-none cursor-pointer bg-[#ededed] rounded-[5px] m-[1%]">

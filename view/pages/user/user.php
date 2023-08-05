@@ -30,70 +30,87 @@
     </div>
 </div>
 <script>
-    let idUser = JSON.parse(localStorage.getItem("uS") || []).toString()
     let data = [];
     let purchase = [];
     let bought = [];
     let totalPage=0;
-    let getDataUser={idUser:idUser}
     let loading = document.getElementById('animationLoading');
     loading.style.display = "flex";
-    fetch(`./api/user/${idUser}`)
-    .then(res => 
-        {
-            if (!res.ok) {
-                throw new Error(`An error occurred: ${res.status}`);
+    const getDataUser = async() => {
+        let token = await checkExpCookie(checkRf,url);
+        fetch('/api/user',{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + token
+            },
+        })
+        .then(res => 
+            {
+                if (!res.ok) {
+                    throw new Error(`An error occurred: ${res.status}`);
+                }
+                return res.json();
             }
-            return res.json();
-        }
-    )
-    .then(dataUser => 
-        {
-            loading.style.display = "none";
-            data = [dataUser]
-            viewUser([dataUser])
-        }
-    );
-
-    fetch(`./api/user/transport/${idUser}`)
-    .then(res => 
-        {
-            if (!res.ok) {
-                throw new Error(`An error occurred: ${res.status}`);
+        )
+        .then(dataUser => 
+            {
+                loading.style.display = "none";
+                data = [dataUser]
+                viewUser([dataUser])
             }
-            return res.json();
-        }
-    )
-    .then(transportData => 
-        {
-            viewTransport(transportData)
-        }
-    );
-    fetch(`./api/user/bought/${idUser}`)
-    .then(res => 
-        {
-            if (!res.ok) {
-                throw new Error(`An error occurred: ${res.status}`);
+        );
+    
+        fetch('/api/user/transport',{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + token
+            },
+        })
+        .then(res => 
+            {
+                if (!res.ok) {
+                    throw new Error(`An error occurred: ${res.status}`);
+                }
+                return res.json();
             }
-            return res.json();
-        }
-    )
-    .then(boughtData => 
-        {
-            if(boughtData.length === 0){
-                let isEmpty = `<h1 class="text-center text-[20px] font-semibold">No orders yet</h1>`
-                document.getElementById('bought').innerHTML = isEmpty;
-                document.getElementById('pagination').style.display = "none"
-                document.getElementById('boughtTitle').style.display = "none"
-            }else{
-                document.getElementById('pagination').style.display = "flex"
-                document.getElementById('boughtTitle').style.display = "none"
-                bought = boughtData
-                totalPage = bought.length % itemsInPage === 0 ? bought.length / itemsInPage : (bought.length / itemsInPage) + 1;
-                viewBought(boughtData,start,end)
+        )
+        .then(transportData => 
+            {
+                viewTransport(transportData)
             }
-        }
-    );
+        );
+        fetch('/api/user/bought',{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + token
+            },
+        })
+        .then(res => 
+            {
+                if (!res.ok) {
+                    throw new Error(`An error occurred: ${res.status}`);
+                }
+                return res.json();
+            }
+        )
+        .then(boughtData => 
+            {
+                if(boughtData.length === 0){
+                    let isEmpty = `<h1 class="text-center text-[20px] font-semibold">No orders yet</h1>`
+                    document.getElementById('bought').innerHTML = isEmpty;
+                    document.getElementById('pagination').style.display = "none"
+                    document.getElementById('boughtTitle').style.display = "none"
+                }else{
+                    document.getElementById('pagination').style.display = "flex"
+                    document.getElementById('boughtTitle').style.display = "none"
+                    bought = boughtData
+                    totalPage = bought.length % itemsInPage === 0 ? bought.length / itemsInPage : (bought.length / itemsInPage) + 1;
+                    viewBought(boughtData,start,end)
+                }
+            }
+        );
+    }
+    getDataUser()
     let start = 0;
     let end = 5;
     let itemsInPage = 5;
@@ -149,7 +166,7 @@
             <div class="userImg w-full h-[70px] flex justify-center mb-[5%]">
                 <img class='w-[70px] h-full rounded-[50%] border-solid border-2 border-black cursor-pointer object-cover' src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`/public/images/uploads/${e.img}`}  alt="User-image" />
                 <div class="changeAvt w-[12%] lg:w-[7%] h-full flex flex-wrap justify-end items-end pr-[3%]" >
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" onclick="changeAvt()" class="w-[25px] h-[30px] rounded-[50%] border-2 border-solid border-black hover:border-blue-900 p-[2%] cursor-pointer transition-all fill-black hover:fill-blue-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" onclick="alert('Tính năng này tạm thời bị khóa!')/* changeAvt() */" class="w-[25px] h-[30px] rounded-[50%] border-2 border-solid border-black hover:border-blue-900 p-[2%] cursor-pointer transition-all fill-black hover:fill-blue-900">
                         <path  d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z"/>
                     </svg>
                 </div>
@@ -238,7 +255,6 @@
         document.querySelector(".change").innerHTML = save;
     }
     const saveData = () => {
-        let id = idUser;
         let name = document.getElementById("newName");
         let email = document.getElementById("newEmail");
         let newName = `Tên: <span class="font-bold text-[#2f2a87] text-[20px] mx-[2%]">${name.value}</span>`;
@@ -247,17 +263,22 @@
         document.querySelector(".userName").innerHTML = newName;
         document.querySelector(".email").innerHTML = newEmail;
         document.querySelector(".change").innerHTML = save;
-        let postData={id:id,name:name.value,email:email.value}
-        fetch('/api/user/update', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body:JSON.stringify(postData)
-        })
-        .then(response => response.text())
-        .then(response => console.log(response))
-        .catch(error => console.error('Error:', error));
+        let postData={name:name.value,email:email.value}
+        const handleChangeUser = async() => {
+            let token = await checkExpCookie(checkRf,url);
+            fetch('/api/user/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': "Bearer " + token
+                },
+                body:JSON.stringify(postData)
+            })
+            .then(response => response.text())
+            .then(response => console.log(response))
+            .catch(error => console.error('Error:', error));
+        }
+        handleChangeUser()
 
     }
 

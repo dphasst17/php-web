@@ -1,9 +1,10 @@
 <?php 
     include_once '../model/transport.php';
-    class TransController{
+    class TransController extends tokenController{
         public function switchToTransport(){
             $data = json_decode(file_get_contents('php://input'), true);
-            $idUser = $data['idUser'];
+            $token = $this->getToken();
+            $idUser = $this->verifyToken($token);
             $name = $data['name'];
             $phone = $data['phone'];
             $city = $data['city'];
@@ -19,7 +20,9 @@
             $data = select_transport();
             echo json_encode($data);
         }
-        public function viewTransportByUser($idUser){
+        public function viewTransportByUser(){
+            $token = $this->getToken();
+            $idUser = $this->verifyToken($token);
             $data = view_transport_by_user($idUser);
             echo json_encode($data);
         }

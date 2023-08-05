@@ -1,10 +1,14 @@
 <?php 
- class CartController{
+ class CartController extends tokenController{
     public function index(){
         $data = json_decode(file_get_contents('php://input'), true);
+        $token = $this->getToken();
+        if($token !=''){
+
+            $idUser = $this->verifyToken($token);
+        }
         $fname = isset($data['fname']) ? $data['fname']:'add';
         $idCart = isset($data['idCart']) ? $data['idCart'] :'';
-        $idUser = isset($data['idUser']) ? $data['idUser'] :'';
         $idProduct = isset($data['idProduct'])? $data['idProduct'] : '';
         $count = isset($data['count'])? $data['count'] : 1;
         switch($fname){

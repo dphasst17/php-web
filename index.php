@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/public/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/public/js/config.Tailwind.js"></script>
+    <script src="/public/js/tk.js"></script>
+    <script>let url = <?php echo json_encode(getenv('URL_RF'));?>;</script>
 </head>
 <body>
     <?php

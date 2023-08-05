@@ -28,13 +28,14 @@ $router->post('/comment/delete', 'CommentController', 'commentDelete');
 
 $router->post('/cart', 'CartController', 'index');
 
-$router->get('/user/:idUser','UserController','getUser');
+$router->get('/user','UserController','getUser');
 $router->post('/user/update','UserController','updateUser');
 $router->post('/user/image','UserController','updateImage');
-$router->get('/user/transport/:idUser', 'TransController', 'viewTransportByUser');
-$router->get('/user/bought/:idUser', 'UserController', 'viewBought');
+$router->get('/user/transport', 'TransController', 'viewTransportByUser');
+$router->get('/user/bought', 'UserController', 'viewBought');
 
 $router->post('/login', 'UserController', 'userLogin');
+$router->get('/new/token','TokenController','getNewToken');
 
 $router->get('/ware/total', 'WareHouseController', 'getTotalProduct');
 $router->get('/ware', 'WareHouseController', 'getAll');

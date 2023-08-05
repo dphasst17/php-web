@@ -96,7 +96,8 @@
   const logOut = () => {
     localStorage.removeItem("isLogin")
     localStorage.removeItem("name")
-    localStorage.removeItem("uS")
-    location.href="/login"
+    location.href="/login";
+    logOutCookie('access')
+    logOutCookie('refresh')
   }
 </script>
