@@ -1,17 +1,21 @@
 # php-web
-Introduction
-This is a web project that sells laptop and accessories products using Docker. The project includes a simple website that displays products and allows users to purchase them.
+Introduction:
 
-Requirements
+- This is a web project that sells laptop and accessories products using Docker. The project includes a simple website that displays products and allows users to purchase them.
 
-#### Docker.
-#### Docker Compose.
+# Requirements
+
+#### - Docker.
+#### - Docker Compose.
 
 Clone the project into your computer.
+
 Run the following command to create the containers:
 docker-compose up -d
 Access the website at http://localhost:8000.
+
 Configuration
+
 The project's settings are stored in the docker-compose.yml file. You can change these settings to suit your needs.
 
 Learn more
@@ -117,7 +121,10 @@ To run the project, open a terminal in the directory that contains the Dockerfil
 ```
 docker-compose up -d
 ```
-This command will create the containers and networks and then start them. The website will be accessible at http://localhost:8000.
+This command will create the containers and networks and then start them.
+
+The website will be accessible at http://localhost:8000.
+
 To access phpAdmin, open a web browser and navigate to http://localhost:8081.
 
 ## Shutdown
