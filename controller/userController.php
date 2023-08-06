@@ -8,6 +8,10 @@
             $data = user_select_by_id($idUser);
             echo json_encode($data);
         }
+        public function getIdAdmin($idUser){
+            $data = user_select_by_id($idUser);
+            echo json_encode($data);
+        }
         public function viewBought(){
             $token = $this->getToken();
             $idUser = $this->verifyToken($token);
@@ -73,7 +77,6 @@
                         "expRf" => $expRefresh
                     );
                     echo json_encode($resultData,JSON_PRETTY_PRINT);
-                    header('Content-type: text/javascript');
                     exit;
                 }else{
                     http_response_code(401);

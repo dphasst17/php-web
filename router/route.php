@@ -28,6 +28,7 @@ $router->post('/comment/delete', 'CommentController', 'commentDelete');
 
 $router->post('/cart', 'CartController', 'index');
 
+$router->get('/user/info/:idUser','UserController','getIdAdmin');
 $router->get('/user','UserController','getUser');
 $router->post('/user/update','UserController','updateUser');
 $router->post('/user/image','UserController','updateImage');

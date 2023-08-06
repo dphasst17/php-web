@@ -42,7 +42,7 @@
           ?>
          <script>
           let dataLocal = JSON.parse(localStorage.getItem("idLog") || []);
-          fetch(`/api/user/${dataLocal}`)
+          fetch(`/api/user/info/${dataLocal}`)
             .then(res => {return res.json()})
             .then(data => ViewTabAdmin([data]))
           const logout = () => {
