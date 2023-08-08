@@ -71,7 +71,7 @@
 
     const viewProducts = (e,start,end) => {
         let viewProduct = e.slice(start,end).map(e => `
-            <tr class="bg-slate-800 ">
+            <tr id='product-${e.idProduct}' class="bg-slate-800 ">
                 <th class="hidden smr:table-cell w-[5%] border-solid border-white border-[1px] px-6 py-4">${e.idProduct}</th>
                 <th class="hidden smr:table-cell w-[10%] border-solid border-white border-[1px] px-6 py-4">${e.nameType.toUpperCase()}</th>
                 <th class="hidden md:table-cell w-[10%] border-solid border-white border-[1px] px-6 py-4"><img src=${e.imgProduct.includes('https://') ? `${e.imgProduct}` : `../images/product/${e.imgProduct}`} alt="imageProduct" style="width:100px;height:100px;object-fit:contain;"/></th>
@@ -95,7 +95,7 @@
     }
     const getNewProduct = (e) => {
         let viewNew = e.map(e => `<tbody>
-        <tr class="bg-slate-800">
+        <tr id='product-${e.idProduct}' class="bg-slate-800">
                 <th class="hidden smr:table-cell border-solid border-white border-[1px] px-6 py-4">${e.idProduct}</th>
                 <th class="hidden smr:table-cell border-solid border-white border-[1px] px-6 py-4">${e.idType}</th>
                 <th class="hidden md:table-cell border-solid border-white border-[1px] px-6 py-4"><img src=${e.imgProduct.includes('https://') ? `${e.imgProduct}` : `../images/product/${e.imgProduct}`} alt="imageProduct" style="width:100px;height:100px;object-fit:contain;"/></th>
@@ -133,24 +133,13 @@
             xhttp.send(formData);
     }
     const deleteItems = (p) => {
-        var formData = new FormData();
-            formData.append('id', p);
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var response = this.responseText;
-                    if(response == 1){
-                            console.log("Upload successfully.");
-                    }else{
-                            console.log("File not uploaded.");
-                    }
-                }
-            };
-            xhttp.open("POST", "../handle/deletep.php", true);
-            xhttp.send(formData);
-            setTimeout(() => {
-            window.location.href="../admin/index.php?act=product";
-        }, 0);
+        fetch(`/api/products/delete/${p}`,{
+            method:'POST'
+        })
+        .then(res =>{if(res.status === 200 || res.status === 201){
+            let element = document.getElementById(`product-${p}`);
+            element.parentNode.removeChild(element);
+        }})
     }
 </script>
 <script src="/public/js/adminHandle.js"></script>

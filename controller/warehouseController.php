@@ -31,5 +31,14 @@
             header('Content-type: text/javascript');
             echo json_encode($total, JSON_PRETTY_PRINT);
         }
+        public function insertWare(){
+            $data = json_decode(file_get_contents('php://input'), true);
+            $idProduct = $data['idProduct'];
+            $idUser = $data['idUser'];
+            $date = $data['date'];
+            $count = $data['count'];
+            $status = $data['status'];
+            insert_ware_house($idProduct,$idUser,$date,$count,$status);
+        }
     }
 ?>

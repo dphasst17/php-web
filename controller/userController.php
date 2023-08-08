@@ -2,6 +2,21 @@
     include_once '../model/user.php';
     include_once '../model/bill.php';
     class UserController extends tokenController{
+        public function getALlUser(){
+            $data =user_select_all();
+            $result = [];
+            foreach ($data as $product) {
+                $newProduct = [];
+                foreach ($product as $key => $value) {
+                    if (!is_int($key)) {
+                    $newProduct[$key] = $value;
+                    }
+                }
+                $result[] = $newProduct;
+            }
+            header('Content-type: text/javascript');
+            echo json_encode($result,JSON_PRETTY_PRINT); 
+        }
         public function getUser(){
             $token = $this->getToken();
             $idUser = $this->verifyToken($token);
@@ -123,6 +138,12 @@
                     exit;
                 }
             }
+        }
+        public function changeRole(){
+            $data = json_decode(file_get_contents('php://input'), true);
+            $idUser = $data['id'];
+            $role = $data['role'];
+            user_update_role($idUser,$role);
         }
     }
 ?>

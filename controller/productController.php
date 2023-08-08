@@ -18,13 +18,27 @@ class ProductController
         header('Content-type: text/javascript');
         echo json_encode($newProducts, JSON_PRETTY_PRINT);
     }
-    public function deleteProduct(){
-        $data = json_decode(file_get_contents('php://input'), true);
-        $idProduct = $data['idProduct'];
-        $delete = hang_hoa_delete($idProduct);
+    public function deleteProduct($idProduct){
+        $delete = product_delete($idProduct);
     }
-    public function addNewProduct(){}
-    public function updateProduct(){}
+    public function addNewProduct(){
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        $imgUrl = $_POST['imgUrl'];
+        $idType = $_POST['cate'];
+        $date = $_POST['date'];
+        $des = $_POST['des'];
+        product_insert($name,$price,$imgUrl,$idType,$date,$des);
+    }
+    public function updateProduct(){
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        $imgUrl = $_POST['imgUrl'];
+        $idType = $_POST['cate'];
+        $date = $_['date'];
+        $des = $_POST['des'];
+        product_update($name,$price,$imgUrl,$idType,$date,$des);
+    }
 
     public function getAccess(){
         $access = product_select_by_loai('!=',1);

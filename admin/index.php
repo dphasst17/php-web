@@ -36,7 +36,7 @@
                             if(CheckLogin($email,$pass))
                             {
                                 $_SESSION['admin']=$email;
-                                echo "<script>localStorage.setItem('idLog',JSON.stringify('".$_SESSION["admin"]."'))</script>";
+                                echo "<script>sessionStorage.setItem('idLog',JSON.stringify('".$_SESSION["admin"]."'))</script>";
                                 echo "<script>location.href = './cate'</script>";
                             }
                             else

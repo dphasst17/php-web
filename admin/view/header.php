@@ -41,12 +41,13 @@
             }
           ?>
          <script>
-          let dataLocal = JSON.parse(localStorage.getItem("idLog") || []);
+          let dataLocal = JSON.parse(sessionStorage.getItem("idLog"));
           fetch(`/api/user/info/${dataLocal}`)
             .then(res => {return res.json()})
             .then(data => ViewTabAdmin([data]))
           const logout = () => {
             window.location.href = './logout'
+            sessionStorage.removeItem("idLog");
           }
           const ViewTabAdmin = (e) => {
             let viewTab = e.map(e => `<div class="w-full h-full flex items-center">
@@ -56,7 +57,7 @@
                 </svg>
               </div>
               
-              <div class="avatar w-[20%] h-full flex items-center pl-[2%]"><img class="w-[40px] h-[40px] rounded-[50%] border-solid border-white border-[1px]" src=${(e.img.length !== 0) ? (e.img.includes('https://') ? e.img :`../public/images/uploads/${e.img}`) : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png'} alt="Avatar"/></div>
+              <div class="avatar w-[20%] h-full flex items-center pl-[2%]"><img class="w-[40px] h-[40px] rounded-[50%] border-solid border-white border-[1px]" src=${(e.img !=="") ? (e.img?.includes('https://') ? e.img :`../public/images/uploads/${e.img}`) : 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png'} alt="Avatar"/></div>
               <div class="name w-1/2 h-full flex justify-center items-center text-white text-[20px] font-bold">${e.nameUser}</div>
             </div>`)
             document.getElementById('tabAdmin').innerHTML = viewTab.join('');

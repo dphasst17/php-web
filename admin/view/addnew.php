@@ -90,30 +90,20 @@
   
         if(isValid){
             var formData = new FormData();
-            formData.append('fname','add')
             formData.append('name', getName.value);
             formData.append('price', getPrice.value);
             formData.append('des', getDes.value);
             formData.append('date', getDate.value);
             formData.append('cate', getCategory.value);
-            formData.append('id', id);
             input.files.length > 0 ? formData.append('imgFile', file) : formData.append('imgUrl', url.value)
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var response = this.responseText;
-                    if(response == 1){
-                            console.log("Upload successfully.");
-                    }else{
-                            console.log("File not uploaded.");
-                    }
-                }
-            };
-            xhttp.open("POST", "../handle/edit.php", true);
-            xhttp.send(formData);
-            setTimeout(() => {
-                window.location.href="../admin/index.php?act=product";
-            }, 300);
+            fetch('/api/products/add',{
+                method: 'POST',
+                body:formData
+            }).then(res => {if(res.status === 200 || res.status === 201){
+                setTimeout(() => {
+                window.location.href="/admin/product";
+            }, 0);
+            }})
         }
 
     }

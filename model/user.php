@@ -76,3 +76,7 @@ function insert_user_with_email($idUser,$name,$email){
     $sql = "INSERT INTO users (idUser,password,nameUser,img,email,roleUser)VALUES(?,'',?,'',?,2);";
     pdo_execute($sql, $idUser, $name, $email);
 }
+function user_update_role($idUser,$role){
+    $sql = "UPDATE users SET roleUser = $role WHERE idUser = ?;";
+    pdo_execute($sql,$idUser);
+}
