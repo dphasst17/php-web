@@ -170,17 +170,22 @@ document.getElementById('city').addEventListener('change', function () {
         if(isValid){
             const checkedMethod = Array.from(methods).find(method => method.checked);
             const value = checkedMethod ? checkedMethod.value : null;
-            let postData = {idUser:idUser,name:name.value,phone:phone.value,city:addressDetail.value+", "+district+", "+city,methods:value,costs:costs}
-            fetch('./api/transport/insert', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(postData)
-            })
-            .then(response => response.text())
-            .then(data => console.log(data));
-            window.location.href="index.php"
+            let postData = {name:name.value,phone:phone.value,city:addressDetail.value+", "+district+", "+city,methods:value,costs:costs}
+            const fetchData = async() => {
+                let token = await checkExpCookie(checkRf,url)
+                fetch('/api/transport/insert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': "Bearer " + token,
+                    },
+                    body: JSON.stringify(postData)
+                })
+                .then(res => {if(res.status === 200){
+                    window.location.href="index.php"
+                }})
+            }
+            fetchData();
         
         }
     }

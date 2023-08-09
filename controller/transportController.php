@@ -10,7 +10,6 @@
             $city = $data['city'];
             $methods = $data['methods'];
             $costs = $data['costs'];
-
             insert_product_onTransport_table($idUser);
             add_infor_user_onTransport_table($name,$phone,$city,$methods,$costs,$idUser);
             delete_cart_all($idUser);
