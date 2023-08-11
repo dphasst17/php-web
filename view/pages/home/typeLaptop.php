@@ -1,7 +1,7 @@
 <h1 class="text-[35px] font-bold">ABOUT LAPTOP</h1>
 <div id="productType" class="w-full xl:w-4/5 min-h-[300px] h-auto flex flex-wrap justify-around my-[2%] mx-auto"></div>
 <script>
-    fetch('./api/products/laptop')
+    fetch('/api/products/laptop')
     .then(res => {
         if (!res.ok) {
             throw new Error(`An error occurred: ${res.status}`);
@@ -9,7 +9,7 @@
         return res.json();
     })
     .then(product => {
-        laptop(product)
+        layout(product,'productType',false)
     })
     .catch(error => {
         console.log(error);

@@ -90,7 +90,7 @@ function product_select_by_id($idProduct){
 }
 
 function product_select_by_date(){
-    $sql = "SELECT * FROM `products` ORDER BY dateAdded DESC LIMIT 0,4;";
+    $sql = "SELECT p.* ,t.nameType FROM products p JOIN type t ON p.idType = t.idType ORDER BY dateAdded DESC LIMIT 0,4;";
     return pdo_query($sql);
 }
 function product_exist($ma_hh){
@@ -104,18 +104,18 @@ function product_update_view($ma_hh){
 }
 
 function product_select_view(){
-    $sql = "SELECT * FROM products ORDER BY view DESC LIMIT 0, 8";
+    $sql = "SELECT p.* ,t.nameType FROM products p JOIN type t ON p.idType = t.idType ORDER BY view DESC LIMIT 0, 8";
     return pdo_query($sql);
 }
 
 
 function product_select_by_loai($operator, $ma_loai){
-    $sql = "SELECT * FROM products WHERE idType $operator ?";
+    $sql = "SELECT p.* ,t.nameType FROM products p JOIN type t ON p.idType = t.idType WHERE p.idType $operator ? LIMIT 0,8";
     return pdo_query($sql, $ma_loai);
 }
 
 function product_select_by_loai_different_id($operator, $ma_loai, $ma_hh){
-    $sql = "SELECT * FROM products WHERE idType $operator ? AND idProduct != ? ORDER BY RAND() LIMIT 0,5;";
+    $sql = "SELECT p.*,t.nameType FROM products p JOIN type t ON p.idType = t.idType WHERE p.idType $operator ? AND p.idProduct != ? ORDER BY RAND() LIMIT 0,5;";
     return pdo_query($sql, $ma_loai , $ma_hh);
 }
 

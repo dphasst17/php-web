@@ -48,7 +48,7 @@
 
 
 <script>
-    fetch('./api/products')
+    fetch('/api/products')
     .then(res => {
         if (!res.ok) {
             throw new Error(`An error occurred: ${res.status}`);
