@@ -4,7 +4,7 @@
 <header class="w-screen flex lg:hidden fixed flex justify-around bg-white top-0 m-0 z-50">
     <div class="navIcons min-w-[100px] h-[30px] flex flex-row justify-evenly items-center bg-neutral-800 text-white rounded-[5px]" onclick="dropMenuMob()">
       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        <path class="text-white" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
       </svg>
     </div>
     <div class="search w-2/5 min-w-[200px] bg-neutral-800">

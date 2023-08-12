@@ -1,4 +1,4 @@
-<div class="purchase w-full min-h-[60vh] h-auto flex flex-col lg:flex-row justify-around items-center">
+<div class="purchase w-full h-auto min-h-[86.3vh] flex flex-col lg:flex-row justify-around items-center lg:items-start">
     <div id="viewPurchase" class="w-screen lg:w-[66%] min-h-[60vh] h-auto flex flex-wrap justify-evenly lg:justify-start"></div>
     <div class="viewUser w-full sm:w-3/4 lg:w-[30%] flex flex-col">
         <div id="user" class="w-full h-[200px]"></div>
@@ -182,7 +182,7 @@ document.getElementById('city').addEventListener('change', function () {
                     body: JSON.stringify(postData)
                 })
                 .then(res => {if(res.status === 200){
-                    window.location.href="index.php"
+                    window.location.href="/"
                 }})
             }
             fetchData();

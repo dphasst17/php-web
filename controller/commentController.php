@@ -9,7 +9,6 @@
             $data = json_decode(file_get_contents('php://input'), true);
             $token = $this->getToken();
             $idUser = $this->verifyToken($token);
-           /*  $id = $data['id']; */
             $idProduct=$data['idProduct'];
             $value = $data['value'];
             $date = $data['date'];

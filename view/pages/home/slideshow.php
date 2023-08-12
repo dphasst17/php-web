@@ -1,14 +1,14 @@
 <div id="default-carousel" class="relative w-full mt-6">
     <!-- Carousel wrapper -->
-    <div id="slideShowImages" class="relative h-auto max-h-[500px] overflow-hidden rounded-lg">
-        <div style="display:block" class="slideShow duration-700 ease-in-out object-cover" >
-            <img src="https://dlcdnwebimgs.asus.com/gain/21AE219C-6E24-4FD8-B83D-EFC9E131B315/fwebp" class="w-full object-contain" alt="slideShow">
+    <div id="slideShowImages" class="relative w-full h-[200px] sm:h-auto max-h-[500px] overflow-hidden rounded-lg flex items-center">
+        <div style="display:block" class="slideShow w-full h-[30vh] md:h-[90vh] duration-700 ease-in-out rounded-lg" >
+            <img src="https://dlcdnwebimgs.asus.com/gain/21AE219C-6E24-4FD8-B83D-EFC9E131B315/fwebp" class="w-full h-full object-contain rounded-lg" alt="slideShow">
         </div>
-        <div style="display:none" class="slideShow duration-700 ease-in-out object-cover" >
-            <img src="https://mspoweruser.com/wp-content/uploads/2019/07/8eecf3b4-f696-49c7-acca-b3d0b9df551e._CR001464600_PT0_SX1464__.jpg" class="w-full object-contain" alt="slideShow">
+        <div style="display:none" class="slideShow w-full h-[30vh] md:h-[90vh] duration-700 ease-in-out rounded-lg" >
+            <img src="https://mspoweruser.com/wp-content/uploads/2019/07/8eecf3b4-f696-49c7-acca-b3d0b9df551e._CR001464600_PT0_SX1464__.jpg" class="w-full h-full object-contain rounded-lg" alt="slideShow">
         </div>
-        <div style="display:none" class="slideShow duration-700 ease-in-out object-cover" >
-            <img src="https://cdn.shopify.com/s/files/1/0561/8345/5901/files/collabs-homepage-naruto.jpg" class="w-full object-contain" alt="slideShow">
+        <div style="display:none" class="slideShow w-full h-[30vh] md:h-[90vh] duration-700 ease-in-out rounded-lg" >
+            <img src="https://cdn.shopify.com/s/files/1/0561/8345/5901/files/collabs-homepage-naruto.jpg" class="w-full h-full object-contain rounded-lg" alt="slideShow">
         </div>    
     </div>
 

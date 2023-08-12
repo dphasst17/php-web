@@ -125,7 +125,6 @@
                 body: JSON.stringify(postData)
                 })
                 .then(response => response.text())
-                .then(data => console.log(data));
     }
     
     const deleteCart = (id) => {

@@ -115,9 +115,11 @@
         }
     }
     const getCommentById = (data) => {
-
         let viewComment = data.map(e => `<div class="items w-full lg:w-3/5 min-h-[200px] h-auto flex items-center">
-            <div class="itemsImg w-[70px] h-[70px] mx-[2%]"><img class="w-full h-full rounded-[50%] border-solid border-[1px] border-black" src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`/public/images/uploads/${e.img}`} alt="imgUserComment"/></div>
+            <div class="itemsImg w-[70px] h-[70px] mx-[2%]">
+                <img class="w-full h-full rounded-[50%] border-solid border-[1px] border-black" src=${e.img.length === 0 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png" :`/public/images/uploads/${e.img}`} 
+                    alt="imgUserComment"/>
+            </div>
             <div class="commentContent w-[90%] min-h-[100px] h-[100px] flex flex-wrap">
                 <div class="commentInfor w-full h-2/5 flex">
                     <div class="commentUser w-2/4 h-[30px] text-[18px] font-semibold">${e.nameUser}</div>
@@ -142,27 +144,36 @@
         const listComment = document.getElementById("viewComment");
         
         const newComment = `
-            <div class="items">
-                <div class="itemsImg">
-                    <img src=${img} alt="imgUserComment" />
+            <div class="items w-full lg:w-3/5 min-h-[200px] h-auto flex items-center">
+                <div class="itemsImg w-[70px] h-[70px] mx-[2%]">
+                    <img class="w-full h-full rounded-[50%] border-solid border-[1px] border-black" src=${img} alt="imgUserComment" />
                 </div>
-                <div class="commentContent">
-                    <div class="commentUser">${name}</div>
-                    <div class="commentDate">Comment time: ${date}</div>
-                    <div class="commentValue"><h3>${value}</h3></div>
+                <div class="commentContent w-[90%] min-h-[100px] h-[100px] flex flex-wrap">
+                    <div class="commentInfor w-full h-2/5 flex">
+                        <div class="commentUser w-2/4 h-[30px] text-[18px] font-semibold">${name}</div>
+                        <div class="commentDate w-2/4 h-[30px] flex items-center">Comment time: ${date}</div>
+                    </div>
+                    <div class="commentValue w-full h-3/5 rounded-[5px] px-[1%] border-solid border-[1px] border-black">
+                        <h3>${value}</h3>
+                    </div>
                 </div>
             </div>
         `
         listComment.insertAdjacentHTML('afterbegin', newComment);
         document.getElementById("getValue").value = "";
-        let postComment = {id:idUser.toString(),idProduct:idProduct,value:value,date:date}
-        fetch('/api/comment/insert',{
-            method: 'POST',
-            headers: {
-                    'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postComment)
-        })
-        .then(res => res.json())
+        let postComment = {idProduct:idProduct,value:value,date:date}
+        const fetchData = async() => {
+            let token = await checkExpCookie(checkRf)
+            fetch('/api/comment/insert',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + token,
+                },
+                body: JSON.stringify(postComment)
+            })
+            .then(res => res.text())
+        }
+        fetchData()
     }
 </script>

@@ -32,7 +32,7 @@
         <th class="hidden lg:table-cell w-2/5 py-3" >Địa chỉ</th>
         <th class="hidden lg:table-cell py-3" >Phương thức thanh toán</th>
         <th class="hidden lg:table-cell py-3" >Phí vận chuyển</th>
-        <th class=" w-[10%] py-3" >Vận chuyển</th>
+        <th class=" w-[10%] py-3 text-center" >Vận chuyển</th>
       </tr>
   </thead>
 </table>
@@ -72,12 +72,12 @@
   const viewAllConfirm = (data) => {
     let viewConfirm = data.map(e => `<tbody>
           <tr id="${e.idTrans}" class="bg-slate-800 ">
-              <th class="py-3 ">${e.idProduct}</th>
+              <th class="py-3 text-center">${e.idProduct}</th>
               <th class="hidden smr:table-cell py-3 ">${e.status}</th>
-              <th class="w-[5%] py-3 ">${e.countProduct}</th>
+              <th class="w-[5%] py-3 text-center">${e.countProduct}</th>
               <th class="py-3 ">${e.fullName}</th>
               <th class="hidden md:table-cell py-3 ">${e.phone}</th>
-              <th class="hidden lg:table-cell lg:w-3/5 py-3 ">${e.address}</th>
+              <th class="hidden lg:table-cell lg:w-3/5 p-3 ">${e.address}</th>
               <th class="hidden lg:table-cell py-3 ">${e.method}</th>
               <th class="hidden lg:table-cell py-3 ">${e.costs}</th>
               <th class="flex w-full flex items-center justify-around py-3 ">
@@ -91,15 +91,15 @@
   const viewAllDelivery = (data) => {
     let viewDelivery = data.map(e => `<tbody>
           <tr class="bg-slate-800 ">
-              <th class="py-3 ">${e.idProduct}</th>
+              <th class="py-3 text-center">${e.idProduct}</th>
               <th class="hidden smr:table-cell py-3 ">${e.status}</th>
-              <th class="w-[5%] py-3 ">${e.countProduct}</th>
+              <th class="w-[5%] py-3 text-center">${e.countProduct}</th>
               <th class="py-3 ">${e.fullName}</th>
               <th class="hidden md:table-cell py-3 ">${e.phone}</th>
-              <th class="hidden lg:table-cell w-2/5 py-3 ">${e.address}</th>
+              <th class="hidden lg:table-cell w-2/5 p-3 ">${e.address}</th>
               <th class="hidden lg:table-cell py-3 ">${e.method}</th>
               <th class="hidden lg:table-cell py-3 ">${e.costs}</th>
-              <th class=" w-[10%] py-3 ">
+              <th class=" w-[10%] p-3 ">
                 <button class="w-full h-[40px] bg-[#3568bb] text-white rounded-[5px]" onclick="changeStatusId(${e.idTrans},'Đang vận chuyển')">
                   Vận chuyển
                 </button>
@@ -112,12 +112,12 @@
   const viewAllTransport = (data) => {
     let viewTransport = data.map(e => `<tbody>
           <tr class="bg-slate-800 ">
-              <th class="py-3 ">${e.idProduct}</th>
+              <th class="py-3 text-center">${e.idProduct}</th>
               <th class="hidden smr:table-cell py-3 ">${e.status}</th>
-              <th class="w-[5%] py-3 ">${e.countProduct}</th>
+              <th class="w-[5%] py-3 text-center">${e.countProduct}</th>
               <th class="py-3 ">${e.fullName}</th>
               <th class="hidden md:table-cell py-3 ">${e.phone}</th>
-              <th class="hidden lg:table-cell w-2/5 lg:w-3/5 py-3 ">${e.address}</th>
+              <th class="hidden lg:table-cell w-2/5 p-3 ">${e.address}</th>
               <th class="hidden lg:table-cell py-3 ">${e.method}</th>
               <th class="hidden lg:table-cell py-3 ">${e.costs}</th>
               <th class="flex w-full  items-center justify-around py-3 ">

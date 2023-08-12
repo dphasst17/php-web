@@ -21,8 +21,8 @@
             </div>
             <div class="itemsPrice w-full h-[50px] flex justify-start items-center text-[20px] text-black font-semibold py-[5px]">Price: <span class="text-[20px] text-[#9d2b2b] font-semibold my-[2px]">${e.price} USD</span> </div>
             <div class="button w-full h-[150px] md:h-[50px] flex flex-col md:flex-row lg:justify-evenly">
-                <button class="w-full md:w-3/5 h-[30%] md:h-[70%] rounded-[5px] outline-none cursor-pointer border-none text-[20px] text-white font-semibold bg-blue-900 hover:bg-primary transition-all" onclick="addCart(${e.idProduct},'${us}')" >Add to cart</button>
-                <button class="w-full md:w-1/4 h-[30%] md:h-[70%] rounded-[5px] outline-none cursor-pointer border-none font-medium hover:bg-primary hover:text-white transition-all" onclick="location.href='detail/${e.idType}/${e.idProduct}/${e.nameProduct}'">Detail</button>
+                <button class="w-full md:w-3/5 h-[30%] md:h-[70%] rounded-[5px] outline-none cursor-pointer border-none text-[20px] text-white font-semibold bg-blue-900 hover:bg-blue-700 transition-all" onclick="addCart(${e.idProduct},'${us}')" >Add to cart</button>
+                <button class="w-full md:w-1/4 h-[30%] md:h-[70%] rounded-[5px] outline-none cursor-pointer border-none font-medium hover:bg-blue-700 text-black hover:text-white  transition-all" onclick="location.href='/detail/${e.idType}/${e.idProduct}/${e.nameProduct}'">Detail</button>
             </div>
         </div>`);
         document.getElementById('getAll').innerHTML = viewProduct.join('');
