@@ -76,7 +76,7 @@
                     <div class="text-[20px] font-semibold">${product.detail5}</div>
                     <div class="text-[20px] font-semibold">${product.detail6}</div>
                 </div>
-                <div class="detailButton">
+                <div class="detailButton flex md:justify-start justify-center">
                     <button 
                     class='w-[40%] min-w-[150px] h-[50px] text-[20px] font-semibold bg-[#586582] hover:bg-[#4F71B1] text-white rounded-[10px] transition-all cursor-pointer outline-none'
                     >

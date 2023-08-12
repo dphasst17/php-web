@@ -1,13 +1,13 @@
 <div id="default-carousel" class="relative w-full mt-6">
     <!-- Carousel wrapper -->
     <div id="slideShowImages" class="relative h-auto max-h-[500px] overflow-hidden rounded-lg">
-        <div class="slideShow duration-700 ease-in-out object-cover" >
+        <div style="display:block" class="slideShow duration-700 ease-in-out object-cover" >
             <img src="https://dlcdnwebimgs.asus.com/gain/21AE219C-6E24-4FD8-B83D-EFC9E131B315/fwebp" class="w-full object-contain" alt="slideShow">
         </div>
-        <div class="slideShow duration-700 ease-in-out object-cover" >
+        <div style="display:none" class="slideShow duration-700 ease-in-out object-cover" >
             <img src="https://mspoweruser.com/wp-content/uploads/2019/07/8eecf3b4-f696-49c7-acca-b3d0b9df551e._CR001464600_PT0_SX1464__.jpg" class="w-full object-contain" alt="slideShow">
         </div>
-        <div class="slideShow duration-700 ease-in-out object-cover" >
+        <div style="display:none" class="slideShow duration-700 ease-in-out object-cover" >
             <img src="https://cdn.shopify.com/s/files/1/0561/8345/5901/files/collabs-homepage-naruto.jpg" class="w-full object-contain" alt="slideShow">
         </div>    
     </div>

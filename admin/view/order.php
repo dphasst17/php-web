@@ -71,7 +71,7 @@
   });
   const viewAllConfirm = (data) => {
     let viewConfirm = data.map(e => `<tbody>
-          <tr class="bg-slate-800 ">
+          <tr id="${e.idTrans}" class="bg-slate-800 ">
               <th class="py-3 ">${e.idProduct}</th>
               <th class="hidden smr:table-cell py-3 ">${e.status}</th>
               <th class="w-[5%] py-3 ">${e.countProduct}</th>
@@ -152,8 +152,10 @@
         },
         body: JSON.stringify(postData)
       })
-      .then(res => res.text())
-      location.reload()
+      .then(res => {if(res.status === 200){
+        let element = document.getElementById(`${idProduct}`);
+            element.parentNode.removeChild(element);
+      }})
     }
     const changeStatusAll = (newStatus,oldStatus) => {
       let postData={fname:'all',newStatus:newStatus,oldStatus:oldStatus}

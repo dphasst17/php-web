@@ -1,5 +1,5 @@
 
-<div class="userPage w-[98%] md:w-[90%] min-h-[400px] h-auto flex flex-col md:flex-row justify-center my-[2%] mx-auto mt-[12%] smr:mt-[5%] md:mt-0 pt-[2%]">
+<div class="userPage w-[98%] md:w-[90%] min-h-[82.3vh] h-auto flex flex-col md:flex-row justify-center my-[2%] mx-auto mt-[12%] smr:mt-[5%] md:mt-0 pt-[2%]">
     <div id="getUser" class="w-full md:w-2/4 h-full flex flex-col justify-center">
         <div id="information" class="w-full h-2/4 flex justify-center mb-[5%]"></div>
         <div class="viewPurchase w-full min-h-[200px] h-auto mt-[5%]">

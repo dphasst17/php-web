@@ -1,6 +1,6 @@
 
 
-<div id="viewCart" class="w-4/5 min-h-[60vh] h-auto mx-auto"></div>
+<div id="viewCart" class="w-4/5 min-h-[79.8vh] h-auto mx-auto"></div>
 <div class="btn w-full h-[50px] flex">
     <div id="clearAll" class="w-2/4 min-h-[50px] h-auto mx-auto flex items-center justify-evenly"></div>
     <div id="purchase" class="w-2/4 min-h-[50px] h-auto mx-auto flex items-center justify-evenly"></div> 

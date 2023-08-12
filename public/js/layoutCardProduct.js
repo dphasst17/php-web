@@ -3,9 +3,9 @@ const layout = (data,id,detail) => {
     <div class="firstItems w-full h-[90%] flex flex-col" onclick="location.href='detail/${e.idType}/${e.idProduct}/${e.nameProduct}'">
         <div class="imgProduct w-full h-[150px] flex justify-center"><img class="w-2/4 h-full object-contain" src=${e.imgProduct} alt="imgProduct"/></div>
         <div class="nameProduct w-full h-[50px] text-[18px] text-center text-[#9d2b2b] font-semibold overflow-hidden whitespace-nowrap text-ellipsis"><span>${e.nameProduct}</span></div>
-        <div class="tagProduct w-full h-[15%] flex flex-row justify-start mb-3">
-            <div class="brand w-auto h-full rounded-[5px] bg-blue-500 px-2 mx-2 text-white text-[15px] font-semibold">${e.brand.toUpperCase()}</div>
-            <div class="type w-auto h-full rounded-[5px] bg-blue-500 px-2 mx-2 text-white text-[15px] font-semibold">${e.nameType.toUpperCase()}</div>
+        <div class="tagProduct w-full h-[15%] flex flex-col md:flex-row justify-start mb-3">
+            <div class="brand w-auto h-full rounded-[5px] bg-blue-500 px-2 mx-2 my-2 md:my-0 text-center text-white text-[15px] font-semibold">${e.brand.toUpperCase()}</div>
+            <div class="type w-auto h-full rounded-[5px] bg-blue-500 px-2 mx-2 my-2 md:my-0 text-center text-white text-[15px] font-semibold">${e.nameType.toUpperCase()}</div>
         </div>
         ${(detail === true)? `<div class="detailProduct">
             <p>${e.detail1}</p>
