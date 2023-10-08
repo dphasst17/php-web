@@ -4,7 +4,6 @@
         $data = json_decode(file_get_contents('php://input'), true);
         $token = $this->getToken();
         if($token !=''){
-
             $idUser = $this->verifyToken($token);
         }
         $fname = isset($data['fname']) ? $data['fname']:'add';
