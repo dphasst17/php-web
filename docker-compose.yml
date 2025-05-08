@@ -11,27 +11,27 @@ services:
       - ./:/var/www/html
     ports:
       - 8080:80
-
-  # Định nghĩa dịch vụ MySQL
-  mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: mydb
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+  db:
+    image: mysql:8.0
+    command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION --max_allowed_packet=1073741824 --group_concat_max_len=1000000
     volumes:
       - db_data:/var/lib/mysql
-
-   # Định nghĩa dịch vụ phpMyAdmin
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - 8081:80
+    restart: always
     environment:
-      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - '3306:3306'
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8084:80'
+    environment:
+      PMA_HOST: db
       PMA_USER: ${DB_USER}
       PMA_PASSWORD: ${DB_PASSWORD}
-# Định nghĩa tập lệnh
 volumes:
   db_data:

@@ -1,5 +1,7 @@
 <h1 class="text-[35px] font-bold">ABOUT ACCESSORY</h1>
-<div id="productType2" class="w-full xl:w-4/5 min-h-[300px] h-auto flex flex-wrap justify-around my-[2%] mx-auto"></div>
+<div class="w-full xl:w-4/5 min-h-[300px] h-auto my-[2%] flex items-center justify-center mx-auto">
+    <div id="productType2" class="w-[90%] min-h-[300px] h-auto grid grid-cols-1 ssm:grid-cols-2 sm:grid-cols-4 gap-6 px-2"></div>
+</div>
 <script>
     fetch('/api/products/access')
     .then(res => {

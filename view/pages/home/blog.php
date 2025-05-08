@@ -111,3 +111,18 @@
     </div>
   </div>
 </section>
+
+<section class="w-full py-10">
+    <div class="stay-container mx-auto px-4">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 max-w-5xl mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Subscribe to our newsletter for exclusive deals, new product announcements, and tech tips delivered straight to your inbox.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-center max-w-lg mx-auto">
+          <input type="email" placeholder="Your email address" class="px-4 py-3 rounded-lg mb-3 sm:mb-0 sm:rounded-r-none sm:rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full border border-gray-300">
+          <button class="bg-blue-600 text-white px-8 py-3 rounded-lg sm:rounded-l-none sm:rounded-r-lg hover:bg-blue-700 transition font-medium">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </section>

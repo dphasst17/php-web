@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>TStore</title>
     <link rel="stylesheet" href="/public/css/style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/public/js/config.Tailwind.js"></script>
     <script src="/public/js/tk.js"></script>
@@ -20,13 +22,11 @@
         } else {
             $page = 'home';
         }
-        if($page !== 'contact'){
+        if ($page !== 'auth' && $page !== 'contact') {
             include_once 'view/layout/header.php';
-        }
-        if($page !== 'contact'){
             include_once 'view/layout/headerMobile.php';
-        }  
-        echo "<div class='container w-screen max-w-full flex flex-col items-center mt-[10%] lg:mt-0 mx-auto'>";
+        }
+        echo "<div class='container w-screen max-w-full min-h-screen flex flex-col items-center mt-[10%] lg:mt-0 mx-auto overflow-x-hidden'>";
         include_once 'view/layout/loading.php';
         switch ($page) {
             case 'home':
@@ -53,11 +53,15 @@
             case 'purchase':
                 include_once 'view/pages/user/purchase.php';
                break;
+            case 'auth':
+                include_once 'view/pages/auth/login.php';
+                break;
+            
             default:
                 include_once 'view/pages/error/error.php';
         }
         echo "</div>";
-        if($page !== 'contact'){
+        if($page !== 'auth' && $page !== 'contact'){
             include_once 'view/layout/footer.php';
         }
     ?>

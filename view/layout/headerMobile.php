@@ -47,7 +47,7 @@
       <button id="login" 
       class="fixed w-[100px] justify-center items-center p-0 top-[60px] sm:top-[70px] left-[20px] sm:left-[62px] bg-neutral-800 text-white text-[20px] rounded-[5px] z-50" 
       style="display:none;height:0px; overflow:hidden; transition:height .1s linear"
-      onclick="window.location.href= '/login'"
+      onclick="window.location.href= '/auth'"
       >Login<button>
     </button>
 </header>
@@ -96,7 +96,7 @@
   const logOut = () => {
     localStorage.removeItem("isLogin")
     localStorage.removeItem("name")
-    location.href="/login";
+    location.href="/auth";
     logOutCookie('access')
     logOutCookie('refresh')
   }

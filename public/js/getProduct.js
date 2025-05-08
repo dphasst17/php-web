@@ -11,36 +11,26 @@
     let totalPage = 0;
 
     const viewProducts = (p,start,end) => {
-        let viewProduct = p.slice(start,end).map(e => `<div class="items w-[30%] lg:w-1/5 md:w-[230px] min-w-[150px] h-[550px] md:h-[400px] mx-[1%] cursor-pointer" key=${e.idProduct}>
-            <div class="itemsImg w-full h-2/5 flex justify-center"><img class="w-full h-full object-contain" src=${e.imgProduct} alt="imgProduct"/></div>
-            <div class="itemsTitle w-full h-[65px] flex justify-center items-center text-[20px] text-[#9d2b2b] font-semibold"><span class='overflow-hidden whitespace-nowrap text-ellipsis'>${e.nameProduct}</span></div>
-            <div class='w-full min-h-[10%] h-auto'>
-                <p class='text-blue-950 font-bold text-[17px] overflow-hidden whitespace-nowrap text-ellipsis'>${e.detail1}</p>
-                <p class='text-blue-950 font-bold text-[17px] overflow-hidden whitespace-nowrap text-ellipsis'>${e.detail2}</p>
-                <p class='text-blue-950 font-bold text-[17px] overflow-hidden whitespace-nowrap text-ellipsis'>${e.detail3}</p>
-            </div>
-            <div class="itemsPrice w-full h-[50px] flex justify-start items-center text-[20px] text-black font-semibold py-[5px]">Price: <span class="text-[20px] text-[#9d2b2b] font-semibold my-[2px]">${e.price} USD</span> </div>
-            <div class="button w-full h-[150px] md:h-[50px] flex flex-col md:flex-row lg:justify-evenly">
-                <button class="w-full md:w-3/5 h-[30%] md:h-[70%] rounded-[5px] outline-none cursor-pointer border-none text-[20px] text-white font-semibold bg-blue-900 hover:bg-blue-700 transition-all" onclick="addCart(${e.idProduct},'${us}')" >Add to cart</button>
-                <button class="w-full md:w-1/4 h-[30%] md:h-[70%] rounded-[5px] outline-none cursor-pointer border-none font-medium hover:bg-blue-700 text-black hover:text-white  transition-all" onclick="location.href='/detail/${e.idType}/${e.idProduct}/${e.nameProduct}'">Detail</button>
-            </div>
-        </div>`);
+        let viewProduct = p.slice(start,end).map(e => productElement(e));
         document.getElementById('getAll').innerHTML = viewProduct.join('');
         paginationPage();
     }
 
     const viewFilter = (f) => {
-        let viewFIlter = f.map(e => `<div class="inputFilter w-[45%] h-[50px] flex flex-wrap items-center pl-[2%] cursor-pointer">
-            <input class="accent-[#0a65c0] rounded-[50%] cursor-pointer checked:border-indigo-50 transition-all" type="checkbox" value=${e} id='filter${e}' name='filter' onclick='filterType("${e}")' />
-            <label class="text-[#2f4466] text-[18px] font-semibold cursor-pointer" for='filter${e}'>${e.toUpperCase()}</label>
+        let viewFIlter = f.map(e => `<div id="filter-${e}" class=" h-[25px] grid grid-cols-11 gap-x-2 shadow-md hover:bg-zinc-200 px-[2px] rounded-sm cursor-pointer transition-all">
+            <input class="hidden accent-[#0a65c0] rounded-[50%] cursor-pointer checked:border-indigo-50 transition-all" 
+                type="checkbox" value=${e} id='filter${e}' name='filter' onclick='filterType("${e}")' />
+            <label class="col-span-11 text-center text-[18px] font-semibold cursor-pointer" for='filter${e}'>${e.toUpperCase()}</label>
         </div>`);
         document.getElementById('getFilter').innerHTML = viewFIlter.join('');
     }
     const viewFilterBrand = (f) => {
-        let filterBrand = f.map(e => `<div class="inputFilter w-[45%] h-[50px] flex flex-wrap items-center pl-[2%] cursor-pointer">
-            <input class="accent-[#0a65c0] rounded-[50%] cursor-pointer checked:border-indigo-50 transition-all" type="checkbox" value=${e} id='filter${e}' 
+        let filterBrand = f.map(e => `<div class="h-[25px] grid grid-cols-10 shadow-md hover:bg-zinc-500 hover:text-white rounded-sm px-[2px] cursor-pointer my-2 transition-all">
+            <input class="hidden accent-[#0a65c0] rounded-[50%] cursor-pointer checked:border-indigo-50 transition-all" type="checkbox" value=${e} id='filter${e}' 
                 name='filter' onclick='filterBrand("${e.toLowerCase()}")' />
-            <label class="text-[#2f4466] text-[18px] font-semibold cursor-pointer" for='filter${e}'>${e.toUpperCase()}</label>
+            <label class="col-span-10 text-center text-[18px] flex items-center justify-start font-semibold cursor-pointer" for='filter${e}'>
+                <p class="truncate">${e.toUpperCase()}</p>
+            </label>
         </div>`);
         document.getElementById('getFilter2').innerHTML = filterBrand.join('');
     }
@@ -110,9 +100,13 @@
         end = 12;
         activePage = 1;
         if (!valueFilter.includes(e)) {
-            valueFilter.push(e);   
+            valueFilter.push(e);
+            document.getElementById(`filter-${e}`).classList.add('bg-zinc-500');
+            document.getElementById(`filter-${e}`).classList.add('text-white');
         }else{
             valueFilter = valueFilter.filter(i => i !== e);
+            document.getElementById(`filter-${e}`).classList.remove('bg-zinc-500');
+            document.getElementById(`filter-${e}`).classList.remove('text-white');
         }
         checkFilter()
         totalPage = filterData.length % itemsInPage === 0 ? filterData.length / itemsInPage : (filterData.length / itemsInPage) + 1;

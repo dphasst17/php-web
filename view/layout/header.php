@@ -2,7 +2,7 @@
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 'home';
 ?>
     <header class=" hidden lg:flex">
-      <div class="search bg-neutral-800">
+      <div class="search bg-neutral-800 p-[3px]">
         <input type="search" id="search" onkeydown="if (event.keyCode == 13) search()"/>
         <div class="iconSearch bg-slate-50" onclick="search()">
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
@@ -11,11 +11,11 @@
         </div>
       </div>
       <script>
-      function search() {
-        var searchValuePC = document.getElementById("search").value;
-        window.location.href = "/search/" + searchValuePC;
-      }
-    </script>
+        function search() {
+          var searchValuePC = document.getElementById("search").value;
+          window.location.href = "/search/" + searchValuePC;
+        }
+      </script>
       <nav class="bg-neutral-800">
         <div class="navBars <?php if ($currentPage == 'home') echo 'active'; ?>" onclick="location.href='/'">
           HOME
@@ -52,12 +52,12 @@
             <li onclick="log()">LogOut</li>
           </ul>
         </div>
-          `) : document.write(`<button class="btnLogin" onclick="location.href='/login'">Login</button>`);
+          `) : document.write(`<button class="btnLogin" onclick="location.href='/auth'">Login</button>`);
 
           const log = () => {
             localStorage.removeItem("isLogin")
             localStorage.removeItem("name")
-            location.href="/login";
+            location.href="/auth";
             logOutCookie('access')
             logOutCookie('refresh')
           }

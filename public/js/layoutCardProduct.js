@@ -1,28 +1,50 @@
 const layout = (data,id,detail) => {
-    let cardProduct = data.map(e => `<div class="items w-[22%] min-w-[150px] smr:min-w-[180px] md:min-w-[200px] h-2/4 flex flex-col flex-wrap items-center p-[1%] cursor-pointer hover:rounded-[5px] hover:bg-slate-300 transition-all" key=${e.idProduct}>
-    <div class="firstItems w-full h-[90%] flex flex-col" onclick="location.href='detail/${e.idType}/${e.idProduct}/${e.nameProduct}'">
-        <div class="imgProduct w-full h-[150px] flex justify-center"><img class="w-2/4 h-full object-contain" src=${e.imgProduct} alt="imgProduct"/></div>
-        <div class="nameProduct w-full h-[50px] text-[18px] text-center text-[#9d2b2b] font-semibold overflow-hidden whitespace-nowrap text-ellipsis"><span>${e.nameProduct}</span></div>
-        <div class="tagProduct w-full h-[15%] flex flex-col md:flex-row justify-start mb-3">
-            <div class="brand w-auto h-full rounded-[5px] bg-blue-500 px-2 mx-2 my-2 md:my-0 text-center text-white text-[15px] font-semibold">${e.brand.toUpperCase()}</div>
-            <div class="type w-auto h-full rounded-[5px] bg-blue-500 px-2 mx-2 my-2 md:my-0 text-center text-white text-[15px] font-semibold">${e.nameType.toUpperCase()}</div>
-        </div>
-        ${(detail === true)? `<div class="detailProduct">
-            <p>${e.detail1}</p>
-            <p>${e.detail2}</p>
-            <p>${e.detail3}</p>
-            <p>${e.detail4}</p>
-        </div>`: ""
-        }
-        <div class="priceProduct w-full h-[30px] text-[18px]">Price: <span class="text-[#9d2b2b] text-[19px] font-semibold">${e.price} USD</span></div>
-    </div>
-    <div class="secondItems w-full h-[10%]">
-        <div class="button w-full h-[40px] flex flex-col sm:flex-row items-center">
-            <button class="w-full sm:w-3/4 h-[70%] text-white hover:text-white text-[20px] flex items-center justify-center font-semibold mr-[2%] bg-blue-900 hover:bg-primary transition-all border-none rounded-[5px] outline-none cursor-pointer " onclick="addCart(${e.idProduct},'${us}')" >Add to cart</button>
-            <button class="w-full sm:w-1/5 h-[70%] text-black hover:text-white text-[15px] font-semibold mr-[2%] bg-transparent hover:bg-primary transition-all border-none rounded-[5px] outline-none cursor-pointer " onclick="location.href='detail/${e.idType}/${e.idProduct}/${e.nameProduct}'">Detail</button>
-        </div>
-    </div>
-</div>`)
+    let cardProduct = data.map(e => productElement(e));
     document.getElementById(`${id}`).innerHTML  = cardProduct.join('');
 
+}
+const productElement = (e) => {
+    return `<div class="product-item bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden" key=${e.idProduct}>
+    <div class="relative">
+      <button class="absolute top-2 right-2 z-10 bg-white p-1.5 rounded-full shadow-md hover:bg-red-500 hover:text-white transition-colors">
+        <i class='bx bx-heart text-lg'></i>
+      </button>
+    
+      <div onclick="location.href='detail/${e.idType}/${e.idProduct}/${e.nameProduct}'" class="product-image overflow-hidden">
+        <img src="${e.imgProduct}" alt="Image Product" class="w-full h-48 object-contain" />
+      </div>
+      
+      <div class="absolute bottom-0 left-0 right-0 p-4">
+        <div class="product-actions flex justify-center space-x-2">
+          <button onclick="addCart(${e.idProduct},'${us}')"  class="bg-white text-gray-800 p-2 rounded-full hover:bg-blue-600 hover:text-white transition shadow-md">
+            <i class='bx bx-cart-add text-lg'></i>
+          </button>
+          <button onclick="location.href='detail/${e.idType}/${e.idProduct}/${e.nameProduct}'" class="bg-white text-gray-800 p-2 rounded-full hover:bg-blue-600 hover:text-white transition shadow-md">
+            <i class='bx bx-search text-lg'></i>
+          </button>
+          <button class="bg-white text-gray-800 p-2 rounded-full hover:bg-blue-600 hover:text-white transition shadow-md">
+            <i class='bx bx-shuffle text-lg'></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-4">
+      <div class="grid grid-cols-6 gap-2 mb-2">
+        <span class="col-span-2 text-xs text-center truncate font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">${e.nameType.toUpperCase()}</span>
+        <span class="col-span-2 text-xs text-center truncate font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">${e.brand.toUpperCase()}</span>
+      </div>
+      
+      <h3 class="font-semibold text-gray-800 hover:text-blue-600 transition mb-1">${e.nameProduct}</h3>
+          
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <span class="text-gray-400 text-sm mr-2">$${e.price}</span>
+        </div>
+        <button onclick="addCart(${e.idProduct},'${us}')"  class="bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition text-sm font-medium">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>`
 }
